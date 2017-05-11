@@ -1,0 +1,27 @@
+<view class="container" style="background:#fff">  
+    <view class="container-hang" style="margin-top:23rpx;width:auto">  
+        <text wx:for="{{dateTitles}}" wx:for-item="dateItem" wx:key="*this" class="cellDate"  
+        style="width:{{titleCellWidth}}px;padding:6rpx 0 6rpx 0">{{dateItem}}</text>  
+    </view>  
+      
+    <swiper bindchange="swiperChange" class="swipter-box" duration="300" style="height:{{swiperHeight}}rpx">  
+        <swiper-item wx:for="{{monthDatas}}" wx:for-item="monthData" wx:key="*this">  
+  
+            <view class="cell-box" wx:for="{{monthData.dataHarr}}" wx:for-index="i" wx:key="*this">  
+                <view wx:for="{{[0, 1, 2, 3, 4, 5, 6]}}" wx:for-index="j" wx:key="*this">  
+                    <view class="contentDate" style="width:{{dateCellWidth}}px;height:{{dateCellHeight}}rpx">  
+                        <view class="type_no_1_pad" wx:if="{{monthData.data[i*7 + j].type == -1}}">  
+                            <text class="type_no_1">{{monthData.data[i*7 + j].dateShow}}</text>  
+                        </view>  
+                        <view class="type_1_pad" wx:if="{{monthData.data[i*7 + j].type == 1}}">  
+                            <text class="type_1">{{monthData.data[i*7 + j].dateShow}}</text>  
+                        </view>  
+                        <view class="type_2_pad" wx:if="{{monthData.data[i*7 + j].type == 2}}">  
+                            <text class="type_2">{{monthData.data[i*7 + j].dateShow}}</text>  
+                        </view>  
+                    </view>  
+                </view>  
+            </view>  
+        </swiper-item>  
+    </swiper>  
+</view> 

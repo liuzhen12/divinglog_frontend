@@ -1,0 +1,22 @@
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title"></view>
+        <view class="page__desc"></view>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <view class="weui-cells box">
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'毕涛'}}</view>
+                <view class="weui-cell__ft">AOW</view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'赵倩'}}</view>
+                <view class="weui-cell__ft">AOW</view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'刘真'}}</view>
+                <view class="weui-cell__ft">OW</view>
+            </view>
+        </view>
+    </view>
+</view>

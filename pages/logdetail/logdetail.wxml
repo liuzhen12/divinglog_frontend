@@ -1,0 +1,121 @@
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title"></view>
+        <view class="page__desc"></view>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <view class="weui-cells box">
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'Diver'}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">真哥</view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="section">
+                    <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+                        <view class="picker">
+                        Date: {{date}}
+                        </view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="section">
+                    <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+                        <view class="picker">
+                        startTime: {{time}}
+                        </view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="section">
+                    <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+                        <view class="picker">
+                        endtiem: {{time}}
+                        </view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'Location'}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">Bali</view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'Dive Point'}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">Tulanben</view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'Tiem'}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">59S</view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'Depth'}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'Air or Nitrox'}}</view>
+                <view class="section section_gap weui-cell__ft ">
+                <view class="body-view">
+                    <switch checked="{{switch1Checked}}" bindchange="switch1Change"/>
+                </view>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'32% O2'}}</view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'Start'}}</view>
+                <view class="weui-cell__ft">220 bar</view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'End'}}</view>
+                <view class="weui-cell__ft">20 bar</view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'Weight'}}</view>
+                <view class="weui-cell__ft">4 kg/lbs</view>
+            </view>
+        </view>
+        <view class="weui-cells box">
+            <view class="section">
+            <textarea placeholder="描述" focus="{{focus}}" />
+            </view>
+        </view>
+        <view class="weui-cells box">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <view class="weui-uploader">
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files" id="uploaderFiles">
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>     
+    </view>
+</view>

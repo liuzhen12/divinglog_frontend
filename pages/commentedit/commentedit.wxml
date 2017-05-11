@@ -1,0 +1,21 @@
+<view class="l-evalbox row">
+  <text class="l-evaltxt">满意度：</text>
+  <view class="l-evalist flex-1" bindtap="chooseicon">
+    <icon class="{{tabArr.curHdIndex >'0'? 'cur icon' : 'icon'}}" data-id="1"></icon>
+    <icon class="{{tabArr.curHdIndex >'1'? 'cur icon' : 'icon'}}" data-id="2"></icon>
+    <icon class="{{tabArr.curHdIndex >'2'? 'cur icon' : 'icon'}}" data-id="3"></icon>
+    <icon class="{{tabArr.curHdIndex >'3'? 'cur icon' : 'icon'}}" data-id="4"></icon>
+    <icon class="{{tabArr.curHdIndex >'4'? 'cur icon' : 'icon'}}" data-id="5"></icon>
+  </view>
+  <view class="weui-cells">
+      <view class="section">
+      <textarea placeholder="描述" focus="{{focus}}" />
+      </view>
+  </view>
+  <view class="weui-cells box">
+            <navigator url="" class="weui_btn weui_btn_default" hover-class="changestyle">
+                <button class="weui_btn weui_btn_default">提交</button>
+            </navigator>
+        </view>
+</view>
+

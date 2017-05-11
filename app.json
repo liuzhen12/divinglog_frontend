@@ -1,0 +1,58 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/myloglist/myloglist",
+    "pages/mylogdetail/mylogdetail",
+    "pages/loglist/loglist",
+    "pages/logdetail/logdetail",
+    "pages/logedit/logedit",
+    "pages/stamp/stamp",
+    "pages/findbuddy/findbuddy",
+    "pages/findbuddylist/findbuddylist",
+    "pages/findbuddydetail/findbuddydetail",
+    "pages/findbuddysearch/findbuddysearch",
+    "pages/calendar/calendar",
+    "pages/meinfo/meinfo",
+    "pages/equipment/equipment",
+    "pages/equipmentedit/equipmentedit",
+    "pages/melevel/melevel",
+    "pages/meleveledit/meleveledit",
+    "pages/instructorsearch/instructorsearch",
+    "pages/instructorinfo/instructorinfo",
+    "pages/instructorlevel/instructorlevel",
+    "pages/instructorlist/instructorlist",
+    "pages/studentlist/studentlist",
+    "pages/storesearch/storesearch",
+    "pages/storelist/storelist",
+    "pages/storeinfo/storeinfo",
+    "pages/storeinstructor/storeinstructor",
+    "pages/storelevel/storelevel",    
+    "pages/commentedit/commentedit"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "FunDive Log",
+    "navigationBarTextStyle":"black",
+    "backgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "images/1.png",
+      "selectedIconPath": "images/1s.png"
+    },
+    {
+      "pagePath": "pages/meinfo/meinfo",
+      "text": "我的",
+      "iconPath": "images/2.png",
+      "selectedIconPath": "images/2s.png"
+    }],
+    "color": "#939295",
+    "backgroundColor": "#FCFCFC",
+    "borderStyle": "black",
+    "selectedColor": "#04B4E5"
+  },
+  "debug":"true"
+}

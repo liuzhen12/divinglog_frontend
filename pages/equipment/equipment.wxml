@@ -1,0 +1,25 @@
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title"></view>
+        <view class="page__desc"></view>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <view class="weui-cells box">
+            <navigator url="../equipmentedit/equipmentedit" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'Masks'}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">gull</view>
+            </navigator>
+            <navigator url="../equipmentedit/equipmentedit" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'Fins'}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">subcapro</view>
+            </navigator>
+            <navigator url="../equipmentedit/equipmentedit" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'BCwing'}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">subcapro</view>
+            </navigator>
+        </view>
+    </view>
+</view>
+<navigator url="../equipmentedit/equipmentedit" class="weui_btn weui_btn_default dock_bottom" hover-class="changestyle">
+<button class="weui_btn weui_btn_default">添加装备</button>
+</navigator>

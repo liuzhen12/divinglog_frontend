@@ -1,0 +1,34 @@
+.l-evalbox{
+  height: 100rpx;
+  padding: 0 3%;
+  margin-top: 10rpx;
+  background: #FFF;
+  line-height: 100rpx;
+}
+.l-evaltxt{
+  width: 120rpx;
+  display: block;
+  font-size: 26rpx;
+  color: #666666;
+}
+.l-evalist .icon{
+  z-index: 2;
+    background-image: url("../../images/normal.png");
+    width: 83rpx;
+    height: 43rpx;
+    background-size: 43rpx 43rpx;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.l-evalist .cur{
+  z-index: 1;
+    width: 83rpx;
+    height: 43rpx;
+    background-image: url("../../images/selected.png");
+    background-size: 43rpx 43rpx;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.l-evalist .icon:last-child{
+  margin: 0;
+}

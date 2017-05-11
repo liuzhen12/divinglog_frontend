@@ -1,0 +1,50 @@
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title"></view>
+        <view class="page__desc"></view>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <view class="weui-cells box">
+            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'店名'}}</view>
+                <view class="weui-cell__ft">大壮潜店</view>
+            </navigator>
+            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'Country'}}</view>
+                <view class="weui-cell__ft">印度尼西亚</view>
+            </navigator>
+            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'Location'}}</view>
+                <view class="weui-cell__ft">Bali</view>
+            </navigator>
+        </view>
+        <view class="weui-cells box">
+            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'店名'}}</view>
+                <view class="weui-cell__ft">中壮潜店</view>
+            </navigator>
+            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'Country'}}</view>
+                <view class="weui-cell__ft">印度尼西亚</view>
+            </navigator>
+            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'Location'}}</view>
+                <view class="weui-cell__ft">Bali</view>
+            </navigator>
+        </view>
+        <view class="weui-cells box">
+            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'店名'}}</view>
+                <view class="weui-cell__ft">小壮潜店</view>
+            </navigator>
+            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'Country'}}</view>
+                <view class="weui-cell__ft">印度尼西亚</view>
+            </navigator>
+            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'Location'}}</view>
+                <view class="weui-cell__ft">Bali</view>
+            </navigator>
+        </view>
+    </view>
+</view>

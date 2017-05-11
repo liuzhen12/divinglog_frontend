@@ -1,0 +1,157 @@
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title"></view>
+        <view class="page__desc"></view>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <view class="weui-cells box">
+            <navigator url="../logdetail/logdetail" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'Diver'}}</view>
+                <view class="weui-cell__ft">真哥</view>
+            </navigator>
+            <navigator url="../logdetail/logdetail" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'2017/04/05 1:20'}}</view>
+            </navigator>
+            <navigator url="../logdetail/logdetail" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'Location'}}</view>
+                <view class="weui-cell__ft">Bali</view>
+            </navigator>
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <view class="weui-uploader">
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files" id="uploaderFiles" >
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="weui-cells box">
+            <navigator url="../logdetail/logdetail" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'Diver'}}</view>
+                <view class="weui-cell__ft">倩姐</view>
+            </navigator>
+            <navigator url="../logdetail/logdetail" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'2017/04/04 1:20'}}</view>
+            </navigator>
+            <navigator url="../logdetail/logdetail" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'Location'}}</view>
+                <view class="weui-cell__ft">Bali</view>
+            </navigator>
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <view class="weui-uploader">
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files" id="uploaderFiles" >
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="weui-cells box">
+            <navigator url="../logdetail/logdetail" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'Diver'}}</view>
+                <view class="weui-cell__ft">涛哥</view>
+            </navigator>
+            <navigator url="../logdetail/logdetail" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'2017/04/03 1:20'}}</view>
+            </navigator>
+            <navigator url="../logdetail/logdetail" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'Location'}}</view>
+                <view class="weui-cell__ft">Bali</view>
+            </navigator>
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <view class="weui-uploader">
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files" id="uploaderFiles" >
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                                <view class="weui-uploader__file" bindtap="yulan">
+                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
+                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="dock_bottom flex-row">
+<navigator url="../logedit/logedit" class="weui_btn weui_btn_default" hover-class="changestyle">
+<button class="weui_btn weui_btn_default btn-normal">新建</button>
+</navigator>
+<navigator url="../myloglist/myloglist" class="weui_btn weui_btn_default" hover-class="changestyle">
+<button class="weui_btn weui_btn_default btn-normal">我的</button>
+</navigator>
+</view>

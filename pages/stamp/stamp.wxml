@@ -1,0 +1,30 @@
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title"></view>
+        <view class="page__desc"></view>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <view class="weui-cells box">
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'我'}}</view>
+                <view class="weui-cell__ft">发起</view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'潜伴1'}}</view>
+                <view class="weui-cell__ft">某某</view>
+            </view> 
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'潜伴2'}}</view>
+                <view class="weui-cell__ft">某某</view>
+            </view> 
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'潜伴3'}}</view>
+                <view class="weui-cell__ft">某某</view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'潜导'}}</view>
+                <view class="weui-cell__ft">大壮老板</view>
+            </view>
+        </view>
+    </view>
+</view>

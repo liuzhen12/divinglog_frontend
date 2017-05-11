@@ -1,0 +1,13 @@
+<view class="page">
+  <view class="userinfo">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </view>
+  <view class="navgationView" wx:for="{{array}}" wx:key="*this">
+    <navigator class="navgationCell" url="">
+    <image class="imageview" src="../../images/{{item.image}}"></image>
+    <view class="cellTitle">{{item.title}}</view>
+    <view class="arrow"></view>
+    </navigator>
+  </view>
+</view>

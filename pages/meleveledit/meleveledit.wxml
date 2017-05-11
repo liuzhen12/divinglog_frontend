@@ -1,0 +1,41 @@
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title"></view>
+        <view class="page__desc"></view>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <view class="weui-cells box">
+            <view class="weui-cell weui-cell_access">
+                <view class="section">
+                    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array1}}">
+                        <view class="picker">
+                            组织：{{array1[index]}}
+                        </view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="section">
+                    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array2}}">
+                        <view class="picker">
+                            等级：{{array2[index]}}
+                        </view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'Dive No:'}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">1234567</view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'认证教练:'}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">大壮老板</view>
+            </view>
+        </view>
+        <view class="weui-cells box">
+            <navigator url="" class="weui_btn weui_btn_default" hover-class="changestyle">
+                <button class="weui_btn weui_btn_default">保存</button>
+            </navigator>
+        </view>
+    </view>
+</view>
