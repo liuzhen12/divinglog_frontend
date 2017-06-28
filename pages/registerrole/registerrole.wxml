@@ -1,0 +1,20 @@
+<!--pages/registerrole/registerrole.wxml-->
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title"></view>
+        <view class="page__desc"></view>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <view class="weui_cells_title">请选择您的角色</view>
+        <view class="weui-cells box">
+          <navigator url="../registerdiver/registerdiver" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'潜水员'}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </navigator>
+          <navigator url="../registercoach/registercoach" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'教练/潜导'}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </navigator>
+        </view>
+    </view>
+</view>

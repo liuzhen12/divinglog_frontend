@@ -41,7 +41,35 @@ Page({
   },
 
   onLoad: function () {
-
+    wx.login({
+      success: function (res) {
+        if (res.code) {
+          //发起网络请求
+          wx.request({
+            url: 'https://log.fundiving.com/login',
+            data: {
+              code: res.code
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              console.log(res.data)
+              if (res.data.hasOwnProperty('id'))
+              {
+                wx.setStorageSync('access_token', res.data.access_token)
+                console.log('true')
+              }                
+              else {
+                wx.navigateTo({ url: '/pages/registerrole/registerrole'})
+              }
+            }
+          })
+        } else {
+          console.log('获取用户登录态失败！' + res.errMsg)
+        }
+      }
+    });
   },
   onShareAppMessage: function () {
     return {

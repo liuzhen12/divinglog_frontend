@@ -1,6 +1,9 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/registerrole/registerrole",
+    "pages/registerdiver/registerdiver",
+    "pages/registercoach/registercoach",
     "pages/myloglist/myloglist",
     "pages/mylogdetail/mylogdetail",
     "pages/loglist/loglist",
