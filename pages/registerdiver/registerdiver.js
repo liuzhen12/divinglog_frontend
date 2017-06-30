@@ -83,6 +83,7 @@ Page({
           wx.hideToast()
         }, 2000)
         wx.setStorageSync('access_token', res.data.access_token) 
+        wx.setStorageSync('id', res.data.id)
         wx.navigateBack({
           delta: 2
         })      

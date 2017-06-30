@@ -57,6 +57,7 @@ Page({
               console.log(res.data)
               if (res.data.hasOwnProperty('id'))
               {
+                wx.setStorageSync('id', res.data.id)
                 wx.setStorageSync('access_token', res.data.access_token)
                 console.log('true')
               }                

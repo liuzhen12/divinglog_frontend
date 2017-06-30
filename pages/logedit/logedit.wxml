@@ -5,10 +5,10 @@
     </view>
     <view class="page__bd page__bd_spacing">
         <view class="weui-cells box">
-            <view class="weui-cell weui-cell_access">
+            <!--<view class="weui-cell weui-cell_access">
                 <view class="weui-cell__bd">{{'Dive No'}}</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access">21</view>
-            </view>
+            </view>-->
             <view class="weui-cell weui-cell_access">
                 <view class="section">
                     <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
@@ -20,37 +20,101 @@
             </view>
             <view class="weui-cell weui-cell_access">
                 <view class="section">
-                    <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+                    <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindStartTimeChange">
                         <view class="picker">
-                        startTime: {{time}}
+                        startTime: {{starttime}}
                         </view>
                     </picker>
                 </view>
             </view>
             <view class="weui-cell weui-cell_access">
                 <view class="section">
-                    <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+                    <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindEndTimeChange">
                         <view class="picker">
-                        endtiem: {{time}}
+                        endtiem: {{endtime}}
                         </view>
                     </picker>
                 </view>
             </view>
             <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'Location'}}</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">Bali</view>
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">Location</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" type="text" maxlength="3" placeholder="Input location" bindinput="locationInput"/>
+                    </view>
+                </view>
             </view>
             <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'Dive Point'}}</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">Tulanben</view>
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">Dive point</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" type="text" maxlength="3" placeholder="Input dive point" bindinput="divePointInput"/>
+                    </view>
+                </view>
             </view>
             <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'Tiem'}}</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">59S</view>
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">Depth1(m)</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" type="number" maxlength="3" placeholder="Input depth" bindinput="depthInput1"/>
+                    </view>
+                </view>
             </view>
             <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'Depth'}}</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">Tiem1(min)</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" type="number" maxlength="3" placeholder="Input tiem" bindinput="tiemInput"/>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">Depth2(m)</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" type="number" maxlength="3" placeholder="Input depth" bindinput="depthInput2"/>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">Tiem2(min)</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" type="number" maxlength="3" placeholder="Input tiem" bindinput="tiemInput3"/>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">Depth3(m)</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" type="number" maxlength="3" placeholder="Input depth" bindinput="depthInput"/>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">Tiem3(min)</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" type="number" maxlength="3" placeholder="Input tiem" bindinput="tiemInput"/>
+                    </view>
+                </view>
             </view>
             <view class="weui-cell weui-cell_access">
                 <view class="weui-cell__bd">{{'Air or Nitrox'}}</view>
@@ -60,29 +124,56 @@
                 </view>
                 </view>
             </view>
+            <block wx:if="{{switch1Checked}}">
+              <view class="weui-cells weui-cell_access">
+                  <view class="weui-cell weui-cell_input">
+                      <view class="weui-cell__hd">
+                          <view class="weui-label">Nitrox(%)</view>
+                      </view>
+                      <view class="weui-cell__bd">
+                          <input class="weui-input" type="number" maxlength="2" placeholder="Input nitrox concentration" bindinput="nitroxInput"/>
+                      </view>
+                  </view>
+              </view>
+            </block>
             <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'32% O2'}}</view>
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">Start(bar)</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" type="number" maxlength="4" placeholder="Input start bar" bindinput="startBarInput"/>
+                    </view>
+                </view>
             </view>
             <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'Start'}}</view>
-                <view class="weui-cell__ft">220 bar</view>
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">End(bar)</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" type="number" maxlength="4" placeholder="Input end bar" bindinput="endBarInput"/>
+                    </view>
+                </view>
             </view>
             <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'End'}}</view>
-                <view class="weui-cell__ft">20 bar</view>
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">Weight(kg/lbs)</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" type="number" maxlength="2" placeholder="Input weight" bindinput="weightInput"/>
+                    </view>
+                </view>
             </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'Weight'}}</view>
-                <view class="weui-cell__ft">4 kg/lbs</view>
-            </view>
-            <navigator url="../stamp/stamp" class="weui-cell weui-cell_access" hover-class="changestyle">
+            <!--<navigator url="../stamp/stamp" class="weui-cell weui-cell_access" hover-class="changestyle">
                 <view class="weui-cell__bd">{{'Buddy'}}</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access">5人</view>
-            </navigator>
+            </navigator>-->
         </view>
         <view class="weui-cells box">
             <view class="section">
-            <textarea placeholder="描述" focus="{{focus}}" />
+            <textarea placeholder="描述" focus="{{focus}}" bindblur="commentsInput"/>
             </view>
         </view>
         <view class="weui-cells box">
@@ -91,7 +182,7 @@
                     <view class="weui-uploader">
                         <view class="weui-uploader__hd">
                             <view class="weui-uploader__title">图片上传</view>
-                            <view class="weui-uploader__info">{{files.length}}/2</view>
+                            <view class="weui-uploader__info">{{files.length}}/6</view>
                         </view>
                         <view class="weui-uploader__bd">
                             <view class="weui-uploader__files" id="uploaderFiles">
@@ -99,26 +190,7 @@
                                     <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
                                         <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
                                     </view>
-                                </block>
-                                <view class="weui-uploader__file">
-                                    <image class="weui-uploader__img" src="/images/pic_160.png" mode="aspectFill" />
-                                </view>
-                                <view class="weui-uploader__file">
-                                    <image class="weui-uploader__img" src="/images/pic_160.png" mode="aspectFill" />
-                                </view>
-                                <view class="weui-uploader__file">
-                                    <image class="weui-uploader__img" src="/images/pic_160.png" mode="aspectFill" />
-                                </view>
-                                <view class="weui-uploader__file weui-uploader__file_status">
-                                    <image class="weui-uploader__img" src="/images/pic_160.png" mode="aspectFill" />
-                                    <view class="weui-uploader__file-content">
-                                        <icon type="warn" size="23" color="#F43530"></icon>
-                                    </view>
-                                </view>
-                                <view class="weui-uploader__file weui-uploader__file_status">
-                                    <image class="weui-uploader__img" src="/images/pic_160.png" mode="aspectFill" />
-                                    <view class="weui-uploader__file-content">50%</view>
-                                </view>
+                                </block>                                
                             </view>
                             <view class="weui-uploader__input-box">
                                 <view class="weui-uploader__input" bindtap="chooseImage"></view>
@@ -129,11 +201,9 @@
             </view>
         </view>
         <view class="weui-cells box">
-            <navigator url="" class="weui_btn weui_btn_default" hover-class="changestyle">
-                <button class="weui_btn weui_btn_default">保存</button>
-            </navigator>
+              <button class="weui_btn weui_btn_primary" bindtap="btnSave">保存</button>
         </view>
-        <view class="weui-cells box">
+        <!--<view class="weui-cells box">
             <navigator url="../commentedit/commentedit" class="weui_btn weui_btn_default" hover-class="changestyle">
                 <button class="weui_btn weui_btn_default">潜水长/教练 评价</button>
             </navigator>
@@ -147,6 +217,6 @@
             <navigator url="../stamp/stamp" class="weui_btn weui_btn_default" hover-class="changestyle">
                 <button class="weui_btn weui_btn_default">删除</button>
             </navigator>
-        </view>        
+        </view>        -->
     </view>
 </view>
