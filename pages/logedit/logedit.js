@@ -20,7 +20,7 @@ Page({
         endbar: '',
         weight: '',
         comments: '',
-        assets: []
+        files: []
     },
     bindDateChange: function(e) {
     this.setData({
@@ -89,7 +89,7 @@ Page({
             success: function (res) {
                 // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
                 that.setData({
-                  assets: that.data.files.concat(res.tempFilePaths)
+                  files: that.data.files.concat(res.tempFilePaths)
                 });
             }
         })
@@ -135,7 +135,7 @@ Page({
           barometer_end: this.data.endbar,
           weight: this.data,weight,
           comments: this.data.comments,
-          assets: "",
+          assets: this.data.files,
           stamp: 0,
           divestore_id: 0,
           divestore_score: 0
