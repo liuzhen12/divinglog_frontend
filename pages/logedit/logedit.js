@@ -184,25 +184,30 @@ Page({
     },
 
     onLoad: function (options){
+      var that = this
       wx.getStorage({
         key: 'id',
-        success: function (res) {
+        success: function (res1) {
           that.setData({
-            id: res.data,
-            }); 
+            id: res1.data,
+            })
         }
-      })
+      });
       wx.getStorage({
         key: 'access_token',
-        success: function (res) {
+        success: function (res2) {
           that.setData({
-            access_token: res.data,
+            access_token: res2.data,
           });
         }
-      })
+      });
+      // that.setData({
+      //   id: wx.getStorageSync('id')||null,
+      //   access_token: wx.getStorageSync('access_token') || null
+      // })
       this.setData({
         date: formatDate(new Date)
-      })       
+      })      
     }    
 });
 
