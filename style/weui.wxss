@@ -987,7 +987,7 @@ icon {
 }
 .weui-search-bar__text {
   display: inline-block;
-  font-size: 14px;
+  font-size: 12px;
   vertical-align: middle;
 }
 .weui-search-bar__form {
