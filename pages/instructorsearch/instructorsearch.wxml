@@ -12,7 +12,7 @@
 
 
 
-    <view class="weui-cells box" wx:for="{{usersArray}}" wx:key="id">
+    <view class="weui-cells list-box" wx:for="{{usersArray}}" wx:key="id">
       <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="listClick" data-url="{{item._links.self.href}}">
         <view class="weui-cell__hd">
           <image src="{{item.avatar_url}}" class="image-avatar"></image>
