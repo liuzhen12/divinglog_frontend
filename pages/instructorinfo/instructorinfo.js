@@ -1,44 +1,43 @@
-var app = getApp()
 Page({
     data: {
-        userInfo: {}
+        userInfo: []
     },
     //事件处理函数
     bindViewTap: function() {
 
     },
-    onLoad: function () {
-        var that = this
-        //调用应用实例的方法获取全局数据
-        app.getUserInfo(function(userInfo){
-        //更新数据
-        that.setData({
-            userInfo:userInfo
-        })
+    onLoad: function (option) {
+        var that = this;
+        var token = wx.getStorageSync('access_token');
+        // this.setData({
+        //   'userInfo.url':option.url
+        // });
+        wx.request({
+          url: option.url,
+          header: {
+            'content-type': 'application/json'
+          },
+          data: {
+            'access-token': token
+          },
+          success: function (res) {
+            if(res.statusCode == 200){
+              console.log(res.data);
+              that.setData({
+                userInfo: res.data,
+                // locationArray: res.data
+              })
+            }
+            else{
+              console.log(res.errMsg);
+            }
+          },
+          fail: function (res) {
+            console.log('failed to get user info')
+          }
         })
     },
     onLaunch: function () {
 
     },
-    getUserInfo:function(cb){
-        var that = this
-        if(this.globalData.userInfo){
-        typeof cb == "function" && cb(this.globalData.userInfo)
-        }else{
-        //调用登录接口
-        wx.login({
-            success: function () {
-            wx.getUserInfo({
-                success: function (res) {
-                that.globalData.userInfo = res.userInfo
-                typeof cb == "function" && cb(that.globalData.userInfo)
-                }
-            })
-            }
-        })
-        }
-    },
-    globalData:{
-        userInfo:null
-    }
 })
