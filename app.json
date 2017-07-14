@@ -20,6 +20,8 @@
     "pages/equipmentedit/equipmentedit",
     "pages/melevel/melevel",
     "pages/meleveledit/meleveledit",
+    "pages/mycourses/mycourses",
+    "pages/mycoursesedit/mycoursesedit",
     "pages/instructorsearch/instructorsearch",
     "pages/instructorinfo/instructorinfo",
     "pages/instructorlevel/instructorlevel",

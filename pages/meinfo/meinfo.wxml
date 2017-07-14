@@ -3,11 +3,99 @@
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
   </view>
-  <view class="navgationView" wx:for="{{array}}" wx:key="*this">
-    <navigator class="navgationCell" url="">
+  <!--<view class="navgationView" wx:for="{{array}}" wx:key="*this">
+    <navigator class="navgationCell" url="{{item.url}}">
     <image class="imageview" src="../../images/{{item.image}}"></image>
     <view class="cellTitle">{{item.title}}</view>
     <view class="arrow"></view>
     </navigator>
+  </view>-->
+  <view wx:if="{{role==1}}">
+    <view class="navgationView" >
+      <navigator class="navgationCell" url="../myloglist/myloglist">
+        <image class="imageview" src="../../images/logs2.png"></image>
+      <view class="cellTitle">my logs</view>
+      <view class="arrow"></view>
+      </navigator>
+    </view>
+    <view class="navgationView" >
+      <navigator class="navgationCell" url="../equipment/equipment">
+        <image class="imageview" src="../../images/equipment1.png"></image>
+      <view class="cellTitle">my equipment</view>
+      <view class="arrow">{{}}</view>
+      </navigator>
+    </view>
+    <view class="navgationView" >
+      <navigator class="navgationCell" url="../melevel/melevel">
+        <image class="imageview" src="../../images/level1.png"></image>
+      <view class="cellTitle">my level</view>
+      <view class="arrow">{{}}</view>
+      </navigator>
+    </view>
+    <view class="navgationView" >
+      <navigator class="navgationCell" url="">
+        <image class="imageview" src="../../images/feedback1.png"></image>
+      <view class="cellTitle">feedback</view>
+      <view class="arrow">{{}}</view>
+      </navigator>
+    </view>
+    <view class="navgationView" >
+      <navigator class="navgationCell" url="">
+        <image class="imageview" src="../../images/info.png"></image>
+      <view class="cellTitle">version</view>
+      <view class="arrow">{{}}</view>
+      </navigator>
+    </view>
+    <view class="navgationView" >
+      <navigator class="navgationCell" url="">
+        <image class="imageview" src="../../images/service1.png"></image>
+      <view class="cellTitle">service</view>
+      <view class="arrow">{{}}</view>
+      </navigator>
+    </view>
+  </view>
+  <view wx:else>
+    <view class="navgationView" >
+      <navigator class="navgationCell" url="../myloglist/myloglist">
+        <image class="imageview" src="../../images/logs2.png"></image>
+      <view class="cellTitle">store</view>
+      <view class="arrow"></view>
+      </navigator>
+    </view>
+    <view class="navgationView" >
+      <navigator class="navgationCell" url="../mycourses/mycourses">
+        <image class="imageview" src="../../images/equipment1.png"></image>
+      <view class="cellTitle">my courses</view>
+      <view class="arrow">{{}}</view>
+      </navigator>
+    </view>
+    <view class="navgationView" >
+      <navigator class="navgationCell" url="../melevel/melevel">
+        <image class="imageview" src="../../images/level1.png"></image>
+      <view class="cellTitle">my students</view>
+      <view class="arrow">{{}}</view>
+      </navigator>
+    </view>
+    <view class="navgationView" >
+      <navigator class="navgationCell" url="">
+        <image class="imageview" src="../../images/feedback1.png"></image>
+      <view class="cellTitle">feedback</view>
+      <view class="arrow">{{}}</view>
+      </navigator>
+    </view>
+    <view class="navgationView" >
+      <navigator class="navgationCell" url="">
+        <image class="imageview" src="../../images/info.png"></image>
+      <view class="cellTitle">version</view>
+      <view class="arrow">{{}}</view>
+      </navigator>
+    </view>
+    <view class="navgationView" >
+      <navigator class="navgationCell" url="">
+        <image class="imageview" src="../../images/service1.png"></image>
+      <view class="cellTitle">service</view>
+      <view class="arrow">{{}}</view>
+      </navigator>
+    </view>
   </view>
 </view>

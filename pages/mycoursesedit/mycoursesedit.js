@@ -1,31 +1,40 @@
+// pages/mycoursesedit/mycoursesedit.js
 var Util = require('../../utils/util.js')
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
     access_token: '',
     id: '',
     links: '',
     editStatus: '',
-    organization: '',
-    level: '',
-    diveNo: '',
-    instructor: ''
+    equiptype: '',
+    brand: '',
+    model: ''
   },
-  orgInput: function (e) {
+
+  typeInput: function (e) {
     this.setData({
-      organization: e.detail.value
+      equiptype: e.detail.value
     })
   },
-  levelInput: function (e) {
+  brandInput: function (e) {
     this.setData({
-      level: e.detail.value
+      brand: e.detail.value
     })
   },
-  divenoInput: function (e) {
+  modelInput: function (e) {
     this.setData({
-      diveNo: e.detail.value
+      model: e.detail.value
     })
   },
-  onLoad: function () {
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
     var that = this;
     wx.getStorage({
       key: 'access_token',
@@ -44,15 +53,14 @@ Page({
           }
         })
         wx.getStorage({
-          key: 'melevelStatus',
-          success: function (resLevelStatus) {
+          key: 'equipStatus',
+          success: function (resEquipStatus) {
             that.setData({
-              editStatus: resLevelStatus.data
+              editStatus: resEquipStatus.data
             });
-            if (resLevelStatus.data == 'Edit') {
-              
+            if (resEquipStatus.data == 'Edit') {
               wx.getStorage({
-                key: 'melevelLinks',
+                key: 'equipLinks',
                 success: function (resLinks) {
                   that.setData({
                     links: resLinks.data
@@ -72,10 +80,9 @@ Page({
                         console.log(resList.data)
                         if (resList.data != null) {
                           that.setData({
-                            organization: resList.data.organization,
-                            level: resList.data.level,
-                            diveNo: resList.data.no,
-                            instructor: resList.data.coach
+                            equiptype: resList.data.type,
+                            brand: resList.data.brand,
+                            model: resList.data.model
                           });
                         }
                         else {
@@ -91,8 +98,9 @@ Page({
         })
 
       }
-    });   
+    }); 
   },
+
   btnSave: function () {
     wx.showLoading({
       title: 'Saving',
@@ -101,9 +109,9 @@ Page({
       wx.request({
         url: this.data.links.edit.href + "?access-token=" + this.data.access_token,
         data: Util.json2Form({
-          organization: this.data.organization,
-          level: this.data.level,
-          no: this.data.diveNo,
+          brand: this.data.brand,
+          type: this.data.equiptype,
+          model: this.data.model,
           user_id: this.data.id
         })
         ,
@@ -160,13 +168,13 @@ Page({
         key: 'meLinks',
         success: function (meLinks) {
           console.log(meLinks.data)
-          console.log(meLinks.data.level.href)
+          console.log(meLinks.data.equip.href)
           wx.request({
-            url: meLinks.data.level.href + "?access-token=" + that.data.access_token,
+            url: meLinks.data.equip.href + "?access-token=" + that.data.access_token,
             data: Util.json2Form({
-              organization: that.data.organization,
-              level: that.data.level,
-              no: that.data.diveNo,
+              brand: that.data.brand,
+              type: that.data.equiptype,
+              model: that.data.model,
               user_id: that.data.id
             })
             ,
@@ -227,9 +235,9 @@ Page({
     wx.request({
       url: this.data.links.delete.href + "?access-token=" + this.data.access_token,
       data: Util.json2Form({
-        organization: this.data.organization,
-        level: this.data.level,
-        no: this.data.diveNo,
+        brand: this.data.brand,
+        type: this.data.equiptype,
+        model: this.data.model,
         user_id: this.data.id
       })
       ,
@@ -277,5 +285,54 @@ Page({
         })
       }
     })
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+  
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+  
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+  
   }
-});
+})

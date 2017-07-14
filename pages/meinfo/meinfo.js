@@ -4,25 +4,32 @@ Page({
     data: {
         array:[{
       image:"logs2.png",
-      title:"我的日志"
+      title:"我的日志",
+      url: "../myloglist/myloglist"
     },{
       image:"equipment1.png",
-      title:"我的装备"
+      title:"我的装备",
+      url: "../equipment/equipment"
     }, {
       image:"level1.png",
-      title:"等级专长"
+      title:"等级专长",
+      url: "../melevel/melevel"
     }, {
       image:"feedback1.png",
-      title:"意见反馈"
+      title:"意见反馈",
+      url: ""
     }, {
       image:"info.png",
-      title:"当前版本"
+      title:"当前版本",
+      url: ""
     }, {
       image:"service1.png",
-      title:"联系客服"
+      title:"联系客服",
+      url: ""
     }
     ],
-        userInfo: {}
+        userInfo: {},
+        role: '',
     },
     //事件处理函数
     bindViewTap: function() {
@@ -37,29 +44,68 @@ Page({
             userInfo:userInfo
         })
         })
+        wx.getStorage({
+          key: 'indexLinks',
+          success: function(resLinks) {
+            console.log(resLinks)
+            wx.getStorage({
+              key: 'access_token',
+              success: function(resToken) {
+                console.log(resToken.data)
+                wx.getStorage({
+                  key: 'role',
+                  success: function (resrole) {
+                    that.setData({
+                      role: resrole.data
+                    })
+                    wx.request({
+                      url: resLinks.data.me.href + "?access-token=" + resToken.data,
+                      data: {
+                        
+                      },
+                      header: {
+                        'content-type': 'application/json'
+                      },
+                      method: "GET",
+                      success: function (res) {
+                        console.log(res)
+                        wx.setStorage({
+                          key: 'meLinks',
+                          data: res.data._links,
+                        })
+                      }
+                    })
+                  },
+                })
+              },
+            })
+            
+          },
+        })
+        
     },
     onLaunch: function () {
 
     },
-    getUserInfo:function(cb){
-        var that = this
-        if(this.globalData.userInfo){
-        typeof cb == "function" && cb(this.globalData.userInfo)
-        }else{
-        //调用登录接口
-        wx.login({
-            success: function () {
-            wx.getUserInfo({
-                success: function (res) {
-                that.globalData.userInfo = res.userInfo
-                typeof cb == "function" && cb(that.globalData.userInfo)
-                }
-            })
-            }
-        })
-        }
-    },
-    globalData:{
-        userInfo:null
-    }
+    // getUserInfo:function(cb){
+    //     var that = this
+    //     if(this.globalData.userInfo){
+    //     typeof cb == "function" && cb(this.globalData.userInfo)
+    //     }else{
+    //     //调用登录接口
+    //     wx.login({
+    //         success: function () {
+    //         wx.getUserInfo({
+    //             success: function (res) {
+    //             that.globalData.userInfo = res.userInfo
+    //             typeof cb == "function" && cb(that.globalData.userInfo)
+    //             }
+    //         })
+    //         }
+    //     })
+    //     }
+    // },
+    // globalData:{
+    //     userInfo:null
+    // }
 })
