@@ -21,7 +21,7 @@
           <view class="weui-cell__bd section_row">
             <text>{{item.nick_name}}</text>
             <image src="../../images/{{item.gender==1?'Male.png':'Female.png'}}" class="image-gender"></image>
-            <text class="text-language">{{item.language_detail==0?'':languageNames[item.language_detail]}}</text>
+            <text class="text-language" hidden="{{!languageNames[item.language_detail]||item.language_detail==0}}">{{languageNames[item.language_detail]}}</text>
           </view>
           <view class="weui-cell__bd section_row">
             <text class="text-rate">{{item.evaluation_score}}</text>
