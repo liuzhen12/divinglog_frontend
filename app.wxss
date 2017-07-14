@@ -28,6 +28,16 @@ page{
   font-size: 13px;
 }
 
+.list_box{
+   font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
+  width:98%;
+  margin-left:auto;
+  margin-right: auto; 
+  line-height: 2;
+  font-size: 13px;
+  margin-top:0;
+}
+
 .widget__arrow {
   padding: 0px;
   width: 100%;
