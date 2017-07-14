@@ -6,42 +6,43 @@
     <view class="page__bd page__bd_spacing">
         <view class="weui-cells box">
             <view class="weui-cell weui-cell_access">
-                <view class="section">
-                    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array1}}">
-                        <view class="picker">
-                            装备类型：{{array1[index]}}
-                        </view>
-                    </picker>
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">Type</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" type="text" placeholder="Input type" value="{{equiptype}}" bindinput="typeInput"/>
+                    </view>
                 </view>
             </view>
             <view class="weui-cell weui-cell_access">
-                <view class="section">
-                    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array2}}">
-                        <view class="picker">
-                            品牌：{{array2[index]}}
-                        </view>
-                    </picker>
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">Brand</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" type="text" placeholder="Input brand" value="{{brand}}" bindinput="brandInput"/>
+                    </view>
                 </view>
             </view>
             <view class="weui-cell weui-cell_access">
-                <view class="section">
-                    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array3}}">
-                        <view class="picker">
-                            型号：{{array3[index]}}
-                        </view>
-                    </picker>
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">Model</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" type="text" placeholder="Input model" value="{{model}}" bindinput="modelInput"/>
+                    </view>
                 </view>
             </view>
         </view>
         <view class="weui-cells box">
-            <navigator url="../equipment/equipment" class="weui_btn weui_btn_default" hover-class="changestyle">
-                <button class="weui_btn weui_btn_default">保存</button>
-            </navigator>
+            <button class="weui_btn weui_btn_default" bindtap="btnSave">保存</button>
         </view>
+        <block wx:if="{{editStatus!='Add'}}">
         <view class="weui-cells box">
-            <navigator url="../equipment/equipment" class="weui_btn weui_btn_default" hover-class="changestyle">
-                <button class="weui_btn weui_btn_default">删除</button>
-            </navigator>
+            <button class="weui_btn weui_btn_default" bindtap="btnDelete">删除</button>
         </view>
+        </block>
     </view>
 </view>

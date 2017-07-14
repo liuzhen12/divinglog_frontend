@@ -54,12 +54,15 @@ Page({
               'content-type': 'application/json'
             },
             success: function (res) {
-              console.log(res.data)
+              console.log(res)
               if (res.data.hasOwnProperty('id'))
               {
                 wx.setStorageSync('id', res.data.id)
                 wx.setStorageSync('access_token', res.data.access_token)
+                wx.setStorageSync('indexLinks', res.data._links)
+                wx.setStorageSync('role', res.data.role)
                 console.log('true')
+                console.log(res.data.access_token)
               }                
               else {
                 wx.navigateTo({ url: '/pages/registerrole/registerrole'})
