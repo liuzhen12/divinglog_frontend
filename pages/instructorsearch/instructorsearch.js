@@ -224,8 +224,12 @@ Page({
               sortBy: res.tapIndex
             })
             that.fetchSearchList();
-            console.log(res.tapIndex)
+            
+            console.log(res.tapIndex);
           }
+        },
+        fail: function (res) {
+          console.log(res.errMsg);
         }
       });
     }

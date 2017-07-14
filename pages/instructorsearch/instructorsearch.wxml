@@ -15,19 +15,20 @@
     <view class="weui-cells box" wx:for="{{usersArray}}" wx:key="id">
       <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="listClick" data-url="{{item._links.self.href}}">
         <view class="weui-cell__hd">
-          <image src="{{item.avatar_url}}" style="margin-right: 5px;vertical-align: top;width:80px; height: 80px;"></image>
+          <image src="{{item.avatar_url}}" class="image-avatar"></image>
         </view>
         <view class="weui-cell__bd userinfo">
           <view class="weui-cell__bd section_row">
             <text>{{item.nick_name}}</text>
-            <text class="text_language">{{item.language_detail==0?'':languageNames[item.language_detail]}}</text>
+            <image src="../../images/{{item.gender==1?'Male.png':'Female.png'}}" class="image-gender"></image>
+            <text class="text-language">{{item.language_detail==0?'':languageNames[item.language_detail]}}</text>
           </view>
           <view class="weui-cell__bd section_row">
-            <text class="text_rate">{{item.evaluation_score}}</text>
-            <text class="text_rate_count">{{item.evaluation_count}}{{' Reviews'}}</text>
+            <text class="text-rate">{{item.evaluation_score}}</text>
+            <text class="text-rate-count">{{item.evaluation_count}}{{' Reviews'}}</text>
           </view>
-          <view class="weui-cell__bd section_row">
-            <text class="text_location">{{item.city}}{{' '}}{{item.province}}{{' '}}{{item.country}}</text>
+          <view class="weui-cell__bd section-row">
+            <text class="text-location">{{item.city ? item.city + ', ' : ''}}{{item.province ? item.province + ', ' : ''}}{{item.country}}</text>
           </view>
         </view>
       </view>
