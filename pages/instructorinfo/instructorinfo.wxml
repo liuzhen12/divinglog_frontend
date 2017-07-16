@@ -1,26 +1,65 @@
 <view class="page">
-    <view class="userinfo" >
-        <image class="userinfo-avatar" src="{{userInfo.avatar_url}}" background-size="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nick_name}}</text>
-    </view>
-    <view class="page__bd page__bd_spacing">
-        <view class="weui-cells box"> 
-            <navigator url="../instructorlevel/instructorlevel" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'PADI'}}</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">"{{userInfo.title}}"</view>
-            </navigator>
-            <navigator url="../commentlist/commentlist" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'Rate'}}</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">{{item.evaluation_score}}</view>
-            </navigator>
-            <navigator url="../studentlist/studentlist" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'Students'}}</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">{{item.student_count}}</view>
-            </navigator>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'WeChat ID'}}</view>
-                <view class="weui-cell__ft">{{item.wechat_no}}</view>
-            </view>
+  <view class="page__hd">
+    <view class="page__title"></view>
+    <view class="page__desc"></view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-cells listbox">
+      <view class="weui-cell">
+        <view class="weui-cell__hd">
+          <image src="{{userInfo.avatar_url}}" class="image-avatar"></image>
         </view>
+        <view class="weui-cell__bd">
+          <view class="weui-cell__bd">
+            <text>{{userInfo.nick_name}}</text>
+            <image src="../../images/{{userInfo.gender==1?'Male.png':'Female.png'}}" class="image-gender"></image>
+            <text class="text-title" hidden="{{!userInfo.title}}">{{userInfo.title}}</text>
+          </view>
+          <view class="weui-cell__bd">
+            <text class="text-rate">{{userInfo.evaluation_score}}</text>
+            <text class="text-rate-count">{{userInfo.evaluation_count}}{{' Reviews'}}</text>
+            <text class="text-language" hidden="{{!languageNames[userInfo.language_detail]||userInfo.language_detail==0}}">{{languageNames[userInfo.language_detail]}}</text>
+          </view>
+          <view class="weui-cell__bd">
+            <text class="text-location">{{userInfo.city ? userInfo.city + ', ' : ''}}{{userInfo.province ? userInfo.province + ', ' : ''}}{{userInfo.country}}</text>
+          </view>
+        </view>
+      </view>
     </view>
+    <view class="weui-cells listbox">
+      <view class="weui-cell__bd">
+        <view class="block-title">Store</view>
+      </view>
+      <view wx:if="{{divestore.name}}">
+      <view class="weui-cell__bd" >
+        <text class="text-store">{{divestore.name}}</text>
+      </view>
+      <view class="weui-cell__bd">
+        <image src="../../images/pin_location.png" class="image-pin-location"></image>
+        <text class="text-location">{{divestore.location_address}}</text>
+      </view>
+      </view>
+      <view class="weui-cell__bd" wx:if="{{!divestore.name}}">
+        <text class="text-store">Not found</text>
+        
+      </view>
+    </view>
+    <view class="weui-cells listbox">
+      <view class="weui-cell__bd">
+        <view class="block-title">Students</view>
+      </view>
+      
+      <view class="weui-cell__bd section-row" wx:for="{{student}}" wx:key="id">
+        
+        <view class="weui-cell section-column">
+          <image src="{{item.avatar_url}}" class="image-student"></image>
+          <text class="text-location">{{item.nick_name}}</text>
+        </view>
+        
+      </view>
+      <view class="weui-cell__bd">
+          <navigator url="" class="text-link" >View All</navigator>
+      </view>
+    </view>
+  </view>
 </view>

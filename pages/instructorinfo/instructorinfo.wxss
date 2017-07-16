@@ -1,16 +1,93 @@
-.userinfo {
+ .section-column {
   display: flex;
   flex-direction: column;
   align-items: center;
+} 
+
+ .section-row {
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+} 
+
+.image-avatar {
+  margin-right: 5px;
+  vertical-align: top;
+  width:80px; 
+  height: 80px;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.text-title {
+  background-color: #54a5c4;
+  color: #ffffff;
+  font-size: 12px;
+  margin-left: 5px;
+  border-radius: 5px;
+  padding:0 0.6em;
 }
 
-.userinfo-nickname {
-  color: #aaa;
+.text-language {
+  background-color: #808080;
+  color: #ffffff;
+  font-size: 11.5px;
+  margin-left: 5px;
+  border-radius: 2px;
+  padding:0 0.6em;
 }
+
+.text-store {
+  padding:5px 15px 0px 15px;
+  color:#404040;
+  font-size:14px;
+}
+.text-rate-count {
+  color: #808080;
+  font-size: 11.5px;
+  margin-left: 5px;
+  line-height: 32px;
+}
+
+.text-rate {
+  color: #df8c20;
+  font-size: 15px;
+}
+
+.text-location {
+  color: #808080;
+  font-size: 11.5px;
+}
+
+.image-gender {
+  margin-left: 5px;
+  margin-right: 5px;
+  /* margin-top: 3px; */
+  width: 16px; 
+  height: 16px;
+}
+.image-pin-location {
+  padding: 0px 5px 0px 15px;
+  width: 11.12px; 
+  height: 16px;
+}
+
+.block-title {
+  padding:5px 15px 0px 15px;
+  color:#999999;
+  font-size:15px;
+}
+
+.image-student {
+  padding:0px 3px 5px 3px;
+  /* margin-right: 5px; */
+  vertical-align: top;
+  width:60px; 
+  height: 60px;
+}
+
+.text-link {
+  padding:0px 0px 10px 0px;
+  color:#3a99f8;
+  font-size:15px;
+  text-align:center;
+}
+

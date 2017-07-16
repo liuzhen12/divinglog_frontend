@@ -42,7 +42,7 @@ Page({
     inputTyping: function (e) {
         var keyWord = e.detail.value;
         var locationArray = wx.getStorageSync('locationArray');
-        var len = locationArray.length;
+        var len = locationArray.length < 6 ? locationArray.length : 5;
         var ret = [];
         var reg = new RegExp(keyWord,"i");
         for (var i=0;i<len;i++){
@@ -62,6 +62,7 @@ Page({
         for (var i=0; i < languageArray.length; i++){
           languageNames[i + 1] = languageArray[i]['name'];
         }
+        wx.setStorageSync('languageNames', languageNames)
         that.setData({
           languageArray: languageArray,
           languageNames: languageNames

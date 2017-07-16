@@ -1,0 +1,26 @@
+<view class="page">
+    <view class="userinfo" >
+        <image class="userinfo-avatar" src="{{userInfo.avatar_url}}" background-size="cover"></image>
+        <text class="userinfo-nickname">{{userInfo.nick_name}}</text>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <view class="weui-cells box"> 
+            <navigator url="../instructorlevel/instructorlevel" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'PADI'}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">{{userInfo.title}}</view>
+            </navigator>
+            <navigator url="../commentlist/commentlist" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'Rate'}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">{{userInfo.evaluation_score}}</view>
+            </navigator>
+            <navigator url="../studentlist/studentlist" class="weui-cell weui-cell_access" hover-class="changestyle">
+                <view class="weui-cell__bd">{{'Students'}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">{{userInfo.student_count}}</view>
+            </navigator>
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">{{'WeChat ID'}}</view>
+                <view class="weui-cell__ft">{{userInfo.wechat_no}}</view>
+            </view>
+        </view>
+    </view>
+</view>
