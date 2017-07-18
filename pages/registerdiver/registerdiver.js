@@ -8,27 +8,136 @@ Page({
    * 页面的初始数据
    */
   data: {
+    links: null,
     code: null,
-    toastHidden: true,
-    //hiddenLoading: true,
-    array1: ["中文", "English", "粤语"],
-    index: 0
+    checkboxItems: [],
+    checkedItem: true,
+    locationlist:'',
+    locationIndex: 0,
+    locationName:'',
+    Provincelist:'',
+    ProvinceIndex: 0,
+    ProvinceName:'',
+    Citylist:'',
+    CityIndex:0,
+    CityName:'',
+    langlist:''
   },
 
-  bindPickerChange: function (e) {
+  bindPickerCountryChange: function (e) {
     this.setData({
-      index: e.detail.value
+      locationIndex: e.detail.value,
+      locationName: this.data.locationlist[e.detail.value].name,
+      Provincelist:'',
+      ProvinceIndex:0
+    })
+    var that = this
+    wx.request({
+      url: this.data.links.location.href.replace("{", "").replace("}", "=") + this.data.locationlist[e.detail.value].id,
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (resProvince) {
+        if (resProvince.data.length!=0)
+        {
+          that.setData({
+            Provincelist: resProvince.data,
+            ProvinceIndex: resProvince.data[0].id
+          })
+        }        
+      }
     })
   },
 
-  listenerButton: function () {
-    // this.setData({
-    //   hiddenLoading: !this.data.hiddenLoading
-    // })    
-    wx.showLoading({
-      title: '提交中',
+  bindPickerProvinceChange: function (e){
+    this.setData({
+      ProvinceIndex: e.detail.value,
+      ProvinceName: this.data.Provincelist[e.detail.value].name,
+      Citylist:'',
+      CityIndex:0
     })
-    console.log(this.data.code);
+    var that = this
+    wx.request({
+      url: this.data.links.location.href.replace("{", "").replace("}", "=") + this.data.Provincelist[e.detail.value].id,
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (resCity) {
+        if (resCity.data.length!=0){
+          that.setData({
+            Citylist: resCity.data,
+            CityIndex: resCity.data[0].id
+          })
+        }       
+      }
+    })
+  },
+
+  bindPickerCityChange:function (e){
+    if (this.data.Citylist.length!=0){
+      this.setData({
+        CityIndex: e.detail.value,
+        CityName: this.data.Citylist[e.detail.value].name
+      })
+    }    
+  },
+
+  checkboxChange: function (e) {
+    var checkboxItems = this.data.checkboxItems, values = e.detail.value, checkStr = '', checkFirst=true;
+    for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
+      checkboxItems[i].checked = false;
+
+      for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
+        if (checkboxItems[i].id == values[j]) {
+          checkboxItems[i].checked = true;
+          break;
+        }
+      }
+    }
+
+    for (var a = 0; a<checkboxItems.length; a++)
+    {
+      if (checkboxItems[a].checked==true){
+        if (checkFirst)
+        {
+          checkStr = checkboxItems[a].id;
+          checkFirst=false;
+        }
+        else{
+          checkStr = checkStr + ',' + checkboxItems[a].id;
+        }
+      }
+    }
+
+    this.setData({
+      checkboxItems: checkboxItems,
+      langlist: checkStr
+    });
+  },
+
+  listenerButton: function () {   
+    wx.showLoading({
+      title: 'Submiting',
+    })
+    if(this.data.langlist.length==0){
+      wx.showToast({
+        title: 'Please choose language!',
+        icon: 'fail',
+        duration: 3000
+      })
+      return;
+    }
+    if (this.data.locationName.length == 0) {
+      wx.showToast({
+        title: 'Please choose country!',
+        icon: 'fail',
+        duration: 3000
+      })
+      return;
+    }
+
     that = this;
     wx.request({ 
       url: "https://log.fundiving.com/register",
@@ -41,24 +150,21 @@ Page({
         avatar_url: app.globalData.userInfo.avatarUrl,
         nick_name: app.globalData.userInfo.nickName,
         gender: app.globalData.userInfo.gender,
-        city: app.globalData.userInfo.city,
-        province: app.globalData.userInfo.province,
-        country: app.globalData.userInfo.country,
+        city: this.data.CityName,
+        province: this.data.ProvinceName,
+        country: this.data.locationName,
         language: app.globalData.userInfo.language,
-        language_detail: this.data.index,
+        language_detail: this.data.langlist,
         role: '1'
         }),      
       complete: function (res){
         if (res == null || res.statusCode != 201) {
-          console.error(res.statusCode);
-          // that.setData({
-          //   hiddenLoading: true,
-          // }); 
+
           setTimeout(function () {
             wx.hideLoading()
           }, 2000)
           wx.showToast({
-            title: '提交失败',
+            title: 'Submit fail',
             icon: 'fail',
             duration: 2000
           })
@@ -67,15 +173,12 @@ Page({
           }, 2000)
           return;
         }
-        console.log(res)
-        // that.setData({
-        //   hiddenLoading: true,
-        // }); 
+
         setTimeout(function () {
           wx.hideLoading()
         }, 2000)
         wx.showToast({
-          title: '提交成功',
+          title: 'Submit success',
           icon: 'success',
           duration: 2000
         })
@@ -104,7 +207,6 @@ Page({
           that.setData({
             code: res.code
           })
-          console.log(res.code)
         } else {
           console.log('获取用户登录态失败！' + res.errMsg)
         }
@@ -117,6 +219,48 @@ Page({
         userInfo: userInfo
       })
     })    
+
+    wx.getStorage({
+      key: 'registerLinks',
+      success: function(res) {
+        that.setData({
+          links: res.data
+        })
+        wx.request({
+          url: res.data.language.href.replace("{","").replace("}",""),
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "GET",
+          success: function (reslang) {
+            that.setData({
+              checkboxItems: reslang.data,           
+            })
+            for (var i = 0; i < that.data.checkboxItems.length;i++)
+            {
+              that.data.checkboxItems[i]['checked']=false
+            }
+          }
+        })
+
+        wx.request({
+          url: res.data.location.href.replace("{","").replace("}",""),
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "GET",
+          success: function (reslocation) {
+            that.setData({
+              locationlist: reslocation.data,
+              locationIndex: reslocation.data[0].id
+            })
+
+          }
+        })
+      },
+    })
+
+    
   },
 
   /**
