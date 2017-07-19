@@ -42,12 +42,14 @@ Page({
     inputTyping: function (e) {
         var keyWord = e.detail.value;
         var locationArray = wx.getStorageSync('locationArray');
-        var len = locationArray.length < 6 ? locationArray.length : 5;
         var ret = [];
         var reg = new RegExp(keyWord,"i");
-        for (var i=0;i<len;i++){
+        for (var i = 0; i < locationArray.length;i++){
           if (locationArray[i]['name'].match(reg)){
             ret.push(locationArray[i]);
+          }
+          if (ret.length > 4) {
+            break;
           }
         }
         this.setData({

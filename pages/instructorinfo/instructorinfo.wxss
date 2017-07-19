@@ -1,13 +1,18 @@
+.weui-cells::after {
+  border-bottom: 0;
+}
+
+ 
  .section-column {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding:5px 2px;
 } 
 
  .section-row {
   display: flex;
-  flex-direction: row;
-  align-items: left;
+  padding:0 0 0 10px;
 } 
 
 .image-avatar {
@@ -84,10 +89,35 @@
   height: 60px;
 }
 
+.image-comment-avatar {
+  margin-right: 5px;
+  vertical-align: top;
+  width:30px; 
+  height: 30px;
+  border-radius:50px;
+}
+
+.text-commenter {
+  font-size: 14px;
+}
+
+.text-commentcontent {
+  font-size: 13px;
+}
 .text-link {
   padding:0px 0px 10px 0px;
   color:#3a99f8;
   font-size:15px;
   text-align:center;
+}
+
+.comment-list {
+  align-items: flex-start;
+}
+
+.scroll-students {
+   white-space: nowrap; 
+   display: flex;
+   padding:0 0 0 10px;
 }
 

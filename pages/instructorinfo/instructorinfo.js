@@ -1,10 +1,11 @@
 Page({
     data: {
-      userLinks: ['divestore','student'],
       userInfo: [],
       languageNames: [],
       divestore: [],
-      student: []
+      student: [],
+      comments: [],
+      course: []
     },
     //事件处理函数
     bindViewTap: function() {
@@ -13,29 +14,55 @@ Page({
     onLoad: function (option) {
         var that = this;
         var token = wx.getStorageSync('access_token');
+        var params = { 'access-token': token};
         var languageNames = wx.getStorageSync('languageNames');
-        getData(option.url, token, function(userInfo){
+        getData(option.url, params, function(userInfo){
           if (userInfo){
+            console.log(userInfo)
             that.setData({
               userInfo: userInfo,
               languageNames: languageNames
             })
-            var divestoreLink = userInfo._links.divestore.href;
-            var studentsLink = userInfo._links.student.href;
-            getData(divestoreLink, token, function (storeInfo) {
+            getData(userInfo._links.divestore.href, params, function (storeInfo) {
               if (storeInfo) {
                 that.setData({
                   divestore: storeInfo
                 })
               }
             })
-            getData(studentsLink, token, function (studentsInfo) {
+            getData(userInfo._links.student.href, params, function (studentsInfo) {
               if (studentsInfo) {
+                while (studentsInfo.items.length < 6){
+                  studentsInfo.items.push(studentsInfo.items[0]);
+                }
                 that.setData({
-                  student: studentsInfo.items
+                  student: studentsInfo
                 })
               }
             })
+            getData(userInfo._links.comment.href, params, function (comment) {
+              //todo limit comment amount
+              if (comment) {
+                console.log(comment);
+                var newDate = new Date();
+                for (var i=0;i<comment.items.length;i++){
+                  newDate.setTime(parseInt(comment.items[i]['remark_time']) * 1000);
+                  comment.items[i]['remark_time'] = newDate.toLocaleString();
+                }
+                that.setData({
+                  comment: comment
+                })
+              }
+            })
+            getData(userInfo._links.coachCourse.href, params, function (course) {
+              if (course) {
+                console.log(course);
+                that.setData({
+                  course: course.items
+                })
+              }
+            })
+
           }
         })
     },
@@ -44,15 +71,13 @@ Page({
     },
 })
 
-function getData(url, accessToken, callback){
+function getData(url, params, callback){
   wx.request({
     url: url,
     header: {
       'content-type': 'application/json'
     },
-    data: {
-      'access-token': accessToken
-    },
+    data: params,
     complete: function (res) {
       if (res.statusCode == 200) {
         callback(res.data);
