@@ -62,7 +62,7 @@
           </view>
         </scroll-view> 
         <view class="weui-cell__bd">
-          <navigator url="" class="text-link" >View All {{student._meta.totalCount}} students</navigator>
+          <navigator url="../studentlist/studentlist?url={{userInfo._links.student.href}}" class="text-link" >View All {{student._meta.totalCount}} students</navigator>
         </view>
       </view>
       <view class="weui-cell__bd" wx:if="{{student._meta.totalCount == 0}}">
@@ -76,7 +76,7 @@
       
       <view class="weui-cells list-box" wx:for="{{comment.items}}" wx:key="id">
         <view class="weui-cell comment-list">
-          <view class="weui-cell__hd">
+          <view class="weui-cell__hd" style="margin-right: 8px">
             <image src="{{item.avatar_url}}" class="image-comment-avatar"></image>
           </view>
           <view class="weui-cell__bd">

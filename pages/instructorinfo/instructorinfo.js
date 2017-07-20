@@ -43,7 +43,6 @@ Page({
             getData(userInfo._links.comment.href, params, function (comment) {
               //todo limit comment amount
               if (comment) {
-                console.log(comment);
                 var newDate = new Date();
                 for (var i=0;i<comment.items.length;i++){
                   newDate.setTime(parseInt(comment.items[i]['remark_time']) * 1000);
