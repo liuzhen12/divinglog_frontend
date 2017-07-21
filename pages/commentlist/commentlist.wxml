@@ -1,0 +1,27 @@
+<view class="page">
+  <scroll-view scroll-y="true" bindscrolltolower="searchScrollLower" style="height: 100%">
+    <view class="weui-cells list-box" wx:for="{{comment}}" wx:key="id">
+      <view class="weui-cell comment-list">
+        <view class="weui-cell__hd" style="margin-right: 8px">
+          <image src="{{item.avatar_url}}" class="image-comment-avatar"></image>
+        </view>
+        <view class="weui-cell__bd">
+          <view class="weui-cell__bd">
+            <text class="text-commenter">{{item.nick_name}}</text>
+          </view>
+          <view class="weui-cell__bd">
+            <text class="text-time">{{item.remark_time}}</text>
+          </view>
+          <view class="weui-cell__bd">
+            <text class="text-commentcontent">{{item.remarks}}</text>
+          </view>
+        </view>
+        <view class="weui-cell__ft">
+          <text class="text-rate">{{item.score}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="loading" hidden="{{!searchLoading}}">Loading...</view>
+    <view class="loading complete" hidden="{{!searchLoadingComplete}}">All loaded</view>
+  </scroll-view>
+</view>

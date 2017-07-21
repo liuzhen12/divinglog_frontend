@@ -95,22 +95,8 @@
           </view>
         </view>
       </view>
-    
-
-
-      <!-- <view class="weui-cell__bd section-column" wx:for="{{student}}" wx:key="id">
-      <view class="weui-cell">
-        <view class="weui-cell__hd">
-          <image src="{{item.avatar_url}}" class="image-comment-avatar"></image>
-        </view>
-        <view class="weui-cell__bd">
-          <text class="text-location">{{item.nick_name}}</text>
-          <text class="text-location">{{item.nick_name}}</text>
-        </view>
-      </view>
-      </view> -->
       <view class="weui-cell__bd">
-          <navigator url="" class="text-link" >View all {{comment._meta.totalCount}} comments</navigator>
+          <navigator url="../commentlist/commentlist?url={{userInfo._links.comment.href}}" class="text-link" >View all {{comment._meta.totalCount}} comments</navigator>
       </view>
     </view>
   </view>
