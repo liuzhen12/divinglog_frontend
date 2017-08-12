@@ -107,7 +107,7 @@ Page({
         title: '提交中',
       })
       console.log(this.data.code);
-      that = this;
+      var that = this;
       wx.request({
         url: "https://log.fundiving.com/diving-logs",
         header: {
@@ -133,13 +133,12 @@ Page({
           gas: this.data.nitrox,
           barometer_start: this.data.startbar,
           barometer_end: this.data.endbar,
-          weight: this.data,weight,
+          weight: this.data.weight,
           comments: this.data.comments,
           assets: this.data.files,
           stamp: 0,
           divestore_id: 0,
           divestore_score: 0
-
         }),
         complete: function (res) {
           if (res == null || res.statusCode != 201) {
