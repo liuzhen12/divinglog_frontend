@@ -63,6 +63,7 @@ Page({
                 wx.setStorageSync('role', res.data.role)
                 console.log('true')
                 console.log(res.data.access_token)
+                console.log(res.data._links)
               }                
               else {
                 wx.navigateTo({ url: '/pages/registerrole/registerrole'})
