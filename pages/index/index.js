@@ -43,7 +43,7 @@ Page({
   onLoad: function () {
     wx.login({
       success: function (res) {
-        if (res.code) {
+        if (res.code) {console.log(res.code);return;
           //发起网络请求
           wx.request({
             url: 'https://log.fundiving.com/login',
