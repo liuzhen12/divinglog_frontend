@@ -8,7 +8,7 @@
         <view class="weui-cells box" >          
             <view class="weui-cell weui-cell_access" data-links="{{item._links}}" bindtap="coursesEdit" wx:for="{{array}}" wx:key="*this">
                 <view class="weui-cell__bd">{{item.organization}}</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">{{item.sub_name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">{{item.name}}</view>
             </view>    
         </view>
     </view>

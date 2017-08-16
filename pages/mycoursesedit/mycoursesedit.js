@@ -185,106 +185,80 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    wx.getStorage({
-      key: 'access_token',
-      success: function (resToken) {
-        that.setData({
-          access_token: resToken.data,
-        });
-        console.log(resToken.data)
+    var token = wx.getStorageSync('access_token')
+    that.setData({
+      access_token: token,
+    });
+    var userId = wx.getStorageSync('id')
+    that.setData({
+      id: userId
+    });
+    var myCourseStatus = wx.getStorageSync('mycourseStatus')
+    that.setData({
+      editStatus: myCourseStatus
+    });
+    if (myCourseStatus == 'Edit'){
+      var editLinks = wx.getStorageSync('mycourseLinks')
+      that.setData({
+        links: editLinks
+      });
+      if (editLinks != null || typeof (editLinks) != 'undefined') {
+        wx.request({
+          url: editLinks.self.href + "?access-token=" + token,
+          data: {
 
-        wx.getStorage({
-          key: 'id',
-          success: function (resId) {
-            that.setData({
-              id: resId.data
-            });
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "GET",
+          success: function (resList) {
+            console.log(resList.data)
+            if (resList.data != null) {
+              that.setData({
+                organization: resList.data.organization,
+                category: resList.data.category,
+                duty: resList.data.duty,
+                name: resList.data.name,
+                subName: resList.data.sub_name
+              });
+            }
+            else {
+              console.log('errer')
+            }
           }
         })
-        wx.getStorage({
-          key: 'mycourseStatus',
-          success: function (resEquipStatus) {
-            that.setData({
-              editStatus: resEquipStatus.data
-            });
-            if (resEquipStatus.data == 'Edit') {
-              wx.getStorage({
-                key: 'mycourseLinks',
-                success: function (resLinks) {
-                  that.setData({
-                    links: resLinks.data
-                  });
-                  if (resLinks.data != null || typeof (resLinks.data) != 'undefined') {
-                    console.log(resLinks.data)
-                    wx.request({
-                      url: resLinks.data.self.href + "?access-token=" + resToken.data,
-                      data: {
+      }
+    }
+    else{
+      var addLinks = wx.getStorageSync('mycourseAddLinks')
+      that.setData({
+        addLinks: addLinks
+      });
+      if (addLinks != null || typeof (addLinks) != 'undefined') {
+        wx.request({
+          url: addLinks.course.href + "?access-token=" + token,
+          data: {
 
-                      },
-                      header: {
-                        'content-type': 'application/json'
-                      },
-                      method: "GET",
-                      success: function (resList) {
-                        console.log(resList.data)
-                        if (resList.data != null) {
-                          that.setData({
-                            organization: resList.data.organization,
-                            category: resList.data.category,
-                            duty: resList.data.duty,
-                            name: resList.data.name,
-                            subName: resList.data.sub_name
-                          });
-                        }
-                        else {
-                          console.log('errer')
-                        }
-                      }
-                    })
-                  }
-                }
-              })
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "GET",
+          success: function (resCourseList) {
+            if (resCourseList.data != null) {
+              that.setData({
+                orglist: resCourseList.data.items,
+                orgIndex: resCourseList.data.items[0].id
+              });
             }
-            else{
-              wx.getStorage({
-                key: 'mycourseAddLinks',
-                success: function (resAddLinks){
-                  that.setData({
-                    addLinks: resAddLinks.data
-                  });
-                  if (resAddLinks.data != null || typeof (resAddLinks.data) != 'undefined'){
-                    console.log(resAddLinks.data)
-                    wx.request({
-                      url: resAddLinks.data.course.href + "?access-token=" + resToken.data,
-                      data: {
-
-                      },
-                      header: {
-                        'content-type': 'application/json'
-                      },
-                      method: "GET",
-                      success: function (resCourseList) {
-                        console.log(resCourseList.data)
-                        if (resCourseList.data != null) {
-                          console.log(resCourseList.data)
-                          that.setData({
-                            orglist: resCourseList.data.items,
-                            orgIndex: resCourseList.data.items[0].id
-                          });
-                        }
-                        else {
-                          console.log('errer')
-                        }
-                      }
-                    })
-                  }
-                }
-              })
+            else {
+              console.log('errer')
             }
           }
-        })        
+        })
       }
-    }); 
+    }
   },
 
   btnSave: function () {
@@ -292,73 +266,131 @@ Page({
       title: 'Saving',
     })
     var that = this;
-    wx.getStorage({
-      key: 'mycourseAddLinks',
-      success: function (myLinks) {
-        console.log(myLinks.data)
-        console.log(myLinks.data.create.href)
-        console.log(that.data.organization)
-        console.log(that.data.category)
-        console.log(that.data.duty)
-        console.log(that.data.name)
-        wx.request({
-          url: myLinks.data.create.href + "?access-token=" + that.data.access_token,
-          data: Util.json2Form({
-            organization: that.data.orgName,
-            category: that.data.categoryName,
-            duty: that.data.dutyName,
-            name: that.data.nameEdit,
-            sub_name: that.data.subName,
-            user_id: that.data.id
+    var addLinks = wx.getStorageSync('mycourseAddLinks')
+    wx.request({
+      url: addLinks.create.href + "?access-token=" + that.data.access_token,
+      data: Util.json2Form({
+        organization: that.data.orgName,
+        category: that.data.categoryName,
+        duty: that.data.dutyName,
+        name: that.data.nameEdit,
+        sub_name: that.data.subName,
+        user_id: that.data.id
+      })
+      ,
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: "POST",
+      complete: function (res2) {
+        console.log(res2)
+        if (res2 == null || res2.statusCode != 201) {
+          console.error(res2.statusCode);
+          setTimeout(function () {
+            wx.hideLoading()
+          }, 2000)
+          wx.showToast({
+            title: 'save fail',
+            icon: 'fail',
+            duration: 2000
           })
-          ,
-          header: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          method: "POST",
-          complete: function (res2) {
-            console.log(res2)
-            if (res2 == null || res2.statusCode != 201) {
-              console.error(res2.statusCode);
-              setTimeout(function () {
-                wx.hideLoading()
-              }, 2000)
-              wx.showToast({
-                title: 'save fail',
-                icon: 'fail',
-                duration: 2000
-              })
-              setTimeout(function () {
-                wx.hideToast()
-              }, 2000)
-              return;
-            }
-            console.log(res2)
-            setTimeout(function () {
-              wx.hideLoading()
-            }, 2000)
-            wx.showToast({
-              title: 'save success',
-              icon: 'success',
-              duration: 2000
-            })
-            setTimeout(function () {
-              wx.hideToast()
-            }, 2000)
-            var pages = getCurrentPages();
-            if (pages.length > 1) {
-              //上一个页面实例对象
-              var prePage = pages[pages.length - 2];
-              //关键在这里
-              prePage.onLoad()
-            }
-            wx.navigateBack({
-              delta: 1
-            })
-          }
+          setTimeout(function () {
+            wx.hideToast()
+          }, 2000)
+          return;
+        }
+        console.log(res2)
+        setTimeout(function () {
+          wx.hideLoading()
+        }, 2000)
+        wx.showToast({
+          title: 'save success',
+          icon: 'success',
+          duration: 2000
+        })
+        setTimeout(function () {
+          wx.hideToast()
+        }, 2000)
+        var pages = getCurrentPages();
+        if (pages.length > 1) {
+          //上一个页面实例对象
+          var prePage = pages[pages.length - 2];
+          //关键在这里
+          prePage.onLoad()
+        }
+        wx.navigateBack({
+          delta: 1
         })
       }
     })
+
+    // wx.getStorage({
+    //   key: 'mycourseAddLinks',
+    //   success: function (myLinks) {
+    //     console.log(myLinks.data)
+    //     console.log(myLinks.data.create.href)
+    //     console.log(that.data.organization)
+    //     console.log(that.data.category)
+    //     console.log(that.data.duty)
+    //     console.log(that.data.name)
+    //     wx.request({
+    //       url: myLinks.data.create.href + "?access-token=" + that.data.access_token,
+    //       data: Util.json2Form({
+    //         organization: that.data.orgName,
+    //         category: that.data.categoryName,
+    //         duty: that.data.dutyName,
+    //         name: that.data.nameEdit,
+    //         sub_name: that.data.subName,
+    //         user_id: that.data.id
+    //       })
+    //       ,
+    //       header: {
+    //         "Content-Type": "application/x-www-form-urlencoded"
+    //       },
+    //       method: "POST",
+    //       complete: function (res2) {
+    //         console.log(res2)
+    //         if (res2 == null || res2.statusCode != 201) {
+    //           console.error(res2.statusCode);
+    //           setTimeout(function () {
+    //             wx.hideLoading()
+    //           }, 2000)
+    //           wx.showToast({
+    //             title: 'save fail',
+    //             icon: 'fail',
+    //             duration: 2000
+    //           })
+    //           setTimeout(function () {
+    //             wx.hideToast()
+    //           }, 2000)
+    //           return;
+    //         }
+    //         console.log(res2)
+    //         setTimeout(function () {
+    //           wx.hideLoading()
+    //         }, 2000)
+    //         wx.showToast({
+    //           title: 'save success',
+    //           icon: 'success',
+    //           duration: 2000
+    //         })
+    //         setTimeout(function () {
+    //           wx.hideToast()
+    //         }, 2000)
+    //         var pages = getCurrentPages();
+    //         if (pages.length > 1) {
+    //           //上一个页面实例对象
+    //           var prePage = pages[pages.length - 2];
+    //           //关键在这里
+    //           prePage.onLoad()
+    //         }
+    //         wx.navigateBack({
+    //           delta: 1
+    //         })
+    //       }
+    //     })
+    //   }
+    // })
   },
   btnDelete: function () {
     wx.showLoading({

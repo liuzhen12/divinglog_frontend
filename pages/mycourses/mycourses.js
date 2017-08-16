@@ -44,39 +44,28 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    wx.getStorage({
-      key: 'access_token',
-      success: function (res) {
+    var token = wx.getStorageSync('access_token')
+    that.setData({
+      access_token: token,
+    })
+    var links = wx.getStorageSync('meLinks')
+    wx.request({
+      url: links.coachCourse.href + '?access-token=' + token,
+      data: {
+
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (resArray) {
+        console.log(resArray)
         that.setData({
-          access_token: res.data,
-        });
-        wx.getStorage({
-          key: 'meLinks',
-          success: function (resLinks) {
-            console.log(resLinks.data)
-            wx.request({
-              url: resLinks.data.coachCourse.href + '?access-token=' + res.data,
-              data: {
-
-              },
-              header: {
-                'content-type': 'application/json'
-              },
-              method: "GET",
-              success: function (resArray) {
-                console.log(resArray)
-                that.setData({
-                  array: resArray.data.items,
-                  extra: resArray.data._extra
-                })
-              }
-            })
-          }
+          array: resArray.data.items,
+          extra: resArray.data._extra
         })
-
       }
-    });
-
+    })
   },
 
   /**
