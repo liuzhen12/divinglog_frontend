@@ -70,7 +70,7 @@
       </navigator>
     </view>
     <view class="navgationView" >
-      <navigator class="navgationCell" url="../melevel/melevel">
+      <navigator class="navgationCell" url="../studentlist/studentlist">
         <image class="imageview" src="../../images/level1.png"></image>
       <view class="cellTitle">my students</view>
       <view class="arrow">{{}}</view>

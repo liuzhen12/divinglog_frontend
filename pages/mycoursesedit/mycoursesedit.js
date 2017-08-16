@@ -9,26 +9,175 @@ Page({
     access_token: '',
     id: '',
     links: '',
+    addLinks:'',
     editStatus: '',
-    equiptype: '',
-    brand: '',
-    model: ''
+    organization: '',
+    category: '',
+    duty: '',
+    name:'',
+    subName:'',
+    duty: '',
+    name:'',
+    subName:'',
+    orglist: '',
+    orgIndex: 0,
+    orgName:'',
+    categoryList:'',
+    categoryIndex: 0,
+    categoryName:'',
+    dutyList:'',
+    dutyIndex:0,
+    dutyName:'',
+    nameList:'',
+    nameIndex:0,
+    nameEdit:'',
+    subList:'',
+    subIndex:0,
+    subName:''
   },
 
-  typeInput: function (e) {
+  bindPickerOrgChange: function(e){
     this.setData({
-      equiptype: e.detail.value
+      orgIndex: e.detail.value,
+      orgName: this.data.orglist[e.detail.value].name,
+      categoryList: '',
+      categoryIndex: 0,
+      categoryName: '',
+      dutyList: '',
+      dutyIndex: 0,
+      dutyName: '',
+      nameList: '',
+      nameIndex: 0,
+      nameEdit: '',
+      subList: '',
+      subIndex: 0,
+      subName: ''
+    })
+    var that = this
+    wx.request({
+      url: this.data.addLinks.course.href + '?access-token==' + this.data.access_token,
+      data:{
+        p_id: this.data.orglist[e.detail.value].id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (resCategory) {
+        if (resCategory.data.items.length != 0) {
+          that.setData({
+            categoryList: resCategory.data.items,
+            categoryIndex: resCategory.data.items[0].id
+          })
+        }
+      }
     })
   },
-  brandInput: function (e) {
+
+  bindPickerCategoryChange: function (e) {
     this.setData({
-      brand: e.detail.value
+      categoryIndex: e.detail.value,
+      categoryName: this.data.categoryList[e.detail.value].name,
+      dutyList: '',
+      dutyIndex: 0,
+      dutyName: '',
+      nameList: '',
+      nameIndex: 0,
+      nameEdit: '',
+      subList: '',
+      subIndex: 0,
+      subName: ''
+    })
+    var that = this
+    wx.request({
+      url: this.data.addLinks.course.href + '?access-token==' + this.data.access_token,
+      data: {
+        p_id: this.data.categoryList[e.detail.value].id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (resDuty) {
+        if (resDuty.data.items.length != 0) {
+          that.setData({
+            dutyList: resDuty.data.items,
+            dutyIndex: resDuty.data.items[0].id
+          })
+        }
+      }
     })
   },
-  modelInput: function (e) {
+
+  bindPickerDutyChange: function (e) {
     this.setData({
-      model: e.detail.value
+      dutyIndex: e.detail.value,
+      dutyName: this.data.dutyList[e.detail.value].name,
+      nameList: '',
+      nameIndex: 0,
+      nameEdit: '',
+      subList: '',
+      subIndex: 0,
+      subName: ''
     })
+    var that = this
+    wx.request({
+      url: this.data.addLinks.course.href + '?access-token==' + this.data.access_token,
+      data: {
+        p_id: this.data.dutyList[e.detail.value].id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (resName) {
+        if (resName.data.items.length != 0) {
+          that.setData({
+            nameList: resName.data.items,
+            nameIndex: resName.data.items[0].id
+          })
+        }
+      }
+    })
+  },
+
+  bindPickerNameChange: function (e) {
+    this.setData({
+      nameIndex: e.detail.value,
+      nameEdit: this.data.nameList[e.detail.value].name,
+      subList: '',
+      subIndex: 0,
+      subName: ''
+    })
+    var that = this
+    wx.request({
+      url: this.data.addLinks.course.href + '?access-token==' + this.data.access_token,
+      data: {
+        p_id: this.data.nameList[e.detail.value].id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (resSub) {
+        console.log(resSub)
+        if (resSub.data.items.length != 0) {
+          that.setData({
+            subList: resSub.data.items,
+            subIndex: resSub.data.items[0].id
+          })
+        }
+      }
+    })
+  },
+
+  bindPickerSubChange:function(e){
+    if (this.data.subList.length != 0) {
+      this.setData({
+        subIndex: e.detail.value,
+        subName: this.data.subList[e.detail.value].name
+      })
+    }
   },
 
   /**
@@ -53,14 +202,14 @@ Page({
           }
         })
         wx.getStorage({
-          key: 'equipStatus',
+          key: 'mycourseStatus',
           success: function (resEquipStatus) {
             that.setData({
               editStatus: resEquipStatus.data
             });
             if (resEquipStatus.data == 'Edit') {
               wx.getStorage({
-                key: 'equipLinks',
+                key: 'mycourseLinks',
                 success: function (resLinks) {
                   that.setData({
                     links: resLinks.data
@@ -80,9 +229,47 @@ Page({
                         console.log(resList.data)
                         if (resList.data != null) {
                           that.setData({
-                            equiptype: resList.data.type,
-                            brand: resList.data.brand,
-                            model: resList.data.model
+                            organization: resList.data.organization,
+                            category: resList.data.category,
+                            duty: resList.data.duty,
+                            name: resList.data.name,
+                            subName: resList.data.sub_name
+                          });
+                        }
+                        else {
+                          console.log('errer')
+                        }
+                      }
+                    })
+                  }
+                }
+              })
+            }
+            else{
+              wx.getStorage({
+                key: 'mycourseAddLinks',
+                success: function (resAddLinks){
+                  that.setData({
+                    addLinks: resAddLinks.data
+                  });
+                  if (resAddLinks.data != null || typeof (resAddLinks.data) != 'undefined'){
+                    console.log(resAddLinks.data)
+                    wx.request({
+                      url: resAddLinks.data.course.href + "?access-token=" + resToken.data,
+                      data: {
+
+                      },
+                      header: {
+                        'content-type': 'application/json'
+                      },
+                      method: "GET",
+                      success: function (resCourseList) {
+                        console.log(resCourseList.data)
+                        if (resCourseList.data != null) {
+                          console.log(resCourseList.data)
+                          that.setData({
+                            orglist: resCourseList.data.items,
+                            orgIndex: resCourseList.data.items[0].id
                           });
                         }
                         else {
@@ -95,8 +282,7 @@ Page({
               })
             }
           }
-        })
-
+        })        
       }
     }); 
   },
@@ -105,128 +291,74 @@ Page({
     wx.showLoading({
       title: 'Saving',
     })
-    if (this.data.editStatus == 'Edit') {
-      wx.request({
-        url: this.data.links.edit.href + "?access-token=" + this.data.access_token,
-        data: Util.json2Form({
-          brand: this.data.brand,
-          type: this.data.equiptype,
-          model: this.data.model,
-          user_id: this.data.id
-        })
-        ,
-        header: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        method: "PUT",
-        complete: function (res1) {
-          if (res1 == null || res1.statusCode != 200) {
-            console.error(res1.statusCode);
-            setTimeout(function () {
-              wx.hideLoading()
-            }, 2000)
-            wx.showToast({
-              title: 'save fail',
-              icon: 'fail',
-              duration: 2000
-            })
-            setTimeout(function () {
-              wx.hideToast()
-            }, 2000)
-            return;
-          }
-          console.log(res1)
-          setTimeout(function () {
-            wx.hideLoading()
-          }, 2000)
-          wx.showToast({
-            title: 'save success',
-            icon: 'success',
-            duration: 2000
+    var that = this;
+    wx.getStorage({
+      key: 'mycourseAddLinks',
+      success: function (myLinks) {
+        console.log(myLinks.data)
+        console.log(myLinks.data.create.href)
+        console.log(that.data.organization)
+        console.log(that.data.category)
+        console.log(that.data.duty)
+        console.log(that.data.name)
+        wx.request({
+          url: myLinks.data.create.href + "?access-token=" + that.data.access_token,
+          data: Util.json2Form({
+            organization: that.data.orgName,
+            category: that.data.categoryName,
+            duty: that.data.dutyName,
+            name: that.data.nameEdit,
+            sub_name: that.data.subName,
+            user_id: that.data.id
           })
-          setTimeout(function () {
-            wx.hideToast()
-          }, 2000)
-          var pages = getCurrentPages();
-          if (pages.length > 1) {
-            //上一个页面实例对象
-            var prePage = pages[pages.length - 2];
-            //关键在这里
-            prePage.onLoad()
-          }
-          wx.navigateBack({
-            delta: 1
-          })
-        }
-      })
-    }
-    else {
-      console.log('Add')
-      console.log(this.data.access_token)
-      var that = this;
-      wx.getStorage({
-        key: 'meLinks',
-        success: function (meLinks) {
-          console.log(meLinks.data)
-          console.log(meLinks.data.equip.href)
-          wx.request({
-            url: meLinks.data.equip.href + "?access-token=" + that.data.access_token,
-            data: Util.json2Form({
-              brand: that.data.brand,
-              type: that.data.equiptype,
-              model: that.data.model,
-              user_id: that.data.id
-            })
-            ,
-            header: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            method: "POST",
-            complete: function (res2) {
-              console.log(res2)
-              if (res2 == null || res2.statusCode != 201) {
-                console.error(res2.statusCode);
-                setTimeout(function () {
-                  wx.hideLoading()
-                }, 2000)
-                wx.showToast({
-                  title: 'save fail',
-                  icon: 'fail',
-                  duration: 2000
-                })
-                setTimeout(function () {
-                  wx.hideToast()
-                }, 2000)
-                return;
-              }
-              console.log(res2)
+          ,
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          method: "POST",
+          complete: function (res2) {
+            console.log(res2)
+            if (res2 == null || res2.statusCode != 201) {
+              console.error(res2.statusCode);
               setTimeout(function () {
                 wx.hideLoading()
               }, 2000)
               wx.showToast({
-                title: 'save success',
-                icon: 'success',
+                title: 'save fail',
+                icon: 'fail',
                 duration: 2000
               })
               setTimeout(function () {
                 wx.hideToast()
               }, 2000)
-              var pages = getCurrentPages();
-              if (pages.length > 1) {
-                //上一个页面实例对象
-                var prePage = pages[pages.length - 2];
-                //关键在这里
-                prePage.onLoad()
-              }
-              wx.navigateBack({
-                delta: 1
-              })
+              return;
             }
-          })
-        }
-      })
-
-    }
+            console.log(res2)
+            setTimeout(function () {
+              wx.hideLoading()
+            }, 2000)
+            wx.showToast({
+              title: 'save success',
+              icon: 'success',
+              duration: 2000
+            })
+            setTimeout(function () {
+              wx.hideToast()
+            }, 2000)
+            var pages = getCurrentPages();
+            if (pages.length > 1) {
+              //上一个页面实例对象
+              var prePage = pages[pages.length - 2];
+              //关键在这里
+              prePage.onLoad()
+            }
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
+      }
+    })
   },
   btnDelete: function () {
     wx.showLoading({
@@ -235,10 +367,11 @@ Page({
     wx.request({
       url: this.data.links.delete.href + "?access-token=" + this.data.access_token,
       data: Util.json2Form({
-        brand: this.data.brand,
-        type: this.data.equiptype,
-        model: this.data.model,
-        user_id: this.data.id
+        organization: this.data.organization,
+        category: this.data.category,
+        duty: this.data.duty,
+        name: this.data.name,
+        sub_name: this.data.subName
       })
       ,
       header: {

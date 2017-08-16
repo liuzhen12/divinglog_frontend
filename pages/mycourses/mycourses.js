@@ -6,7 +6,8 @@ Page({
    */
   data: {
     access_token: '',
-    array: []
+    array: [],
+    extra:[]
   },
 
   coursesEdit: function (event) {
@@ -24,6 +25,10 @@ Page({
     })
   },
   addCourse: function () {
+    wx.setStorage({
+      key: "mycourseAddLinks",
+      data: this.data.extra
+    })
     wx.setStorage({
       key: "mycourseStatus",
       data: "Add"
@@ -61,7 +66,8 @@ Page({
               success: function (resArray) {
                 console.log(resArray)
                 that.setData({
-                  array: resArray.data.items
+                  array: resArray.data.items,
+                  extra: resArray.data._extra
                 })
               }
             })

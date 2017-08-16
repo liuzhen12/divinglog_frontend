@@ -6,14 +6,12 @@ Page({
       var that = this;
       var token = wx.getStorageSync('access_token');
       var params = { 'access-token': token };
-      getData(option.url, params, function(data){
-        while (data.items.length < 6) {
-          data.items.push(data.items[0]);
-        }
+      var urls = wx.getStorageSync('meLinks');
+      getData(urls.student.href, params, function (data) {
         that.setData({
           student: data.items
         })
-      })
+      })      
     }
 });
 
