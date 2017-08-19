@@ -56,7 +56,7 @@
   </view>
   <view wx:else>
     <view class="navgationView" >
-      <navigator class="navgationCell" url="../myloglist/myloglist">
+      <navigator class="navgationCell" url="../mystore/mystore">
         <image class="imageview" src="../../images/logs2.png"></image>
       <view class="cellTitle">store</view>
       <view class="arrow"></view>

@@ -43,7 +43,7 @@ Page({
   onLoad: function () {
     wx.login({
       success: function (res) {
-        if (res.code) {console.log(res.code);return;
+        if (res.code) {
           //发起网络请求
           wx.request({
             url: 'https://log.fundiving.com/login',
@@ -66,6 +66,10 @@ Page({
                 console.log(res.data._links)
               }                
               else {
+                wx.setStorage({
+                  key: 'registerLinks',
+                  data: res.data._links,
+                })
                 wx.navigateTo({ url: '/pages/registerrole/registerrole'})
               }
             }
