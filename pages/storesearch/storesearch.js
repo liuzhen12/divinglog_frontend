@@ -19,9 +19,11 @@ Page({
     showInput: function () {
       var that = this;
       var token = wx.getStorageSync('access_token');
-      getLocationList(token, function (data) {
-        wx.setStorageSync('locationArray', data);
-        console.log(data);
+      var indexLinks = wx.getStorageSync('indexLinks');
+      var locationUrl = indexLinks['divestores-location'].href;
+      var params = { 'access-token': token};
+      getData(locationUrl, params, function (data) {
+        wx.setStorageSync('locationArray', data.items);
         that.setData({
           inputShowed: true,
         })
@@ -63,11 +65,17 @@ Page({
     },
     onLoad: function(){
       var that = this;
-      var languageArray = wx.getStorageSync('language_array');
-      that.setData({
-        languageArray: languageArray
+      var token = wx.getStorageSync('access_token');
+      var indexLinks = wx.getStorageSync('indexLinks');
+      var languageUrl = indexLinks.language.href;
+      var params = { 'access-token': token };
+      getData(languageUrl, params, function (data) {
+        that.setData({
+          languageArray: data
+        })
+        that.fetchSearchList();
       })
-      this.fetchSearchList();
+      
     },
 
     fetchSearchList: function () {
@@ -237,19 +245,22 @@ function getStoreList(params, callback) {
   });
 }
 
-function getLocationList(accessToken, callback) {
-  var indexLinks = wx.getStorageSync('indexLinks');
+
+function getData(url, params, callback) {
   wx.request({
-    url: indexLinks['divestores-location'].href,
+    url: url,
     header: {
       'content-type': 'application/json'
     },
-    data: {
-      'access-token': accessToken
-    },
-    success: function (res) {
+    data: params,
+    complete: function (res) {
       if (res.statusCode == 200) {
-        callback(res.data.items);
+        callback(res.data);
+      }
+      else {
+        console.log(res.data.message);
+        callback();
+
       }
     }
   })
