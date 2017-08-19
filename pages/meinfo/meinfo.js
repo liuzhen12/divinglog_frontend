@@ -73,6 +73,10 @@ Page({
                           key: 'meLinks',
                           data: res.data._links,
                         })
+                        wx.setStorage({
+                          key:'hasStore',
+                          data: res.data.hasDiveStore
+                        })
                       }
                     })
                   },

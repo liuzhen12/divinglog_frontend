@@ -1,0 +1,92 @@
+<!--pages/mystore/mystore.wxml-->
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title"></view>
+    <view class="page__desc"></view>
+  </view>
+  <view class="page__bd page__bd_spacing">
+    <view wx:if="{{hasStore}}">
+      <view class="weui-cells box">
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__bd">Store Name</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{name}}</view>
+        </view>
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__bd">Wechat ID</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{wechat_id}}</view>
+        </view>
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__bd">Telephone</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{telephone}}</view>
+        </view>
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__bd">Country</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{country}}</view>
+        </view>
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__bd">Province</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{province}}</view>
+        </view>
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__bd">City</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{city}}</view>
+        </view>
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__bd">Coach Count</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{coach_count}}</view>
+        </view>
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__bd">Language Detail</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{language_detail}}</view>
+        </view>
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__bd">Evalution Count</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{evaluation_count}}</view>
+        </view>
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__bd">Evalution Score</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{evaluation_score}}</view>
+        </view>
+      </view>
+    </view>
+    <view wx:else>
+      <view class="weui_cells_title">Please choose your store infomation:</view>
+      <view class="weui-cell weui-cell_access">
+        <view class="section">
+          <picker bindchange="bindPickerCountryChange" value="{{locationIndex}}" range="{{locationlist}}" range-key="name" data-index="{{locationIndex}}">
+            <view class="picker">
+              Country : {{locationlist[locationIndex].name}}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="section">
+          <picker bindchange="bindPickerProvinceChange" value="{{ProvinceIndex}}" range="{{Provincelist}}" range-key="name" data-index="{{ProvinceIndex}}">
+            <view class="picker">
+              Province : {{Provincelist[ProvinceIndex].name}}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="section">
+          <picker bindchange="bindPickerCityChange" value="{{CityIndex}}" range="{{Citylist}}" range-key="name" data-index="{{CityIndex}}">
+            <view class="picker">
+              City : {{Citylist[CityIndex].name}}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="section">
+          <picker bindchange="bindPickerStoreChange" value="{{StoreIndex}}" range="{{Storelist}}" range-key="name" data-index="{{StoreIndex}}">
+            <view class="picker">
+              Store : {{Storelist[StoreIndex].name}}
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

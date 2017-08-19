@@ -22,6 +22,7 @@
     "pages/meleveledit/meleveledit",
     "pages/mycourses/mycourses",
     "pages/mycoursesedit/mycoursesedit",
+    "pages/mystore/mystore",
     "pages/instructorsearch/instructorsearch",
     "pages/instructorinfo/instructorinfo",
     "pages/instructorlevel/instructorlevel",
