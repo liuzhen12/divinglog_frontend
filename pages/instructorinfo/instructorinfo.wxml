@@ -36,12 +36,12 @@
         <view class="block-title">Store</view>
       </view>
       <view wx:if="{{divestore.name}}">
-        <view class="weui-cell__bd" >
+        <view class="weui-cell__bd">
           <text class="text-store">{{divestore.name}}</text>
         </view>
         <view class="weui-cell__bd">
           <image src="../../images/pin_location.png" class="image-pin-location"></image>
-          <text class="text-location">{{divestore.location_address}}</text>
+          <text class="text-location">{{divestore.location_address}}{{divestore.location_name ?' - ' + divestore.location_name + ', ':''}}{{divestore.city ? divestore.city + ', ' : ''}}{{divestore.province ? divestore.province + ', ' : ''}}{{divestore.country}}</text>
         </view>
       </view>
       <view class="weui-cell__bd" wx:if="{{!divestore.name}}">
@@ -53,16 +53,16 @@
         <view class="block-title">Students</view>
       </view>
       <view wx:if="{{student._meta.totalCount > 0}}">
-        <scroll-view class="scroll-students" scroll-x="true"> 
+        <scroll-view class="scroll-students" scroll-x="true">
           <view style="display: inline-block" wx:for="{{student.items}}" wx:key="id">
-            <view class="section-column">  
+            <view class="section-column">
               <image src="{{item.avatar_url}}" class="image-student"></image>
               <text class="text-location">{{item.nick_name}}</text>
-            </view>  
+            </view>
           </view>
-        </scroll-view> 
+        </scroll-view>
         <view class="weui-cell__bd">
-          <navigator url="../studentlist/studentlist?url={{userInfo._links.student.href}}" class="text-link" >View All {{student._meta.totalCount}} students</navigator>
+          <navigator url="../studentlist/studentlist?url={{userInfo._links.student.href}}" class="text-link">View All {{student._meta.totalCount}} Students</navigator>
         </view>
       </view>
       <view class="weui-cell__bd" wx:if="{{student._meta.totalCount == 0}}">
@@ -73,32 +73,35 @@
       <view class="weui-cell__bd">
         <view class="block-title">Comments</view>
       </view>
-      
-      <view class="weui-cells list-box" wx:for="{{comment.items}}" wx:key="id">
-        <view class="weui-cell comment-list">
-          <view class="weui-cell__hd" style="margin-right: 8px">
-            <image src="{{item.avatar_url}}" class="image-comment-avatar"></image>
-          </view>
-          <view class="weui-cell__bd">
-            <view class="weui-cell__bd">
-              <text class="text-commenter">{{item.nick_name}}</text>
+      <view wx:if="{{comment._meta.totalCount > 0}}">
+        <view class="weui-cells list-box" wx:for="{{comment.items}}" wx:key="id">
+          <view class="weui-cell comment-list">
+            <view class="weui-cell__hd" style="margin-right: 8px">
+              <image src="{{item.avatar_url}}" class="image-comment-avatar"></image>
             </view>
             <view class="weui-cell__bd">
-              <text class="text-location">{{item.remark_time}}</text>
+              <view class="weui-cell__bd">
+                <text class="text-commenter">{{item.nick_name}}</text>
+              </view>
+              <view class="weui-cell__bd">
+                <text class="text-location">{{item.remark_time}}</text>
+              </view>
+              <view class="weui-cell__bd">
+                <text class="text-commentcontent">{{item.remarks}}</text>
+              </view>
             </view>
-            <view class="weui-cell__bd">
-              <text class="text-commentcontent">{{item.remarks}}</text>
+            <view class="weui-cell__ft">
+              <text class="text-rate">{{item.score}}</text>
             </view>
-          </view>
-          <view class="weui-cell__ft">
-            <text class="text-rate">{{item.score}}</text>
           </view>
         </view>
+        <view class="weui-cell__bd">
+          <navigator url="../commentlist/commentlist?url={{userInfo._links.comment.href}}" class="text-link">View all {{comment._meta.totalCount}} comments</navigator>
+        </view>
       </view>
-      <view class="weui-cell__bd">
-          <navigator url="../commentlist/commentlist?url={{userInfo._links.comment.href}}" class="text-link" >View all {{comment._meta.totalCount}} comments</navigator>
+      <view class="weui-cell__bd" wx:if="{{comment._meta.totalCount == 0}}">
+        <text class="text-store">Not found</text>
       </view>
     </view>
   </view>
 </view>
-

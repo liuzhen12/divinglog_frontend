@@ -1,3 +1,6 @@
+.page {
+  background-color: #F8F8F8;
+}
 .image-comment-avatar {
   margin-right: 5px;
   vertical-align: top;
@@ -26,4 +29,25 @@
 .text-rate {
   color: #df8c20;
   font-size: 15px;
+}
+
+.loading{ 
+ padding: 10rpx; 
+ text-align: center; 
+} 
+.loading:before{ 
+ display: inline-block; 
+ margin-right: 5rpx; 
+ vertical-align: middle; 
+ content: ''; 
+ width: 40rpx; 
+ height: 40rpx; 
+ animation: rotate 1s linear infinite; 
+} 
+.loading.complete:before{ 
+ display: none; 
+} 
+
+.weui-loadmore__tips_in-line {
+background-color:#f5f5f5;
 }

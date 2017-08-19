@@ -4,7 +4,7 @@ Page({
       languageNames: [],
       divestore: [],
       student: [],
-      comments: [],
+      comment: [],
       course: []
     },
     //事件处理函数

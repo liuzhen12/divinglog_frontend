@@ -31,8 +31,10 @@
     "pages/storelist/storelist",
     "pages/storeinfo/storeinfo",
     "pages/storeinstructor/storeinstructor",
-    "pages/storelevel/storelevel",    
-    "pages/commentedit/commentedit"
+    "pages/storelevel/storelevel",   
+    "pages/storemap/storemap", 
+    "pages/commentedit/commentedit",
+    "pages/commentlist/commentlist"
   ],
   "window":{
     "backgroundTextStyle":"light",

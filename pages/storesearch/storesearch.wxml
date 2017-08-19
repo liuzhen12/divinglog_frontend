@@ -1,91 +1,87 @@
 <view class="page">
-    <view class="page__hd">
-        <view class="page__title"></view>
-        <view class="page__desc"></view>
+  <view class="page__hd">
+    <view class="page__title"></view>
+    <view class="page__desc"></view>
+  </view>
+  <view class="page__bd" style="margin-top:49px;margin-bottom:58px;">
+    <view class="weui-cells searchbar-result" wx:if="{{searchKeyword.length > 0}}" >
+      <view class="weui-cell" hover-class="weui-cell_active" wx:for="{{filteredLocationArray}}" wx:key="id" bindtap="searchClick" data-keyword="{{item.detail}}">
+        <view>{{item.detail}}</view>
+      </view>
     </view>
-    <view class="page__bd" style="margin-top:49px;margin-bottom:58px;">
-        <view class="weui-cells searchbar-result" style="margin-top:50px" wx:if="{{inputVal.length > 0}}">
-            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">
-                    <view>实时搜索文本</view>
-                </view>
-            </navigator>
-            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">
-                    <view>实时搜索文本</view>
-                </view>
-            </navigator>
-            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">
-                    <view>实时搜索文本</view>
-                </view>
-            </navigator>
-            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">
-                    <view>实时搜索文本</view>
-                </view>
-            </navigator>
+    <view class="weui-cells list-box" wx:for="{{storesArray}}" wx:key="id">
+      <view class="weui-cell" hover-class="weui-cell_active" bindtap="listClick" data-url="{{item._links.self.href}}">
+        <view class="weui-cell__hd">
+          <image src="{{item.avatar_url}}" class="image-avatar"></image>
         </view>
-        <view class="weui-cells box">
-            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'店名'}}</view>
-                <view class="weui-cell__ft">大壮潜店</view>
-            </navigator>
-            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'Country'}}</view>
-                <view class="weui-cell__ft">印度尼西亚</view>
-            </navigator>
-            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'Location'}}</view>
-                <view class="weui-cell__ft">Bali</view>
-            </navigator>
+        <view class="weui-cell__bd">
+          <view class="weui-cell__bd">
+            <text>{{item.name}}</text>
+            <text class="text-title" hidden="{{!item.title}}">{{item.title}}</text>
+          </view>
+          <view class="weui-cell__bd">
+            <text class="text-rate">{{item.evaluation_score}}</text>
+            <text class="text-rate-count">{{item.evaluation_count}}{{' Reviews'}}</text>
+            <text class="text-language" hidden="{{!item.language_detail}}">{{item.language_detail}}</text>
+          </view>
+          <view class="weui-cell__bd">
+            <text class="text-location">{{item.location_name ? item.location_name + ', ':''}}{{item.city ? item.city + ', ' : ''}}{{item.province ? item.province + ', ' : ''}}{{item.country}}</text>
+          </view>
         </view>
-        <view class="weui-cells box">
-            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'店名'}}</view>
-                <view class="weui-cell__ft">中壮潜店</view>
-            </navigator>
-            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'Country'}}</view>
-                <view class="weui-cell__ft">印度尼西亚</view>
-            </navigator>
-            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'Location'}}</view>
-                <view class="weui-cell__ft">Bali</view>
-            </navigator>
-        </view>
-        <view class="weui-cells box">
-            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'店名'}}</view>
-                <view class="weui-cell__ft">小壮潜店</view>
-            </navigator>
-            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'Country'}}</view>
-                <view class="weui-cell__ft">印度尼西亚</view>
-            </navigator>
-            <navigator url="../storeinfo/storeinfo" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'Location'}}</view>
-                <view class="weui-cell__ft">Bali</view>
-            </navigator>
-        </view>
+      </view>
     </view>
+  </view>
 </view>
 
 <view class="dock_top flex-column">
-    <view class='weui-search-bar '>
-        <view class="weui-search-bar__form">
-            <view class="weui-search-bar__box">
-            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
-            <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
-                <icon type="clear" size="14"></icon>
-            </view>
-            </view>
-            <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
-                <icon class="weui-icon-search" type="search" size="14"></icon>
-                <view class="weui-search-bar__text">关键字/国家/地区/店名</view>
-            </label>
+  <view class='weui-search-bar '>
+    <view class="weui-search-bar__form">
+      <view class="weui-search-bar__box">
+        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+        <input type="text" class="weui-search-bar__input" placeholder="Search" value="{{searchKeyword}}" focus="{{inputShowed}}" bindinput="inputTyping" bindblur="clearFilteredLocation"/>
+        <view class="weui-icon-clear" wx:if="{{searchKeyword.length > 0}}" bindtap="clearInput">
+          <icon type="clear" size="14"></icon>
         </view>
-        <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+      </view>
+      <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+        <icon class="weui-icon-search" type="search" size="14"></icon>
+        <view class="weui-search-bar__text">Country/Provice/City</view>
+      </label>
     </view>
+    <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">Cancel</view>
+  </view>
 </view>
+
+<view class="dock_bottom flex-row">
+  <navigator url="" class="weui_btn weui_btn_default" >
+    <button class="weui_btn weui_btn_default btn-normal" hover-class="changestyle" bindtap="showFilter">Filter</button>
+  </navigator>
+  <navigator url="" class="weui_btn weui_btn_default" hover-class="changestyle">
+    <button class="weui_btn weui_btn_default btn-normal" hover-class="changestyle" bindtap="showSort">Sort</button>
+  </navigator>
+</view>
+
+<view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationDataFilter}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+  <view class="weui-cells__title">Language</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell block-filter" >
+    <view wx:for="{{languageArray}}" wx:key="id">
+      <view class="filter-box {{item.isSelected ? 'selected' : 'normal'}}" bindtap="changeColor" id="{{item.id}}">{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="weui-cells__title">
+    <button class="weui-btn" type= "primary" bindtap= "filterConfirm" >Confirm</button>
+  </view>
+</view>
+
+<action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet" >
+    <block wx:for="{{actionSheetItems}}" wx:key="id"> 
+        <action-sheet-item bindtap= "sortConfirm" id="{{item.id}}">
+        {{item.name}}
+        <image src="../../images/long_arrow_down.png" class="image-arrow"></image>
+        </action-sheet-item>
+    </block>
+    <action-sheet-cancel>Cancel</action-sheet-cancel>
+</action-sheet>

@@ -7,8 +7,19 @@ Page({
     searchLoadingComplete: false,
   },
   onLoad: function (option) {
-    this.setData({
-      url: option.url
+    var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        //设置map高度，根据当前设备宽高满屏显示
+        that.setData({
+          view: {
+            Height: res.windowHeight
+          }
+        })
+      }
+    })
+    that.setData({
+      url: option.url,
     })
     this.fetchSearchList();
   },
@@ -44,11 +55,8 @@ Page({
 
   searchScrollLower: function () {
     let that = this;
-    console.log(that.data.searchLoading);
-    console.log(that.data.searchLoadingComplete);
     if (that.data.searchLoading && !that.data.searchLoadingComplete) {
       that.setData({
-        // searchPageNum: that.data.searchPageNum + 1, //每次触发上拉事件，把searchPageNum+1 
         isFromSearch: false //触发到上拉事件，把isFromSearch设为为false 
       });
       that.fetchSearchList();

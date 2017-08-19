@@ -113,8 +113,12 @@
   background-color:#F8F8F8;
 }
 
-.container1 {
+.block-filter {
   flex-flow: wrap row;
 }
 
-
+.image-arrow {
+  padding: 0px 0px 0px 10px;
+  width: 11px; 
+  height: 15px;
+}

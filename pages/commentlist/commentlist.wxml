@@ -1,6 +1,6 @@
 <view class="page">
-  <scroll-view scroll-y="true" bindscrolltolower="searchScrollLower" style="height: 100%">
-    <view class="weui-cells list-box" wx:for="{{comment}}" wx:key="id">
+  <scroll-view scroll-y="true" bindscrolltolower="searchScrollLower" style="height:{{view.Height}}px">
+    <view class="weui-cells list-box" wx:for="{{comment}}">
       <view class="weui-cell comment-list">
         <view class="weui-cell__hd" style="margin-right: 8px">
           <image src="{{item.avatar_url}}" class="image-comment-avatar"></image>
@@ -21,7 +21,12 @@
         </view>
       </view>
     </view>
-    <view class="loading" hidden="{{!searchLoading}}">Loading...</view>
-    <view class="loading complete" hidden="{{!searchLoadingComplete}}">All loaded</view>
+    <view class="weui-loadmore" hidden="{{!searchLoading}}">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">Loading...</view>
+    </view>
+    <view class="weui-loadmore weui-loadmore_line" hidden="{{!searchLoadingComplete}}">
+      <view class="weui-loadmore__tips weui-loadmore__tips_in-line">All loaded</view>
+    </view>
   </scroll-view>
 </view>

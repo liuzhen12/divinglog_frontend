@@ -26,7 +26,7 @@
           <view class="weui-cell__bd">
             <text class="text-rate">{{item.evaluation_score}}</text>
             <text class="text-rate-count">{{item.evaluation_count}}{{' Reviews'}}</text>
-            <text class="text-language" hidden="{{!languageNames[item.language_detail]||item.language_detail==0}}">{{languageNames[item.language_detail]}}</text>
+            <text class="text-language" hidden="{{!item.language_detail}}">{{item.language_detail}}</text>
           </view>
           <view class="weui-cell__bd">
             <text class="text-location">{{item.city ? item.city + ', ' : ''}}{{item.province ? item.province + ', ' : ''}}{{item.country}}</text>
@@ -43,7 +43,7 @@
     <view class="weui-search-bar__form">
       <view class="weui-search-bar__box">
         <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-        <input type="text" class="weui-search-bar__input" placeholder="Search" value="{{searchKeyword}}" focus="{{inputShowed}}" bindinput="inputTyping"/>
+        <input type="text" class="weui-search-bar__input" placeholder="Search" value="{{searchKeyword}}" focus="{{inputShowed}}" bindinput="inputTyping" bindblur="clearFilteredLocation"/>
         <view class="weui-icon-clear" wx:if="{{searchKeyword.length > 0}}" bindtap="clearInput">
           <icon type="clear" size="14"></icon>
         </view>
@@ -70,7 +70,7 @@
 <view animation="{{animationDataFilter}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
   <view class="weui-cells__title">Language</view>
   <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell container1" >
+    <view class="weui-cell" >
     <view wx:for="{{languageArray}}" wx:key="id">
       <view class="filter-box {{item.isSelected ? 'selected' : 'normal'}}" bindtap="changeColor" id="{{item.id}}">{{item.name}}</view>
       </view>
@@ -88,3 +88,13 @@
     <button class="weui-btn" type= "primary" bindtap= "filterConfirm" >Confirm</button>
   </view>
 </view>
+
+<action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet" >
+    <block wx:for="{{sortArray}}" wx:key="id"> 
+        <action-sheet-item bindtap= "sortConfirm" id="{{item.id}}">
+        {{item.name}}
+        <image src="../../images/long_arrow_down.png" class="image-arrow"></image>
+        </action-sheet-item>
+    </block>
+    <action-sheet-cancel>Cancel</action-sheet-cancel>
+</action-sheet>
