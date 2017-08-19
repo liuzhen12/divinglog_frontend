@@ -6,8 +6,7 @@ Page({
       var that = this;
       var token = wx.getStorageSync('access_token');
       var params = { 'access-token': token };
-      var urls = wx.getStorageSync('meLinks');
-      getData(urls.student.href, params, function (data) {
+      getData(option.url, params, function (data) {
         that.setData({
           student: data.items
         })

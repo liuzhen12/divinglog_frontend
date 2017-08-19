@@ -30,6 +30,7 @@ Page({
     ],
         userInfo: {},
         role: '',
+        studentUrl:''
     },
     //事件处理函数
     bindViewTap: function() {
@@ -76,6 +77,9 @@ Page({
                         wx.setStorage({
                           key:'hasStore',
                           data: res.data.hasDiveStore
+                        })
+                        that.setData({
+                          studentUrl: res.data._links.student.href
                         })
                       }
                     })
