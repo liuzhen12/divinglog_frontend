@@ -1,6 +1,6 @@
 Page({
   data: {
-    url: '',
+    commentLink: '',
     comment: [],
     isFromSearch: true,
     searchLoading: false,
@@ -19,7 +19,7 @@ Page({
       }
     })
     that.setData({
-      url: option.url,
+      commentLink: option.url,
     })
     this.fetchSearchList();
   },
@@ -32,8 +32,8 @@ Page({
         'access-token': token,
         currentPage: searchPageNum,
       };
-    getData(that.data.url, params, function (data) {
-      if (data.items.lenght != 0) {
+    getData(that.data.commentLink, params, function (data) {
+      if (data.items.length != 0) {
         var comment_from_rs = data.items;
         var newDate = new Date();
         for (var i = 0; i < comment_from_rs.length; i++) {
@@ -44,7 +44,7 @@ Page({
         var url = data._links.next ? data._links.next.href : '';
         that.setData({
           comment: comment,
-          url: url,
+          commentLink: url,
           searchLoading: url ? true : false,
           searchLoadingComplete: url ? false: true,
         })

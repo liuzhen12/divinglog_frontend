@@ -5,6 +5,8 @@ Page({
     filteredLocationArray: [],
     languageArray: [],
     searchKeyword: "",
+    initialInstructorLink: "",
+    instructorLink: "",
     isFromSearch: true,
     searchLoading: false,
     searchLoadingComplte: false,
@@ -60,20 +62,32 @@ Page({
       filteredLocationArray: ret
     });
   },
-  clearFilteredLocation: function (e){
+  clearFilteredLocation: function (e) {
     this.setData({
       filteredLocationArray: []
     });
   },
   onLoad: function (option) {
     var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        //设置map高度，根据当前设备宽高满屏显示
+        that.setData({
+          view: {
+            Height: res.windowHeight
+          }
+        })
+      }
+    })
     var token = wx.getStorageSync('access_token');
     var indexLinks = wx.getStorageSync('indexLinks');
     var languageUrl = indexLinks.language.href;
     var params = { 'access-token': token };
     getData(languageUrl, params, function (data) {
       that.setData({
-        languageArray: data
+        languageArray: data,
+        initialInstructorLink: indexLinks.coaches.href.split('{')[0],
+        instructorLink: indexLinks.coaches.href.split('{')[0]
       })
       that.fetchSearchList();
     })
@@ -85,7 +99,7 @@ Page({
       url: "../instructorinfo/instructorinfo?url=" + user_url
     })
   },
-  fetchSearchList: function () {
+  fetchSearchList: function (refresh=true) {
     let that = this,
       keyword = that.data.searchKeyword,
       token = wx.getStorageSync('access_token'),
@@ -107,27 +121,25 @@ Page({
     var selectedLanguageStr = selectedLanguage.join(',');
     var keywordArray = keyword.split(',').reverse();
     var params = {
-      'location': keywordArray,
+      'access-token': token,
+      'country': keywordArray[0],
+      'province': keywordArray.length > 1 ? keywordArray[1] : '',
+      'city': keywordArray.length > 2 ? keywordArray[2] : '',
       'gender': selectedGenderStr,
       'language': selectedLanguageStr,
       'evaluation_score': that.data.sortBy == 1 ? 2 : '',
       'student_count': that.data.sortBy == 2 ? 2 : ''
     };
 
-    getUserList(token, params, function (data) {
-      var usersArray = that.data.isFromSearch ? data : that.data.usersArray.concat(data);
-      that.setData({
-        usersArray: usersArray
-      })
-      if (data.length != 0) {
+    getData(that.data.instructorLink, params, function (instructor_data) {
+      if (instructor_data.items.length != 0) {
+        var usersArray = (that.data.isFromSearch || refresh) ? instructor_data.items : that.data.usersArray.concat(instructor_data.items);
+        var url = instructor_data._links.next ? instructor_data._links.next.href : that.data.initialInstructorLink;
         that.setData({
-          seachLoading: true
-        })
-      }
-      else {
-        that.setData({
-          searchLoadingComplete: true,
-          searchLoading: false
+          usersArray: usersArray,
+          instructorLink: url,
+          searchLoading: instructor_data._links.next ? true : false,
+          searchLoadingComplete: instructor_data._links.next ? false : true,
         })
       }
     })
@@ -239,33 +251,19 @@ Page({
       actionSheetHidden: !this.data.actionSheetHidden
     })
     this.fetchSearchList();
+  },
+
+  searchScrollLower: function () {
+    let that = this;
+    if (that.data.searchLoading && !that.data.searchLoadingComplete) {
+      that.setData({
+        isFromSearch: false //触发到上拉事件，把isFromSearch设为为false 
+      });
+      that.fetchSearchList(false);
+    }
   }
 });
 
-function getUserList(accessToken, params, callback) {
-  var indexLinks = wx.getStorageSync('indexLinks');
-  wx.request({
-    url: indexLinks.coaches.href.split('{')[0],
-    data: {
-      'access-token': accessToken,
-      country: params['location'][0],
-      province: params['location'].length > 1 ? params['location'][1] : '',
-      city: params['location'].length > 2 ? params['location'][2] : '',
-      gender: params['gender'],
-      language: params['language'],
-      evaluation_score: params['evaluation_score'],
-      student_count: params['student_count']
-    },
-    header: {
-      'content-type': 'application/json'
-    },
-    success: function (res) {
-      if (res.statusCode == 200) {
-        callback(res.data.items);
-      }
-    }
-  });
-}
 
 function getData(url, params, callback) {
   wx.request({
