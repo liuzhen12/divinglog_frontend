@@ -45,52 +45,36 @@ Page({
             userInfo:userInfo
         })
         })
-        wx.getStorage({
-          key: 'indexLinks',
-          success: function(resLinks) {
-            console.log(resLinks)
-            wx.getStorage({
-              key: 'access_token',
-              success: function(resToken) {
-                console.log(resToken.data)
-                wx.getStorage({
-                  key: 'role',
-                  success: function (resrole) {
-                    that.setData({
-                      role: resrole.data
-                    })
-                    wx.request({
-                      url: resLinks.data.me.href + "?access-token=" + resToken.data,
-                      data: {
-                        
-                      },
-                      header: {
-                        'content-type': 'application/json'
-                      },
-                      method: "GET",
-                      success: function (res) {
-                        console.log(res)
-                        wx.setStorage({
-                          key: 'meLinks',
-                          data: res.data._links,
-                        })
-                        wx.setStorage({
-                          key:'hasStore',
-                          data: res.data.hasDiveStore
-                        })
-                        that.setData({
-                          studentUrl: res.data._links.student.href
-                        })
-                      }
-                    })
-                  },
-                })
-              },
-            })
-            
+        var links = wx.getStorageSync('indexLinks')
+        var token = wx.getStorageSync('access_token')
+        var params = { 'access-token': token };
+        wx.request({
+          url: links.me.href,
+          data: params,
+          header: {
+            'content-type': 'application/json'
           },
+          method: "GET",
+          success: function (res) {
+            console.log(res)
+            wx.setStorage({
+              key: 'meLinks',
+              data: res.data._links,
+            })
+            that.setData({
+              role: res.data.role
+            })
+            if (res.data.role != 1) {
+              wx.setStorage({
+                key: 'hasStore',
+                data: res.data.hasDiveStore
+              })
+              that.setData({
+                studentUrl: res.data._links.student.href
+              })
+            }
+          }
         })
-        
     },
     onLaunch: function () {
 

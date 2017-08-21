@@ -40,7 +40,7 @@ Page({
     ]
   },
 
-  onLoad: function () {
+  onShow: function () {
     wx.login({
       success: function (res) {
         if (res.code) {
@@ -54,16 +54,11 @@ Page({
               'content-type': 'application/json'
             },
             success: function (res) {
-              console.log(res)
               if (res.data.hasOwnProperty('id'))
               {
                 wx.setStorageSync('id', res.data.id)
                 wx.setStorageSync('access_token', res.data.access_token)
                 wx.setStorageSync('indexLinks', res.data._links)
-                wx.setStorageSync('role', res.data.role)
-                console.log('true')
-                console.log(res.data.access_token)
-                console.log(res.data._links)
               }                
               else {
                 wx.setStorage({
@@ -80,6 +75,7 @@ Page({
       }
     });
   },
+
   onShareAppMessage: function () {
     return {
       title: '自定义分享标题',

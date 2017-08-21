@@ -1,7 +1,38 @@
 //app.js
 App({
     onLaunch: function () {
-
+      wx.login({
+        success: function (res) {
+          if (res.code) {
+            //发起网络请求
+            wx.request({
+              url: 'https://log.fundiving.com/login',
+              data: {
+                code: res.code
+              },
+              header: {
+                'content-type': 'application/json'
+              },
+              success: function (res) {
+                if (res.data.hasOwnProperty('id')) {
+                  wx.setStorageSync('id', res.data.id)
+                  wx.setStorageSync('access_token', res.data.access_token)
+                  wx.setStorageSync('indexLinks', res.data._links)
+                }
+                else {
+                  wx.setStorage({
+                    key: 'registerLinks',
+                    data: res.data._links,
+                  })
+                  wx.navigateTo({ url: '/pages/registerrole/registerrole' })
+                }
+              }
+            })
+          } else {
+            console.log('获取用户登录态失败！' + res.errMsg)
+          }
+        }
+      });
     },
     getUserInfo:function(cb){
         var that = this
