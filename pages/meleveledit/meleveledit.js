@@ -311,12 +311,12 @@ Page({
       method: "PUT",
       complete: function (res1) {
         if (res1 == null || res1.statusCode != 200) {
-          console.error(res1.statusCode);
+          console.error(res1);
           setTimeout(function () {
             wx.hideLoading()
           }, 2000)
           wx.showToast({
-            title: 'save fail',
+            title: res1.data[0].message,
             icon: 'fail',
             duration: 2000
           })
