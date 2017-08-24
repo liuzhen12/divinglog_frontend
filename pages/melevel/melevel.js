@@ -4,7 +4,6 @@ Page({
       array: []
     },
     levelEdit: function (event) {
-      console.log(event)
       wx.setStorage({
         key: "melevelLinks",
         data: event.currentTarget.dataset.links
@@ -28,36 +27,26 @@ Page({
     },
     onLoad: function(){
       var that = this;
-      wx.getStorage({
-        key: 'access_token',
-        success: function (resToken) {
-          console.log(resToken.data)
-          that.setData({
-            access_token: resToken.data,
-          });
-          wx.getStorage({
-            key: 'meLinks',
-            success: function (resLinks) {
-              console.log(resLinks)
-              wx.request({
-                url: resLinks.data.level.href + "?access-token=" + resToken.data,
-                data: {
+      var token = wx.getStorageSync('access_token')
+      var links = wx.getStorageSync('meLinks')
+      that.setData({
+        access_token: token,
+      });
+      wx.request({
+        url: links.level.href + "?access-token=" + token,
+        data: {
 
-                },
-                header: {
-                  'content-type': 'application/json'
-                },
-                method: "GET",
-                success: function (resArray) {
-                  console.log(resArray)
-                  that.setData({
-                    array: resArray.data.items
-                  })
-                }
-              })
-            }
-          })
         },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (resArray) {
+          console.log(resArray)
+          that.setData({
+            array: resArray.data.items
+          })
+        }
       })
     }
 });

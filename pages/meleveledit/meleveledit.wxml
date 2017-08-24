@@ -39,12 +39,17 @@
         
         <block wx:if="{{editStatus=='Add'}}">
         <view class="weui-cells box">
-            <button class="weui_btn weui_btn_default" bindtap="btnSave">保存</button>
+            <button class="weui_btn weui_btn_default" bindtap="btnSave">Save</button>
         </view>
         </block>
-        <block wx:if="{{editStatus!='Add'}}">
+        <block wx:if="{{editStatus=='Edit'}}">
         <view class="weui-cells box">
-            <button class="weui_btn weui_btn_default" bindtap="btnDelete">删除</button>
+            <button class="weui_btn weui_btn_default" bindtap="btnDelete">Delete</button>
+        </view>
+        </block>
+        <block wx:if="{{editStatus=='Stamp'}}">
+        <view class="weui-cells box">
+            <button class="weui_btn weui_btn_default" bindtap="btnStamp">Stamp</button>
         </view>
         </block>
     </view>

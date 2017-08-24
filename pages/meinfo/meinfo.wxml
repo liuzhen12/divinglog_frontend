@@ -54,7 +54,7 @@
       </navigator>
     </view>
   </view>
-  <view wx:else>
+  <view wx:if="{{role==2}}">
     <view class="navgationView" >
       <navigator class="navgationCell" url="../mystore/mystore">
         <image class="imageview" src="../../images/logs2.png"></image>
