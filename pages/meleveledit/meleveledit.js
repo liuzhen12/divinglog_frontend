@@ -310,13 +310,27 @@ Page({
       },
       method: "PUT",
       complete: function (res1) {
-        if (res1 == null || res1.statusCode != 200) {
+        if (res1 == null || (res1.statusCode != 200 && res1.statusCode == 422)) {
           console.error(res1);
           setTimeout(function () {
             wx.hideLoading()
           }, 2000)
           wx.showToast({
             title: res1.data[0].message,
+            icon: 'fail',
+            duration: 2000
+          })
+          setTimeout(function () {
+            wx.hideToast()
+          }, 2000)
+          return;
+        }
+        else if (res1 == null || (res1.statusCode != 200 && res1.statusCode != 422)){
+          setTimeout(function () {
+            wx.hideLoading()
+          }, 2000)
+          wx.showToast({
+            title: 'Stamp Fail',
             icon: 'fail',
             duration: 2000
           })
