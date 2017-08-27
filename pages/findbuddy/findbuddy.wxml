@@ -87,16 +87,6 @@
 1
 <view class="dock_top flex-column">
     <view class="location-time-search-bar">
-                <!--<navigator url="../logedit/logedit" class="weui_btn weui_btn_default" hover-class="changestyle">
-                    <button class="weui_btn weui_btn_default btn-normal">潜点</button>
-                </navigator>
-                <navigator url="../logedit/logedit" class="weui_btn weui_btn_default" hover-class="changestyle">
-                    <button class="weui_btn weui_btn_default btn-normal">开始日期</button>
-                </navigator>
-                <navigator url="../myloglist/myloglist" class="weui_btn weui_btn_default" hover-class="changestyle">
-                    <button class="weui_btn weui_btn_default btn-normal">结束日期</button>
-                </navigator>-->
-
         <label bindtap="selectLocation">
         潜点
         </label>

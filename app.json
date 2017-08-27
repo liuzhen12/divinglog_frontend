@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/registerrole/registerrole",
     "pages/registerdiver/registerdiver",
@@ -32,35 +32,37 @@
     "pages/storelist/storelist",
     "pages/storeinfo/storeinfo",
     "pages/storeinstructor/storeinstructor",
-    "pages/storelevel/storelevel",   
-    "pages/storemap/storemap", 
+    "pages/storelevel/storelevel",
     "pages/commentedit/commentedit",
-    "pages/commentlist/commentlist"
+    "pages/commentlist/commentlist",
+    "pages/map/map"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "FunDive Log",
-    "navigationBarTextStyle":"black",
+    "navigationBarTextStyle": "black",
     "backgroundColor": "#ffffff"
   },
   "tabBar": {
-    "list": [{
-      "pagePath": "pages/index/index",
-      "text": "首页",
-      "iconPath": "images/1.png",
-      "selectedIconPath": "images/1s.png"
-    },
-    {
-      "pagePath": "pages/meinfo/meinfo",
-      "text": "我的",
-      "iconPath": "images/2.png",
-      "selectedIconPath": "images/2s.png"
-    }],
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/1.png",
+        "selectedIconPath": "images/1s.png"
+      },
+      {
+        "pagePath": "pages/meinfo/meinfo",
+        "text": "我的",
+        "iconPath": "images/2.png",
+        "selectedIconPath": "images/2s.png"
+      }
+    ],
     "color": "#939295",
     "backgroundColor": "#FCFCFC",
     "borderStyle": "black",
     "selectedColor": "#04B4E5"
   },
-  "debug":"true"
+  "debug": "true"
 }

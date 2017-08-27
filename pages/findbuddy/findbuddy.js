@@ -25,7 +25,18 @@ Page({
         });
     },
     selectLocation: function(e) {
-        
+        wx.navigateTo({
+          url: '../map/map',
+          success: function(res){
+            // success
+          },
+          fail: function(res) {
+            // fail
+          },
+          complete: function(res) {
+            // complete
+          }
+        })
     },
     selectBeginDate: function(e) {
         wx.navigateTo({
