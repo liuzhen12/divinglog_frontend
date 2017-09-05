@@ -4,14 +4,8 @@
     <view class="page__desc"></view>
   </view>
   <view class="page__bd" style="margin-top:49px;margin-bottom:58px;">
-    <view class="weui-cells searchbar-result" wx:if="{{searchKeyword.length > 0}}">
-      <view class="weui-cell" hover-class="weui-cell_active" wx:for="{{filteredLocationArray}}" wx:key="id" bindtap="searchClick" data-keyword="{{item.detail}}">
-        <view>{{item.detail}}</view>
-      </view>
-    </view>
-
-    <scroll-view scroll-y="true" bindscrolltolower="searchScrollLower" style="height:{{view.Height}}px">
-      <view class="weui-cells list-box" wx:for="{{storesArray}}" wx:key="id">
+    <scroll-view scroll-y="true" bindscroll="scroll" bindscrolltolower="searchScrollLower" style="height:{{view.Height}}px" scroll-top="{{scrollTop}}">
+      <view class="weui-cells list-box" wx:for="{{storesArray}}">
         <view class="weui-cell" hover-class="weui-cell_active" bindtap="listClick" data-url="{{item._links.self.href}}">
           <view class="weui-cell__hd">
             <image src="{{item.avatar_url}}" class="image-avatar"></image>
@@ -61,6 +55,11 @@
     </view>
     <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">Cancel</view>
   </view>
+  <view class="weui-cells searchbar-result" wx:if="{{searchKeyword.length > 0}}">
+      <view class="weui-cell" hover-class="weui-cell_active" wx:for="{{filteredLocationArray}}" wx:key="id" bindtap="searchClick" data-keyword="{{item.detail}}">
+        <view>{{item.detail}}</view>
+      </view>
+    </view>
 </view>
 
 <view class="dock_bottom flex-row">

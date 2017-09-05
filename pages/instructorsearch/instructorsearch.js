@@ -7,9 +7,9 @@ Page({
     searchKeyword: "",
     initialInstructorLink: "",
     instructorLink: "",
-    isFromSearch: true,
     searchLoading: false,
-    searchLoadingComplte: false,
+    searchLoadingComplete: false,
+    batchLoadingComplete: true,
     showModalStatus: false,
     sortBy: 0,
     genderArray: [
@@ -19,6 +19,7 @@ Page({
       { 'id': '1', 'name': 'Rate' },
       { 'id': '2', 'name': 'Students amount' }],
     actionSheetHidden: true,
+    scrollTop: 0
   },
   showInput: function () {
     var that = this;
@@ -71,7 +72,7 @@ Page({
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
-        //设置map高度，根据当前设备宽高满屏显示
+        //设置高度，根据当前设备宽高满屏显示
         that.setData({
           view: {
             Height: res.windowHeight
@@ -99,7 +100,7 @@ Page({
       url: "../instructorinfo/instructorinfo?url=" + user_url
     })
   },
-  fetchSearchList: function (refresh=true) {
+  fetchSearchList: function (refresh = true) {
     let that = this,
       keyword = that.data.searchKeyword,
       token = wx.getStorageSync('access_token'),
@@ -132,50 +133,30 @@ Page({
     };
 
     getData(that.data.instructorLink, params, function (instructor_data) {
-      if (instructor_data.items.length != 0) {
-        var usersArray = (that.data.isFromSearch || refresh) ? instructor_data.items : that.data.usersArray.concat(instructor_data.items);
-        var url = instructor_data._links.next ? instructor_data._links.next.href : that.data.initialInstructorLink;
-        that.setData({
-          usersArray: usersArray,
-          instructorLink: url,
-          searchLoading: instructor_data._links.next ? true : false,
-          searchLoadingComplete: instructor_data._links.next ? false : true,
-        })
-      }
+      var usersArray =  refresh ? instructor_data.items : that.data.usersArray.concat(instructor_data.items);
+      var url = instructor_data._links.next ? instructor_data._links.next.href : that.data.initialInstructorLink;
+      console.log(instructor_data);
+      that.setData({
+        usersArray: usersArray,
+        instructorLink: url,
+        searchLoading: instructor_data._links.next ? true : false,
+        searchLoadingComplete: instructor_data._links.next ? false : true,
+        batchLoadingComplete: true
+      })
     })
   },
   searchClick: function (event) {
     var keyword = event.currentTarget.dataset.keyword;
     this.setData({
       usersArray: [],
-      isFromSearch: true,
       searchLoading: true,
       SearchLoadingComplete: false,
       searchKeyword: keyword
     })
     this.fetchSearchList();
+    this.goTop();
   },
 
-  showModal: function () {
-    // 显示遮罩层
-    var animation = wx.createAnimation({
-      duration: 200,
-      timingFunction: "linear",
-      delay: 0
-    })
-    this.animation = animation
-    animation.translateY(300).step()
-    this.setData({
-      animationData: animation.export(),
-      showModalStatus: true,
-    })
-    setTimeout(function () {
-      animation.translateY(0).step()
-      this.setData({
-        animationData: animation.export()
-      })
-    }.bind(this), 200)
-  },
   hideModal: function () {
     // 隐藏遮罩层
     var animation = wx.createAnimation({
@@ -193,6 +174,7 @@ Page({
       this.setData({
         animationData: animation.export(),
         showModalStatus: false,
+        showSearch: false
       })
     }.bind(this), 200)
   },
@@ -254,14 +236,32 @@ Page({
   },
 
   searchScrollLower: function () {
-    let that = this;
-    if (that.data.searchLoading && !that.data.searchLoadingComplete) {
-      that.setData({
-        isFromSearch: false //触发到上拉事件，把isFromSearch设为为false 
-      });
-      that.fetchSearchList(false);
+    if (this.data.batchLoadingComplete && !this.data.searchLoadingComplete) {
+      this.setData({
+        batchLoadingComplete: false,
+      })
+      this.fetchSearchList(false);
     }
-  }
+  },
+  scroll: function (e, res) {
+    // 容器滚动时将此时的滚动距离赋值给 this.data.scrollTop
+    console.log(e.detail.scrollTop);
+    if (e.detail.scrollTop > 500) {
+      this.setData({
+        floorstatus: true
+      });
+    } else {
+      this.setData({
+        floorstatus: false
+      });
+    }
+  },
+  goTop: function (e) {
+    console.log(this.data.scrollTop);
+    this.setData({
+      scrollTop: 0
+    })
+  },
 });
 
 

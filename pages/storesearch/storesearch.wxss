@@ -36,7 +36,7 @@
 
 .text-rate-count {
   color: #808080;
-  font-size: 11.5px;
+  font-size: 13.5px;
   margin-left: 5px;
   line-height: 32px;
 }
@@ -48,7 +48,7 @@
 
 .text-location {
   color: #808080;
-  font-size: 11.5px;
+  font-size: 14px;
 }
 
 

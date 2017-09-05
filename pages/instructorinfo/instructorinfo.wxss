@@ -1,3 +1,7 @@
+.weui-cells {
+  border-top:0.5px solid #D9D9D9;
+}
+
 .weui-cells::after {
   border-bottom: 0;
 }
@@ -43,23 +47,23 @@
 .text-store {
   padding:5px 15px 0px 15px;
   color:#404040;
-  font-size:14px;
+  font-size:16px;
 }
 .text-rate-count {
   color: #808080;
-  font-size: 11.5px;
+  font-size: 13.5px;
   margin-left: 5px;
   line-height: 32px;
 }
 
 .text-rate {
   color: #df8c20;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .text-location {
   color: #808080;
-  font-size: 11.5px;
+  font-size: 14px;
 }
 
 .image-gender {
@@ -76,9 +80,9 @@
 }
 
 .block-title {
-  padding:5px 15px 0px 15px;
+  padding:10px 15px 10px 15px;
   color:#636363;
-  font-size:15px;
+  font-size:20px;
   font-weight: bold;
 }
 
@@ -99,11 +103,11 @@
 }
 
 .text-commenter {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .text-commentcontent {
-  font-size: 13px;
+  font-size: 15px;
 }
 .text-link {
   padding:0px 0px 10px 0px;

@@ -8,24 +8,24 @@ Page({
     token: '',
     hasStore: false,
     links: '',
-    meLinks:'',
-    assets:'',
-    avatar_url:'',
-    city:'',
-    coach_count:0,
-    country:'',
-    evaluation_count:0,
-    evaluation_score:'',
-    id:0,
-    language_detail:'',
-    location_address:'',
-    location_latitude:'',
-    location_longitude:'',
-    location_name:'',
-    name:'',
-    province:'',
-    telephone:'',
-    wechat_id:'',
+    meLinks: '',
+    assets: '',
+    avatar_url: '',
+    city: '',
+    coach_count: 0,
+    country: '',
+    evaluation_count: 0,
+    evaluation_score: '',
+    id: 0,
+    language_detail: '',
+    location_address: '',
+    location_latitude: '',
+    location_longitude: '',
+    location_name: '',
+    name: '',
+    province: '',
+    telephone: '',
+    wechat_id: '',
     locationlist: '',
     locationIndex: 0,
     locationName: '',
@@ -35,92 +35,168 @@ Page({
     Citylist: '',
     CityIndex: 0,
     CityName: '',
-    Storelist:'',
-    StoreIndex:0,
-    StoreName:'',
-    storeinfo:[]
+    Storelist: '',
+    StoreIndex: 0,
+    StoreName: '',
+    storeinfo: [],
+    storesArray: [],
+    inputShowed: false,
+    inputVal: "",
+    initialStoreLink: "",
+    storeLink: "",
+    searchLoading: false,
+    searchLoadingComplte: false,
+    batchLoadingComplete: true,
+    searchKeyword: "",
+    filteredLocationArray: [],
+    scrollTop: 0
   },
 
-  bindPickerCountryChange: function (e) {
-    this.setData({
-      locationIndex: e.detail.value,
-      locationName: this.data.locationlist[e.detail.value].name,
-      Provincelist: '',
-      ProvinceIndex: 0
-    })
-    var that = this
-    wx.request({
-      url: this.data.links.location.href.replace("{", "").replace("}", "=") + this.data.locationlist[e.detail.value].id,
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function (resProvince) {
-        if (resProvince.data.length != 0) {
-          that.setData({
-            Provincelist: resProvince.data,
-            ProvinceIndex: resProvince.data[0].id
-          })
-        }
-      }
-    })
-  },
-
-  bindPickerProvinceChange: function (e) {
-    this.setData({
-      ProvinceIndex: e.detail.value,
-      ProvinceName: this.data.Provincelist[e.detail.value].name,
-      Citylist: '',
-      CityIndex: 0
-    })
-    var that = this
-    wx.request({
-      url: this.data.links.location.href.replace("{", "").replace("}", "=") + this.data.Provincelist[e.detail.value].id,
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function (resCity) {
-        if (resCity.data.length != 0) {
-          that.setData({
-            Citylist: resCity.data,
-            CityIndex: resCity.data[0].id
-          })
-        }
-      }
-    })
-  },
-
-  bindPickerCityChange: function (e) {
-    if (this.data.Citylist.length != 0) {
-      this.setData({
-        CityIndex: e.detail.value,
-        CityName: this.data.Citylist[e.detail.value].name,
-        Storelist:'',
-        StoreIndex:0
+  showInput: function () {
+    var that = this;
+    var locationUrl = that.data.links['divestores-location'].href;
+    var params = { 'access-token': that.data.token };
+    getData(locationUrl, params, function (data) {
+      wx.setStorageSync('locationArray', data.items);
+      that.setData({
+        inputShowed: true,
       })
+    })
+  },
+  hideInput: function () {
+    this.setData({
+      searchKeyword: "",
+      inputShowed: false
+    });
+  },
+  clearInput: function () {
+    this.setData({
+      searchKeyword: ""
+    });
+  },
+  inputTyping: function (e) {
+    var keyWord = e.detail.value;
+    var locationArray = wx.getStorageSync('locationArray');
+    var ret = [];
+    var reg = new RegExp(keyWord, "i");
+    for (var i = 0; i < locationArray.length; i++) {
+      if (locationArray[i]['name'].match(reg)) {
+        ret.push(locationArray[i]);
+      }
+      if (ret.length > 4) {
+        break;
+      }
     }
-    var that = this
-    var params = { 'access-token': this.data.token, 'country': this.data.locationName, 'province': this.data.ProvinceName, 'city': this.data.Citylist[e.detail.value].name };
-    wx.request({
-      url: this.data.meLinks.location.href.replace("{?country,province,city}", ""),
-      data: params,
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function (resStore) {
-        console.log(resStore)
-        if (resStore.data.length != 0) {
-          that.setData({
-            Storelist: resStore.data,
-            StoreIndex: resStore.data[0].id
+    this.setData({
+      searchKeyword: keyWord,
+      filteredLocationArray: ret
+    });
+  },
+  clearFilteredLocation: function (e) {
+    this.setData({
+      filteredLocationArray: []
+    });
+  },
+  fetchSearchList: function (refresh = true) {
+    let that = this,
+      keyword = that.data.searchKeyword;
+    var keywordArray = keyword.split(',').reverse();
+    var params = {
+      'access-token': that.data.token,
+      'country': keywordArray[0],
+      'province': keywordArray.length > 1 ? keywordArray[1] : '',
+      'city': keywordArray.length > 2 ? keywordArray[2] : '',
+    };
+
+    getData(that.data.storeLink, params, function (store_data) {
+      var storesArray = refresh ? store_data.items : that.data.storesArray.concat(store_data.items);
+      var url = store_data._links.next ? store_data._links.next.href : that.data.initialStoreLink;
+      that.setData({
+        storesArray: storesArray,
+        storeLink: url,
+        searchLoading: store_data._links.next ? true : false,
+        searchLoadingComplete: store_data._links.next ? false : true,
+        batchLoadingComplete: true
+      })
+    })
+  },
+  searchScrollLower: function () {
+    if (this.data.batchLoadingComplete && this.data.searchLoading && !this.data.searchLoadingComplete) {
+      this.setData({
+        batchLoadingComplete: false
+      });
+      this.fetchSearchList(false);
+    }
+  },
+
+  scroll: function (e, res) {
+    // 容器滚动时将此时的滚动距离赋值给 this.data.scrollTop
+    if (e.detail.scrollTop > 500) {
+      this.setData({
+        floorstatus: true
+      });
+    } else {
+      this.setData({
+        floorstatus: false
+      });
+    }
+  },
+  goTop: function (e) {
+    this.setData({
+      scrollTop: 0
+    })
+  },
+  searchClick: function (event) {
+    var keyword = event.currentTarget.dataset.keyword;
+    this.setData({
+      usersArray: [],
+      searchLoading: true,
+      SearchLoadingComplete: false,
+      searchKeyword: keyword
+    })
+    this.fetchSearchList();
+    this.goTop();
+  },
+  openConfirm: function (e) {
+    var that = this;
+    var storeid = e.currentTarget.dataset.storeid;
+    wx.showModal({
+      title: 'Link store',
+      content: 'Are you sure to link to this store?',
+      confirmText: "Yes",
+      cancelText: "No",
+      success: function (res) {
+        if (res.confirm) {
+          wx.request({
+            url: that.data.meLinks.self.href + '?access-token=' + that.data.token,
+            header: {
+              'content-type': 'application/json'
+            },
+            data: {
+              'divestore_id': storeid
+            },
+            method: 'PUT',
+            complete: function (res) {
+              if (res.statusCode == 200) {
+                wx.switchTab({
+                  url: '../meinfo/meinfo',
+                  success: function (e) {
+                    //reload user data
+                    var page = getCurrentPages().pop();
+                    if (page == undefined || page == null) return;
+                    page.onLoad();
+                  }
+                })
+              }
+              else {
+                console.log(res.data.message);
+              }
+            }
           })
         }
       }
-    })
+    });
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -135,7 +211,7 @@ Page({
       meLinks: url,
       token: token
     })
-    if (hasStore){
+    if (hasStore) {
       wx.request({
         url: url.divestore.href,
         header: {
@@ -172,24 +248,25 @@ Page({
         }
       })
     }
-    else{
-      var location = wx.getStorageSync('indexLinks')
-      that.setData({
-        links: location
-      })
-      wx.request({
-        url: location.location.href.replace("{", "").replace("}", ""),
-        header: {
-          'content-type': 'application/json'
-        },
-        method: "GET",
-        success: function (reslocation) {
+    else {
+      var indexLinks = wx.getStorageSync('indexLinks')
+      wx.getSystemInfo({
+        success: function (res) {
+          //设置高度，根据当前设备宽高满屏显示
           that.setData({
-            locationlist: reslocation.data,
-            locationIndex: reslocation.data[0].id
+            view: {
+              Height: res.windowHeight
+            }
           })
         }
       })
+      var params = { 'access-token': token };
+      that.setData({
+        links: indexLinks,
+        initialStoreLink: indexLinks.divestores.href,
+        storeLink: indexLinks.divestores.href
+      })
+      that.fetchSearchList();
     }
   },
 
@@ -197,48 +274,67 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })
+
+function getData(url, params, callback) {
+  wx.request({
+    url: url,
+    header: {
+      'content-type': 'application/json'
+    },
+    data: params,
+    complete: function (res) {
+      if (res.statusCode == 200) {
+        callback(res.data);
+      }
+      else {
+        console.log(res.data.message);
+        callback();
+      }
+    }
+  })
+}

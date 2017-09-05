@@ -10,11 +10,11 @@
 }
 
 .text-commenter {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .text-commentcontent {
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .comment-list {
@@ -23,12 +23,12 @@
 
 .text-time {
   color: #808080;
-  font-size: 11.5px;
+  font-size: 14px;
 }
 
 .text-rate {
   color: #df8c20;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .loading{ 

@@ -57,7 +57,7 @@ Page({
               if (course) {
                 console.log(course);
                 that.setData({
-                  course: course.items
+                  course: course
                 })
               }
             })

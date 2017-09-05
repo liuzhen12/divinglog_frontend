@@ -49,44 +49,60 @@
         </view>
       </view>
     </view>
-    <view wx:else>
-      <view class="weui_cells_title">Please choose your store infomation:</view>
-      <view class="weui-cell weui-cell_access">
-        <view class="section">
-          <picker bindchange="bindPickerCountryChange" value="{{locationIndex}}" range="{{locationlist}}" range-key="name" data-index="{{locationIndex}}">
-            <view class="picker">
-              Country : {{locationlist[locationIndex].name}}
+    <view wx:else style="margin-top:49px;margin-bottom:58px;">
+      <view class="dock_top flex-column">
+        <view class='weui-search-bar '>
+          <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+              <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+              <input type="text" class="weui-search-bar__input" placeholder="Search" value="{{searchKeyword}}" focus="{{inputShowed}}" bindinput="inputTyping" bindblur="clearFilteredLocation" />
+              <view class="weui-icon-clear" wx:if="{{searchKeyword.length > 0}}" bindtap="clearInput">
+                <icon type="clear" size="14"></icon>
+              </view>
             </view>
-          </picker>
+            <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+              <icon class="weui-icon-search" type="search" size="14"></icon>
+              <view class="weui-search-bar__text">Country/Provice/City</view>
+            </label>
+          </view>
+          <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">Cancel</view>
+        </view>
+        <view class="weui-cells searchbar-result" wx:if="{{searchKeyword.length > 0}}">
+          <view class="weui-cell" hover-class="weui-cell_active" wx:for="{{filteredLocationArray}}" wx:key="id" bindtap="searchClick" data-keyword="{{item.detail}}">
+            <view>{{item.detail}}</view>
+          </view>
         </view>
       </view>
-      <view class="weui-cell weui-cell_access">
-        <view class="section">
-          <picker bindchange="bindPickerProvinceChange" value="{{ProvinceIndex}}" range="{{Provincelist}}" range-key="name" data-index="{{ProvinceIndex}}">
-            <view class="picker">
-              Province : {{Provincelist[ProvinceIndex].name}}
+      <scroll-view scroll-y="true" bindscroll="scroll" bindscrolltolower="searchScrollLower" style="height:{{view.Height}}px" scroll-top="{{scrollTop}}">
+        <view class="weui-cells list-box" wx:for="{{storesArray}}">
+          <view class="weui-cell" hover-class="weui-cell_active" bindtap="openConfirm" data-storeid="{{item.id}}">
+            <view class="weui-cell__hd">
+              <image src="{{item.avatar_url}}" class="image-avatar"></image>
             </view>
-          </picker>
-        </view>
-      </view>
-      <view class="weui-cell weui-cell_access">
-        <view class="section">
-          <picker bindchange="bindPickerCityChange" value="{{CityIndex}}" range="{{Citylist}}" range-key="name" data-index="{{CityIndex}}">
-            <view class="picker">
-              City : {{Citylist[CityIndex].name}}
+            <view class="weui-cell__bd">
+              <view class="weui-cell__bd">
+                <text>{{item.name}}</text>
+                <text class="text-title" hidden="{{!item.title}}">{{item.title}}</text>
+              </view>
+              <view class="weui-cell__bd">
+                <text class="text-rate">{{item.evaluation_score}}</text>
+                <text class="text-rate-count">{{item.evaluation_count}}{{' Reviews'}}</text>
+                <text class="text-language" hidden="{{!item.language_detail}}">{{item.language_detail}}</text>
+              </view>
+              <view class="weui-cell__bd">
+                <text class="text-location">{{item.location_name ? item.location_name + ', ':''}}{{item.city ? item.city + ', ' : ''}}{{item.province ? item.province + ', ' : ''}}{{item.country}}</text>
+              </view>
             </view>
-          </picker>
+          </view>
         </view>
-      </view>
-      <view class="weui-cell weui-cell_access">
-        <view class="section">
-          <picker bindchange="bindPickerStoreChange" value="{{StoreIndex}}" range="{{Storelist}}" range-key="name" data-index="{{StoreIndex}}">
-            <view class="picker">
-              Store : {{Storelist[StoreIndex].name}}
-            </view>
-          </picker>
+        <view class="weui-loadmore" hidden="{{!searchLoading}}">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">Loading...</view>
         </view>
-      </view>
+        <view class="weui-loadmore weui-loadmore_line" hidden="{{!searchLoadingComplete}}">
+          <view class="weui-loadmore__tips weui-loadmore__tips_in-line">All loaded</view>
+        </view>
+      </scroll-view>
     </view>
   </view>
 </view>
