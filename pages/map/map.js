@@ -68,6 +68,24 @@ Page({
           });
       }
     });
+
+    if(null == options.longitude || null == options.latitude){
+          // 获取当前定位
+        wx.getLocation({
+          success: function(res){
+            that.setData({
+              longitude: res.longitude,
+              latitude: res.latitude
+            });
+          }
+        });
+      } else {
+        this.setData({
+              longitude: options.longitude,
+              latitude: options.latitude
+        });
+      }
+    
   },
 
   /**
@@ -75,16 +93,6 @@ Page({
    */
   onReady: function () {
     var that = this;
-
-    // 获取当前定位
-    wx.getLocation({
-      success: function(res){
-        that.setData({
-          longitude: res.longitude,
-          latitude: res.latitude
-        });
-      }
-    });
 
     // mark 在地图中央
     this.mapCtx.getCenterLocation({
