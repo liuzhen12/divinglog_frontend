@@ -123,10 +123,57 @@ function initRowList(num){
         arr.push(i)  
     }  
     return arr  
-}  
+} 
+
+function getMonthsInEn(month){
+    var monthsInEn = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+    return monthsInEn[month];
+} 
+
+function formatNumber(n) {
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
+
+function formatTime(date) {
+  var year = date.getFullYear()
+  var month = date.getMonth() + 1
+  var day = date.getDate()
+
+  var hour = date.getHours()
+  var minute = date.getMinutes()
+  var second = date.getSeconds()
+
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+
+function formatDate(date) {
+  var year = date.getFullYear()
+  var month = date.getMonth() + 1
+  var day = date.getDate()
+
+  var hour = date.getHours()
+  var minute = date.getMinutes()
+  var second = date.getSeconds()
+
+  return [year, month, day].map(formatNumber).join('-')
+}
+
+function addDays(date,days){
+    var nd = new Date(date);
+    nd = nd.valueOf();
+    nd = nd + days * 24 * 60 * 60 * 1000;
+    nd = new Date(nd);
+    return nd;
+}
+
   
 module.exports = {  
     initThisMonthDates : initThisMonthDates,  
     initNextMonthDates : initNextMonthDates,  
-    initRowList : initRowList  
+    initRowList : initRowList,
+    getMonthsInEn : getMonthsInEn,
+    formatTime: formatTime,
+    formatDate: formatDate,
+    addDays: addDays
 } 

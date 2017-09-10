@@ -1,8 +1,42 @@
 // pages/findbuddylist/findbuddylist.js
 Page({
-  data:{},
-  onLoad:function(options){
-    // 页面初始化 options为页面跳转所带来的参数
+  data:{
+    array: []
+  },
+  onLoad: function (options) {
+    var that = this
+    wx.getStorage({
+      key: 'access_token',
+      success: function (res) {
+        that.setData({
+          access_token: res.data,
+        });
+        wx.getStorage({
+          key: 'indexLinks',
+          success: function (resLinks){
+            console.log(resLinks.data)
+            wx.request({
+              url: resLinks.data.activity.href + '?access-token=' + res.data,
+              data: {
+
+              },
+              header: {
+                'content-type': 'application/json'
+              },
+              method: "GET",
+              success: function (resArray) {
+                console.log(resArray)
+                that.setData({
+                  array: resArray.data.items
+                })
+              }
+            })
+          }
+        })
+        
+      }
+    });
+
   },
   onReady:function(){
     // 页面渲染完成

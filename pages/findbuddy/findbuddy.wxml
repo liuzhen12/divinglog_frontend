@@ -3,129 +3,61 @@
         <view class="page__title"></view>
         <view class="page__desc"></view>
     </view>
-    <view class="page__bd" style="margin-top:49px;margin-bottom:58px;">        
-        <view class="weui-cells searchbar-result" style="margin-top:90px" wx:if="{{inputVal.length > 0}}">
-            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">
-                    <view>实时搜索文本</view>
-                </view>
-            </navigator>
-            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">
-                    <view>实时搜索文本</view>
-                </view>
-            </navigator>
-            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">
-                    <view>实时搜索文本</view>
-                </view>
-            </navigator>
-            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">
-                    <view>实时搜索文本</view>
-                </view>
-            </navigator>
-        </view>
-        <view class="weui-cells box">
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'日期:'}}</view>
-                <view class="weui-cell__ft">2017/05/12 - 2017/05/19</view>
-            </navigator>
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'潜点'}}</view>
-                <view class="weui-cell__ft">Bali</view>
-            </navigator>
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'参与人数'}}</view>
-                <view class="weui-cell__ft">4/5</view>
-            </navigator>
-        </view>
-        <view class="weui-cells box">
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'日期:'}}</view>
-                <view class="weui-cell__ft">2017/05/12 - 2017/05/19</view>
-            </navigator>
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'潜点'}}</view>
-                <view class="weui-cell__ft">Bali</view>
-            </navigator>
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'参与人数'}}</view>
-                <view class="weui-cell__ft">4/5</view>
-            </navigator>
-        </view>
-        <view class="weui-cells box">
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'日期:'}}</view>
-                <view class="weui-cell__ft">2017/05/12 - 2017/05/19</view>
-            </navigator>
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'潜点'}}</view>
-                <view class="weui-cell__ft">Bali</view>
-            </navigator>
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'参与人数'}}</view>
-                <view class="weui-cell__ft">4/5</view>
-            </navigator>
-        </view>
-        <view class="weui-cells box">
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'日期:'}}</view>
-                <view class="weui-cell__ft">2017/05/12 - 2017/05/19</view>
-            </navigator>
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'潜点'}}</view>
-                <view class="weui-cell__ft">Bali</view>
-            </navigator>
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'参与人数'}}</view>
-                <view class="weui-cell__ft">4/5</view>
-            </navigator>
-        </view>
-    </view>
-</view>
-1
-<view class="dock_top flex-column">
-    <view class="location-time-search-bar">
+     <view class="location-time-search-bar">
         <label bindtap="selectLocation">
         潜点
         </label>
         <label>
         |
         </label>
-        <label bindtap="selectBeginDate">
-        开始日期
+        <label>
+        <picker mode="date" value="{{start_date}}" start="1999-01-01" end="2999-12-12" bindchange="startDatePickerBindchange">
+            开始{{start_date_short}}
+        </picker>
         </label>
         <label>
         |
         </label>
-        <label bindtap="selectEndDate">
-        结束日期
+        <label>
+        <picker mode="date" value="{{end_date}}" start="1999-01-01" end="2999-12-12" bindchange="endDatePickerBindchange">
+            结束{{end_date_short}}
+        </picker>
         </label>
     </view>
-    <view class='weui-search-bar '>
-    <view class="weui-search-bar__form">
-        <view class="weui-search-bar__box">
-            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
-            <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
-                <icon type="clear" size="14"></icon>
+    <scroll-view scroll-y class="page__bd" style="height:{{content_height}}">        
+        <view class="flex-row" data-links="{{item._links}}" bindtap="findbuddyEdit" wx:for="{{array}}" wx:key="*this">
+            <view class="timeline">
+                <view class="timeline-month">{{item.timeline_month}}</view>
+                <view class="timeline-day">{{item.timeline_day}}</view>
             </view>
+            <view class="card">
+                <view class="card-img">
+                    <image style="width: 100%; height: 130px;" mode="aspectFill" src="../../images/findbuddy1.jpg"></image>
+                </view>
+                <view class="card-title">
+                    {{item.title}}
+                </view>
+                <view class="card-content">
+                    <view class="card-content-left">{{'Date:'}}</view>
+                    <view class="card-content-right">{{item.start_date}} - {{item.end_date}}</view>
+                </view>
+                <view class="card-content">
+                    <view class="card-content-left">{{'Dive Point:'}}</view>
+                    <view class="card-content-right">{{item.dive_point}}</view>
+                </view>
+                <view class="card-content">
+                    <view class="card-content-left">{{'Participants:'}}</view>
+                    <view class="card-content-right">{{item.participants_count}}/{{item.max_member}}</view>
+                </view>
+            </view> 
         </view>
-        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
-            <icon class="weui-icon-search" type="search" size="14"></icon>
-            <view class="weui-search-bar__text">关键字/位置/潜点</view>
-        </label>
-    </view>
-    <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
-    </view>
+    </scroll-view>
 </view>
-
-<view class="dock_bottom flex-row">
+<view class="flex-row">
     <navigator url="../findbuddydetail/findbuddydetail" class="weui_btn weui_btn_default" hover-class="changestyle">
-        <button class="weui_btn weui_btn_default btn-normal">新建</button>
+        <button class="weui_btn weui_btn_default btn-normal">Create</button>
     </navigator>
     <navigator url="../findbuddylist/findbuddylist" class="weui_btn weui_btn_default" hover-class="changestyle">
-        <button class="weui_btn weui_btn_default btn-normal">我的</button>
+        <button class="weui_btn weui_btn_default btn-normal">Me</button>
     </navigator>
 </view>
