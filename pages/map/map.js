@@ -15,6 +15,7 @@ Page({
         width: 25,
         height: 25
       }],
+    showMarkers: false  
     
   },
 
@@ -23,7 +24,7 @@ Page({
    */
   onLoad: function (options) {
     this.mapCtx = wx.createMapContext('myMap');
-        var that = this;
+    var that = this;
 
     wx.getSystemInfo({
       success: function(res){
@@ -69,8 +70,9 @@ Page({
       }
     });
 
+
     if(null == options.longitude || null == options.latitude){
-          // 获取当前定位
+        // 获取当前定位
         wx.getLocation({
           success: function(res){
             that.setData({
@@ -84,8 +86,7 @@ Page({
               longitude: options.longitude,
               latitude: options.latitude
         });
-      }
-    
+      };    
   },
 
   /**
@@ -173,6 +174,9 @@ Page({
   },
 
   regionchange: function (e) {
+    if(!this.data.showMarkers){
+      return;
+    }
     var that = this;
     this.mapCtx.getCenterLocation({
         success: function(res){
@@ -185,7 +189,7 @@ Page({
     this.mapCtx.translateMarker({
             markerId: 0,
             // autoRotate: true,
-            duration: 100,
+            duration: 10,
             destination: {
               latitude: latitude,
               longitude: longitude
@@ -201,9 +205,5 @@ Page({
       latitude: latitude,
       longitude: longitude
     });
-  },
-
-  markertap: function (e) {
-    // console.log(e);
   }
 })
