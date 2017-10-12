@@ -2,6 +2,8 @@
 var app = getApp()
 Page({
     data: {
+      access_token: '',
+      array: [],
       source: function() {
         var that = this;
         wx.chooseImage({
@@ -20,6 +22,42 @@ Page({
         })
       }
     },
+
+    onLoad: function (option){
+      var that = this;
+      var token = wx.getStorageSync('access_token')
+      var links = wx.getStorageSync('indexLinks')
+      that.setData({
+        access_token: token,
+      });
+      wx.request({
+        url: links.logs.href + "?access-token=" + token,
+        data: {
+
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (resArray) {
+          console.log(resArray)
+          that.setData({
+            array: resArray.data.items
+          })
+        }
+      })
+    },
+
+    logEdit: function (event){
+      wx.setStorage({
+        key: "loglistLinks",
+        data: event.currentTarget.dataset.links
+      })
+      wx.navigateTo({
+        url: '../logdetail/logdetail'
+      })
+    },
+
     yulan:function(){
       wx.previewImage({
         current: '../../images/index1.jpg', // 当前显示图片的链接，不填则默认为 urls 的第一张
