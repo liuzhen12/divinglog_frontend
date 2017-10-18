@@ -4,6 +4,7 @@ Page({
     data: {
       access_token: '',
       array: [],
+      loglinks: [],
       source: function() {
         var that = this;
         wx.chooseImage({
@@ -42,9 +43,34 @@ Page({
         success: function (resArray) {
           console.log(resArray)
           that.setData({
-            array: resArray.data.items
+            array: resArray.data.items,
+            loglinks: resArray.data._extra
           })
         }
+      })
+    },
+
+    logAdd: function(){
+      wx.setStorage({
+        key: "logaddLinks",
+        data: this.data.loglinks.create
+      }),
+      wx.setStorage({
+        key: "logEditStatus",
+        data: 'Add'
+      })
+      wx.navigateTo({
+        url: '../logedit/logedit'
+      })
+    },
+
+    logMine: function () {
+      wx.setStorage({
+        key: "logmineLinks",
+        data: this.data.loglinks.mine
+      })
+      wx.navigateTo({
+        url: '../myloglist/myloglist'
       })
     },
 

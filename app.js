@@ -6,7 +6,7 @@ App({
           if (res.code) {
             //发起网络请求
             wx.request({
-              url: 'https://log.fundiving.com/login',
+              url: 'https://divinglog.cn/login',
               data: {
                 code: res.code
               },
