@@ -16,7 +16,8 @@ Page({
       { 'id': '2', 'name': 'Instructor amount ' }],
     searchKeyword: "",
     filteredLocationArray: [],
-    scrollTop: 0
+    scrollTop: 0,
+    imagePlaceholder: '../../images/image_placeholder.png'
   },
   showInput: function () {
     var that = this;
@@ -115,7 +116,11 @@ Page({
     };
 
     getData(that.data.storeLink, params, function (store_data) {
-      var storesArray = refresh ? store_data.items : that.data.storesArray.concat(store_data.items);
+      var storeItems = store_data.items;
+      storeItems.map(function(item,index,input){
+        item.language_detail = item.language_detail.length > 20 ? item.language_detail.substr(0, 20)+'...' : item.language_detail;
+      });
+      var storesArray = refresh ? storeItems : that.data.storesArray.concat(storeItems);
       var url = store_data._links.next ? store_data._links.next.href : that.data.initialStoreLink;
       that.setData({
         storesArray: storesArray,

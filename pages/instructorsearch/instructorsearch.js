@@ -133,7 +133,11 @@ Page({
     };
 
     getData(that.data.instructorLink, params, function (instructor_data) {
-      var usersArray =  refresh ? instructor_data.items : that.data.usersArray.concat(instructor_data.items);
+      var instructorItems = instructor_data.items;
+      instructorItems.map(function (item, index, input) {
+        item.language_detail = item.language_detail.length > 20 ? item.language_detail.substr(0, 20) + '...' : item.language_detail;
+      });
+      var usersArray = refresh ? instructorItems : that.data.usersArray.concat(instructorItems);
       var url = instructor_data._links.next ? instructor_data._links.next.href : that.data.initialInstructorLink;
       console.log(instructor_data);
       that.setData({

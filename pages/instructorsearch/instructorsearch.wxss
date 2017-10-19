@@ -16,8 +16,8 @@
 .image-avatar {
   margin-right: 5px;
   vertical-align: top;
-  width:80px; 
-  height: 80px;
+  width:72px; 
+  height: 72px;
 }
 /* .section-row {
   display: flex;
