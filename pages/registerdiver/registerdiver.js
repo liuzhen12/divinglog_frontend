@@ -140,7 +140,7 @@ Page({
 
     that = this;
     wx.request({ 
-      url: "https://log.fundiving.com/register",
+      url: "https://divinglog.cn/register",
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       }, 
