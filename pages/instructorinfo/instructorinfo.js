@@ -7,9 +7,11 @@ Page({
       comment: [],
       course: []
     },
-    //事件处理函数
-    bindViewTap: function() {
 
+    showMap: function () {
+      wx.navigateTo({
+        url: "../map/map?longitude=" + this.data.divestore.location_longitude + "&latitude=" + this.data.divestore.location_latitude
+      })
     },
     onLoad: function (option) {
         var that = this;
@@ -32,9 +34,6 @@ Page({
             })
             getData(userInfo._links.student.href, params, function (studentsInfo) {
               if (studentsInfo) {
-                while (studentsInfo.items.length < 6){
-                  studentsInfo.items.push(studentsInfo.items[0]);
-                }
                 that.setData({
                   student: studentsInfo
                 })

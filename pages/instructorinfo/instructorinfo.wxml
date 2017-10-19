@@ -32,44 +32,36 @@
       </view>
       <view class="weui-cell__bd">
         <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell_access" wx:for="{{course.items}}" wx:key="id">
-                <!-- <view class="weui-cell__hd">{{item.organization}}</view> -->
-                <view class="weui-cell__bd">{{item.organization}}</view> 
-                <view class="weui-cell__ft">{{item.name}}</view>
-            </view>
+          <view class="weui-cell weui-cell_access" wx:for="{{course.items}}" wx:key="id">
+            <!-- <view class="weui-cell__hd">{{item.organization}}</view> -->
+            <view class="weui-cell__bd">{{item.organization}}</view>
+            <view class="weui-cell__ft">{{item.name}}</view>
+          </view>
         </view>
       </view>
     </view>
     <view class="weui-cells listbox">
-    
+
       <view class="weui-cell__bd">
         <view class="block-title">Store</view>
       </view>
-      
-      <!-- <view class="weui-cell">
-        <view class="weui-cell__bd">
-          <text class="text-store">{{divestore.name}}</text>
+
+      <view wx:if="{{divestore.name}}">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <text class="text-store">{{divestore.name}}</text>
+          </view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <text class="text-location">{{divestore.location_address}}{{divestore.location_name ?' - ' + divestore.location_name + ', ':''}}{{divestore.city ? divestore.city + ', ' : ''}}{{divestore.province ? divestore.province + ', ' : ''}}{{divestore.country}}</text>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access" bindtap="showMap">
+            <image src="../../images/pin_location.png" class="image-pin-location"></image>
+          </view>
         </view>
       </view>
-      <view class="weui-cell">
-        <view class="weui-cell__bd">
-          <text class="text-location">{{divestore.location_address}}{{divestore.location_name ?' - ' + divestore.location_name + ', ':''}}{{divestore.city ? divestore.city + ', ' : ''}}{{divestore.province ? divestore.province + ', ' : ''}}{{divestore.country}}</text>
-        </view>
-        <view class="weui-cell__ft weui-cell__ft_in-access" bindtap="showMap">
-          <image src="../../images/pin_location.png" class="image-pin-location"></image>
-        </view>
-      </view> -->
-    
-       <view wx:if="{{divestore.name}}">
-        <view class="weui-cell__bd">
-          <text class="text-store">{{divestore.name}}</text>
-        </view>
-        <view class="weui-cell__bd">
-          <image src="../../images/pin_location.png" class="image-pin-location"></image>
-          <text class="text-location">{{divestore.location_address}}{{divestore.location_name ?' - ' + divestore.location_name + ', ':''}}{{divestore.city ? divestore.city + ', ' : ''}}{{divestore.province ? divestore.province + ', ' : ''}}{{divestore.country}}</text>
-        </view>
-      </view> 
-      <view class="weui-cell__bd" wx:if="{{!divestore.name}}">
+      <view wx:else>
         <text class="text-store">Not found</text>
       </view>
     </view>
@@ -90,7 +82,7 @@
           <navigator url="../studentlist/studentlist?url={{userInfo._links.student.href}}" class="text-link">View All {{student._meta.totalCount}} Students</navigator>
         </view>
       </view>
-      <view class="weui-cell__bd" wx:if="{{student._meta.totalCount == 0}}">
+      <view class="weui-cell__bd" wx:else>
         <text class="text-store">Not found</text>
       </view>
     </view>
@@ -124,7 +116,7 @@
           <navigator url="../commentlist/commentlist?url={{userInfo._links.comment.href}}" class="text-link">View all {{comment._meta.totalCount}} comments</navigator>
         </view>
       </view>
-      <view class="weui-cell__bd" wx:if="{{comment._meta.totalCount == 0}}">
+      <view class="weui-cell__bd" wx:else>
         <text class="text-store">Not found</text>
       </view>
     </view>

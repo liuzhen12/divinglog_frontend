@@ -245,7 +245,6 @@ Page({
   },
   scroll: function (e, res) {
     // 容器滚动时将此时的滚动距离赋值给 this.data.scrollTop
-    console.log(e.detail.scrollTop);
     if (e.detail.scrollTop > 500) {
       this.setData({
         floorstatus: true

@@ -18,7 +18,7 @@
             <view class="weui-cell__bd">
               <text class="text-rate">{{item.evaluation_score}}</text>
               <text class="text-rate-count">{{item.evaluation_count}}{{' Reviews'}}</text>
-              <text class="text-language" hidden="{{!item.language_detail}}">{{item.language_detail}}</text>
+               <text class="text-language" hidden="{{!item.language_detail}}">{{item.language_detail.length>20?item.language_detail+'...':item.language_detail}}</text> 
             </view>
             <view class="weui-cell__bd">
               <text class="text-location">{{item.location_name ? item.location_name + ', ':''}}{{item.city ? item.city + ', ' : ''}}{{item.province ? item.province + ', ' : ''}}{{item.country}}</text>
@@ -39,7 +39,7 @@
 </view>
 
 <view class="dock_top flex-column">
-  <view class='weui-search-bar '>
+  <view class='weui-search-bar'>
     <view class="weui-search-bar__form">
       <view class="weui-search-bar__box">
         <icon class="weui-icon-search_in-box" type="search" size="14"></icon>

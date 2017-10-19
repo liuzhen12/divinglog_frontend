@@ -17,15 +17,11 @@
         </view>
       </view>
       <view class="weui-cell">
-        <!-- <view class="weui-cell__hd">
-          <image src="../../images/pin_location.png" class="image-pin-location"></image>
-        </view> -->
         <view class="weui-cell__bd">
           <text class="text-location">{{storeInfo.location_name ? storeInfo.location_name + ', ':''}}{{storeInfo.city ? storeInfo.city + ', ' : ''}}{{storeInfo.province ? storeInfo.province + ', ' : ''}}{{storeInfo.country}}</text>
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-access" bindtap="showMap">
           <image src="../../images/pin_location.png" class="image-pin-location"></image>
-          <!-- <text>map</text> -->
         </view>
       </view>
     </view>
@@ -63,33 +59,9 @@
           <navigator url="../studentlist/studentlist?url={{storeInfo._links.coach.href}}" class="text-link">View All {{instructors._meta.totalCount}} Instructors</navigator>
         </view>
       </view>
-      <view class="weui-cell__bd" wx:if="{{instructors._meta.totalCount == 0}}">
+      <view class="weui-cell__bd" wx:else>
         <text class="text-store">Not found</text>
       </view>
     </view>
-    
-    
-    <!-- <view class="weui-cells box">
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'店名'}}</view>
-                <view class="weui-cell__ft">大壮潜店</view>
-            </view>
-            <navigator url="../commentlist/commentlist" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'评价'}}</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">4.5分</view>
-            </navigator>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'地址'}}</view>
-                <view class="weui-cell__ft">巴厘岛某地</view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'电话'}}</view>
-                <view class="weui-cell__ft">1234567890</view>
-            </view>
-            <navigator url="../storeinstructor/storeinstructor" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'教练'}}</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">5人</view>
-            </navigator>
-        </view> -->
   </view>
 </view>

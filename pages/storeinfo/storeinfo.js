@@ -34,7 +34,7 @@ Page({
   },
   showMap: function () {
     wx.navigateTo({
-      url: "../storemap/storemap?longitude=" + this.data.storeInfo.location_longitude + "&latitude=" + this.data.storeInfo.location_latitude
+      url: "../map/map?longitude=" + this.data.storeInfo.location_longitude + "&latitude=" + this.data.storeInfo.location_latitude
     })
   }
 });
