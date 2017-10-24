@@ -5,7 +5,7 @@
   </view>
   <view class="page__bd page__bd_spacing">
     <view class="weui-cells list-box">
-      <view class="container-head" style="background-image:url(../../images/index1.png); background-position:center; background-repeat:no-repeat;">
+      <view class="container-head" style="background-image:url({{storeInfo.avatar_url?storeInfo.avatar_url:'../../images/index1.png'}}); background-position:center; background-repeat:no-repeat;">
         <text class="text-title">{{storeInfo.name}}</text>
       </view>
     </view>
@@ -60,7 +60,9 @@
         </view>
       </view>
       <view class="weui-cell__bd" wx:else>
-        <text class="text-store">Not found</text>
+        <view class="weui-cell">
+          <text class="text-store">Not found</text>
+        </view>
       </view>
     </view>
   </view>

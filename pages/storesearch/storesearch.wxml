@@ -18,7 +18,7 @@
             <view class="weui-cell__bd">
               <text class="text-rate">{{item.evaluation_score}}</text>
               <text class="text-rate-count">{{item.evaluation_count}}{{' Reviews'}}</text>
-               <text class="text-language" hidden="{{!item.language_detail}}">{{item.language_detail}}</text> 
+              <text class="text-language" hidden="{{!item.language_detail}}">{{item.language_detail}}</text>
             </view>
             <view class="weui-cell__bd">
               <text class="text-location">{{item.location_name ? item.location_name + ', ':''}}{{item.city ? item.city + ', ' : ''}}{{item.province ? item.province + ', ' : ''}}{{item.country}}</text>
@@ -56,10 +56,10 @@
     <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">Cancel</view>
   </view>
   <view class="weui-cells searchbar-result" wx:if="{{searchKeyword.length > 0}}">
-      <view class="weui-cell" hover-class="weui-cell_active" wx:for="{{filteredLocationArray}}" wx:key="id" bindtap="searchClick" data-keyword="{{item.detail}}">
-        <view>{{item.detail}}</view>
-      </view>
+    <view class="weui-cell" hover-class="weui-cell_active" wx:for="{{filteredLocationArray}}" wx:key="id" bindtap="searchClick" data-keyword="{{item.detail}}">
+      <view>{{item.detail}}</view>
     </view>
+  </view>
 </view>
 
 <view class="dock_bottom flex-row">

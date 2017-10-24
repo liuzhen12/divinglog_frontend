@@ -18,6 +18,8 @@
           <view class="weui-cell__bd">
             <text class="text-rate">{{userInfo.evaluation_score}}</text>
             <text class="text-rate-count">{{userInfo.evaluation_count}}{{' Reviews'}}</text>
+          </view>
+          <view class="weui-cell__bd">
             <text class="text-language" hidden="{{!userInfo.language_detail}}">{{userInfo.language_detail}}</text>
           </view>
           <view class="weui-cell__bd">
@@ -62,7 +64,9 @@
         </view>
       </view>
       <view wx:else>
-        <text class="text-store">Not found</text>
+        <view class="weui-cell">
+          <text class="text-store">Not found</text>
+        </view>
       </view>
     </view>
     <view class="weui-cells listbox">
@@ -83,7 +87,9 @@
         </view>
       </view>
       <view class="weui-cell__bd" wx:else>
-        <text class="text-store">Not found</text>
+        <view class="weui-cell">
+          <text class="text-store">Not found</text>
+        </view>
       </view>
     </view>
     <view class="weui-cells listbox">
@@ -117,7 +123,9 @@
         </view>
       </view>
       <view class="weui-cell__bd" wx:else>
-        <text class="text-store">Not found</text>
+        <view class="weui-cell">
+          <text class="text-store">Not found</text>
+        </view>
       </view>
     </view>
   </view>

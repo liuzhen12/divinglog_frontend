@@ -39,7 +39,6 @@
   background-color: #808080;
   color: #ffffff;
   font-size: 11.5px;
-  margin-left: 5px;
   border-radius: 2px;
   padding:0 0.6em;
 }

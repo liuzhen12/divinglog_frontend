@@ -117,8 +117,8 @@ Page({
 
     getData(that.data.storeLink, params, function (store_data) {
       var storeItems = store_data.items;
-      storeItems.map(function(item,index,input){
-        item.language_detail = item.language_detail.length > 20 ? item.language_detail.substr(0, 20)+'...' : item.language_detail;
+      storeItems.map(function (item, index, input) {
+        item.language_detail = item.language_detail.length > 20 ? item.language_detail.substr(0, 20) + '...' : item.language_detail;
       });
       var storesArray = refresh ? storeItems : that.data.storesArray.concat(storeItems);
       var url = store_data._links.next ? store_data._links.next.href : that.data.initialStoreLink;
