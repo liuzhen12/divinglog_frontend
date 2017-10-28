@@ -15,7 +15,7 @@
       <navigator class="navgationCell" url="../myloglist/myloglist">
         <image class="imageview" src="../../images/logs2.png"></image>
       <view class="cellTitle">my logs</view>
-      <view class="arrow"></view>
+      <view class="arrow">{{}}</view>
       </navigator>
     </view>
     <view class="navgationView" >

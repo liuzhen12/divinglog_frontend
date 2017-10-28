@@ -1,8 +1,12 @@
 var Util = require('../../utils/util.js')
 Page({
     data: {
+        stampLinks: '',
+        loglinks:'',
         access_token: '',
         id: '',
+        userId:'',
+        coachId:'',
         logEditStatus: '',
         date: '',
         starttime: '12:00',
@@ -16,6 +20,7 @@ Page({
         tiem2: '0',
         depth3: '0',
         tiem3: '0',
+        gas: '0',
         nitrox: '0',
         startbar: '0',
         endbar: '0',
@@ -145,8 +150,7 @@ Page({
           },
           method: "POST",
           data: Util.json2Form({
-            access_token: this.data.access_token,
-            user_id: this.data.id,
+            user_id: this.data.userId,
             day: this.data.date,
             time_in: this.data.starttime,
             time_out: this.data.endtime,
@@ -154,6 +158,7 @@ Page({
             location_latitue: "0.000000",
             location_name: this.data.location,
             location_address: "",
+            dive_point: this.data.divepoint,
             depth1: this.data.depth1,
             time1: this.data.tiem1,
             depth2: this.data.depth2,
@@ -211,26 +216,372 @@ Page({
           }
         })
       }
-      
+      else if (status == 'Edit'){
+        var loglistlinks = wx.getStorageSync('loglistLinks')
+        wx.request({
+          url: loglistlinks.edit.href + "?access-token=" + this.data.access_token,
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          method: "PUT",
+          data: Util.json2Form({
+            day: this.data.date,
+            time_in: this.data.starttime,
+            time_out: this.data.endtime,
+            location_longitude: "0.000000",
+            location_latitue: "0.000000",
+            location_name: this.data.location,
+            location_address: "",
+            dive_point: this.data.divepoint,
+            depth1: this.data.depth1,
+            time1: this.data.tiem1,
+            depth2: this.data.depth2,
+            time2: this.data.tiem2,
+            depth3: this.data.depth3,
+            time3: this.data.tiem3,
+            gas: this.data.nitrox,
+            barometer_start: this.data.startbar,
+            barometer_end: this.data.endbar,
+            weight: this.data.weight,
+            comments: this.data.comments,
+            assets: this.data.files,
+          }),
+          complete: function (res) {
+            if (res == null || res.statusCode != 200) {
+              console.error(res.statusCode);
+              // that.setData({
+              //   hiddenLoading: true,
+              // }); 
+              setTimeout(function () {
+                wx.hideLoading()
+              }, 2000)
+              wx.showToast({
+                title: '提交失败',
+                icon: 'fail',
+                duration: 2000
+              })
+              setTimeout(function () {
+                wx.hideToast()
+              }, 2000)
+              return;
+            }
+            console.log(res)
+            // that.setData({
+            //   hiddenLoading: true,
+            // }); 
+            setTimeout(function () {
+              wx.hideLoading()
+            }, 2000)
+            wx.showToast({
+              title: '提交成功',
+              icon: 'success',
+              duration: 2000
+            })
+            setTimeout(function () {
+              wx.hideToast()
+            }, 2000)
+            // wx.setStorageSync('access_token', res.data.access_token)
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
+      }
+    },
+
+    btnDelete: function(){
+      wx.showLoading({
+        title: 'Deleting',
+      })
+      var loglistlinks = wx.getStorageSync('loglistLinks')
+      wx.request({
+        url: loglistlinks.delete.href + "?access-token=" + this.data.access_token,
+        data: Util.json2Form({
+          
+        })
+        ,
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        method: "DELETE",
+        complete: function (res1) {
+          if (res1 == null || res1.statusCode != 204) {
+            console.error(res1.statusCode);
+            setTimeout(function () {
+              wx.hideLoading()
+            }, 2000)
+            wx.showToast({
+              title: 'save fail',
+              icon: 'fail',
+              duration: 2000
+            })
+            setTimeout(function () {
+              wx.hideToast()
+            }, 2000)
+            return;
+          }
+          console.log(res1)
+          setTimeout(function () {
+            wx.hideLoading()
+          }, 2000)
+          wx.showToast({
+            title: 'Delete Success',
+            icon: 'success',
+            duration: 2000
+          })
+          setTimeout(function () {
+            wx.hideToast()
+          }, 2000)
+          var pages = getCurrentPages();
+          if (pages.length > 1) {
+            //上一个页面实例对象
+            var prePage = pages[pages.length - 2];
+            //关键在这里
+            prePage.onLoad()
+          }
+          wx.navigateBack({
+            delta: 1
+          })
+        }
+      })
+    },
+
+    btnStamp:function(){
+      wx.showLoading({
+        title: '提交中',
+      })
+      var that = this;
+      wx.request({
+        url: this.data.stampLinks.edit.href + "?access-token=" + this.data.access_token,
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        method: "PUT",
+        data: Util.json2Form({
+          day: this.data.date,
+          time_in: this.data.starttime,
+          time_out: this.data.endtime,
+          location_longitude: "0.000000",
+          location_latitue: "0.000000",
+          location_name: this.data.location,
+          location_address: "",
+          dive_point: this.data.divepoint,
+          depth1: this.data.depth1,
+          time1: this.data.tiem1,
+          depth2: this.data.depth2,
+          time2: this.data.tiem2,
+          depth3: this.data.depth3,
+          time3: this.data.tiem3,
+          gas: this.data.nitrox,
+          barometer_start: this.data.startbar,
+          barometer_end: this.data.endbar,
+          weight: this.data.weight,
+          comments: this.data.comments,
+          assets: this.data.files,
+        }),
+        complete: function (res) {
+          if (res == null || res.statusCode != 200) {
+            console.error(res.statusCode);
+            setTimeout(function () {
+              wx.hideLoading()
+            }, 2000)
+            wx.showToast({
+              title: '提交失败',
+              icon: 'fail',
+              duration: 2000
+            })
+            setTimeout(function () {
+              wx.hideToast()
+            }, 2000)
+            return;
+          }
+        }
+      })
+
+      wx.request({
+        url: this.data.stampLinks.certification.href + "?access-token=" + this.data.access_token,
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        method: "POST",
+        data: Util.json2Form({
+          id: this.data.id,
+          user_id: this.data.userId,
+          coach_id: this.data.coachId
+        }),
+        complete: function (res) {
+          if (res == null || res.statusCode != 201) {
+            console.error(res.statusCode);
+            setTimeout(function () {
+              wx.hideLoading()
+            }, 2000)
+            wx.showToast({
+              title: '提交失败',
+              icon: 'fail',
+              duration: 2000
+            })
+            setTimeout(function () {
+              wx.hideToast()
+            }, 2000)
+            return;
+          }
+          console.log(res)
+          setTimeout(function () {
+            wx.hideLoading()
+          }, 2000)
+          wx.showToast({
+            title: '提交成功',
+            icon: 'success',
+            duration: 2000
+          })
+          setTimeout(function () {
+            wx.hideToast()
+          }, 2000)
+          wx.navigateBack({
+            delta: 1
+          })
+        }
+      })
+    },
+
+    onShareAppMessage: function () {
+      return {
+        title: 'Stamp',
+        path: '/pages/logedit?status=Stamp&selflink=' + this.data.loglinks.self.href,
+        success: function (res) {
+          // 转发成功
+        },
+        fail: function (res) {
+          // 转发失败
+        }
+      }
     },
 
     onLoad: function (options){
       var that = this
-      var id = wx.getStorageSync('id')
-      var token = wx.getStorageSync('access_token')
-      var status = wx.getStorageSync('logEditStatus')
-      that.setData({
-        access_token: token,
-        id: id,
-        logEditStatus: status
-      });
-      // that.setData({
-      //   id: wx.getStorageSync('id')||null,
-      //   access_token: wx.getStorageSync('access_token') || null
-      // })
-      this.setData({
-        date: formatDate(new Date)
-      })      
+      if (options.status == 'Stamp'){
+        console.log(options)
+        var token = wx.getStorageSync('access_token')
+        var id = wx.getStorageSync('id')
+        var selflink = options.selflink
+        that.setData({
+          logEditStatus: options.status,
+          access_token: token,
+          coachId: id,
+        });
+        wx.request({
+          url: selflink + "?access-token=" + token,
+          data: {
+
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "GET",
+          success: function (resArray) {
+            console.log(resArray)            
+            if (resArray.data != null) {
+              if (resArray.data.gas > 0) {
+                that.setData({
+                  switch1Checked: true,
+                  nitrox: resArray.data.gas
+                })
+              }
+              else {
+                that.setData({
+                  switch1Checked: false,
+                  nitrox: '0'
+                })
+              }
+              that.setData({
+                stampLinks: resArray.data._links,
+                id: resArray.data.id,
+                userId: resArray.data.user_id,
+                date: resArray.data.day,
+                starttime: resArray.data.time_in,
+                endtime: resArray.data.time_out,
+                location: resArray.data.location_name,
+                divepoint: resArray.data.dive_point,
+                depth1: resArray.data.depth1,
+                time1: resArray.data.tiem1,
+                depth2: resArray.data.depth2,
+                time2: resArray.data.tiem2,
+                depth3: resArray.data.depth3,
+                time3: resArray.data.tiem3,
+                startbar: resArray.data.barometer_start,
+                endbar: resArray.data.barometer_end,
+                weight: resArray.data.weight,
+                comments: resArray.data.comments
+              })
+              return
+            }
+            else {
+              console.log('errer')
+              return
+            }
+          }
+        })
+      }
+      else{
+        var id = wx.getStorageSync('id')
+        var token = wx.getStorageSync('access_token')
+        var status = wx.getStorageSync('logEditStatus')
+        var links = wx.getStorageSync('loglistLinks')
+        that.setData({
+          access_token: token,
+          userId: id,
+          logEditStatus: status,
+          loglinks: links,
+          nitrox: '0'
+        });
+        this.setData({
+          date: formatDate(new Date)
+        })
+        if (status == 'Edit') {          
+          wx.request({
+            url: links.self.href + "?access-token=" + token,
+            data: {
+
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            method: "GET",
+            success: function (resArray) {
+              console.log(resArray.data)
+              if (resArray.data.gas > 0) {
+                that.setData({
+                  switch1Checked: true,
+                  nitrox: resArray.data.gas
+                })
+              }
+              else {
+                that.setData({
+                  switch1Checked: false,
+                  nitrox: '0'
+                })
+              }
+              that.setData({
+                date: resArray.data.day,
+                starttime: resArray.data.time_in,
+                endtime: resArray.data.time_out,
+                location: resArray.data.location_name,
+                divepoint: resArray.data.dive_point,
+                depth1: resArray.data.depth1,
+                time1: resArray.data.tiem1,
+                depth2: resArray.data.depth2,
+                time2: resArray.data.tiem2,
+                depth3: resArray.data.depth3,
+                time3: resArray.data.tiem3,
+                startbar: resArray.data.barometer_start,
+                endbar: resArray.data.barometer_end,
+                weight: resArray.data.weight,
+                comments: resArray.data.comments
+              })
+            }
+          })
+        }  
+      }   
     }    
 });
 
