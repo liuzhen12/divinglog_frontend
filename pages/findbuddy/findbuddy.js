@@ -8,6 +8,18 @@ Page({
         end_date: "",
         array: [],
         content_height:"",
+        northeast: {
+          latitude:null,
+          longitude:null
+        },
+        southwest: {
+          latitude:null,
+          longitude:null
+        }
+    },
+    onShow: function(){
+        console.log(this.data.northeast);
+        console.log(this.data.southwest);
     },
     onLoad: function (options) {
       var that = this;
@@ -22,18 +34,58 @@ Page({
             }
       });
       //获取当前日期
-      var nowDate = new Date();
+      let nowDate = new Date();
 
       this.setData({
           start_date: dateUtils.formatDate(nowDate),
           end_date: dateUtils.formatDate(dateUtils.addDays(nowDate,7))
       });
-      
+
       this.setData({
-          start_date_short: this.data.start_date.substring(5),
-          end_date_short: this.data.start_date.substring(5)
+        start_date_short: this.data.start_date.substring(5),
+        end_date_short: this.data.end_date.substring(5)
       });
 
+      this.getActivityList();
+    },
+
+    selectLocation: function(e) {
+        wx.navigateTo({
+          url: '../map/map?showMarkers=true',
+          success: function(res){
+            console.log(res);
+          },
+          fail: function(res) {
+            // fail
+          },
+          complete: function(res) {
+            // complete
+          }
+        });
+    },
+
+    startDatePickerBindchange: function(e) {
+        this.setData({
+          start_date: e.detail.value,
+          start_date_short: e.detail.value.substring(5)
+        });
+        this.getActivityList();
+    }, 
+
+    endDatePickerBindchange: function(e) {
+        this.setData({
+          end_date: e.detail.value,
+          end_date_short: e.detail.value.substring(5)
+        });
+        this.getActivityList();
+    },
+
+    findbuddyEdit: function(e){
+        console.log(e);
+    },
+
+    getActivityList: function(){
+      let that = this;
       wx.getStorage({
         key: 'access_token',
         success: function (res) {
@@ -43,19 +95,32 @@ Page({
           wx.getStorage({
             key: 'indexLinks',
             success: function (resLinks){
-              console.log(resLinks.data)
+              let reqData = {
+                start_date: that.data.start_date,
+                end_date: that.data.end_date
+              };
+              if(null != that.data.northeast.longitude){
+                reqData.northeast_longitude = that.data.northeast.longitude;
+              }
+              if(null != that.data.northeast.latitude){
+                reqData.northeast_latitude = that.data.northeast.latitude;
+              }
+              if(null != that.data.southwest.longitude){
+                reqData.southwest_longitude = that.data.southwest.longitude;
+              }
+              if(null != that.data.southwest.latitude){
+                reqData.southwest_latitude = that.data.southwest.latitude;
+              }
               wx.request({
                 url: resLinks.data.activity.href + '?access-token=' + res.data,
-                data: {
-
-                },
+                data: reqData,
                 header: {
                   'content-type': 'application/json'
                 },
                 method: "GET",
                 success: function (resArray) {
-                  for(var i = 0; i < resArray.data.items.length; i++){
-                      var d = new Date(resArray.data.items[i].start_date);
+                  for(let i = 0; i < resArray.data.items.length; i++){
+                      let d = new Date(resArray.data.items[i].start_date);
                       resArray.data.items[i].timeline_month = dateUtils.getMonthsInEn(d.getMonth());
                       resArray.data.items[i].timeline_day = d.getDate();
                   }
@@ -69,87 +134,6 @@ Page({
           
         }
       });
-    },
-    showInput: function () {
-        this.setData({
-            inputShowed: true
-        });
-    },
-    hideInput: function () {
-        this.setData({
-            inputVal: "",
-            inputShowed: false
-        });
-    },
-    clearInput: function () {
-        this.setData({
-            inputVal: ""
-        });
-    },
-    inputTyping: function (e) {
-        this.setData({
-            inputVal: e.detail.value
-        });
-    },
-    selectLocation: function(e) {
-        wx.navigateTo({
-          url: '../map/map?longitude=20&latitude=20',
-          success: function(res){
-            // success
-          },
-          fail: function(res) {
-            // fail
-          },
-          complete: function(res) {
-            // complete
-          }
-        })
-    },
-    selectBeginDate: function(e) {
-        wx.navigateTo({
-          url: '../calendar/calendar',
-          success: function(res){
-            // success
-          },
-          fail: function(res) {
-            // fail
-          },
-          complete: function(res) {
-            // complete
-          }
-        })
-    },
-    selectEndDate: function(e) {
-        wx.navigateTo({
-          url: '../calendar/calendar',
-          success: function(res){
-            // success
-          },
-          fail: function(res) {
-            // fail
-          },
-          complete: function(res) {
-            // complete
-          }
-        })
-    },
-
-    startDatePickerBindchange: function(e) {
-        this.setData({
-          start_date: e.detail.value,
-          start_date_short: e.detail.value.substring(5)
-        })
-    }, 
-
-    endDatePickerBindchange: function(e) {
-        this.setData({
-          end_date: e.detail.value,
-          end_date_short: e.detail.value.substring(5)
-        })
-    },
-
-    findbuddyEdit: function(e){
-        console.log(e);
-    },
+    }
   
 });
