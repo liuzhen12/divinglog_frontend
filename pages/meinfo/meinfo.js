@@ -73,6 +73,12 @@ Page({
                 studentUrl: res.data._links.student.href
               })
             }
+            else{
+              wx.setStorage({
+                key: 'logmineLinks',
+                data: res.data._links.divinglog
+              })
+            }
           }
         })
     },

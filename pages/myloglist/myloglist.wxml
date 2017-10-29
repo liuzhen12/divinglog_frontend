@@ -4,7 +4,7 @@
         <view class="page__desc"></view>
     </view>
     <view class="page__bd page__bd_spacing">
-        <view class="weui-cells box" data-links="{{item._links}}" bindtap="logEdit" wx:for="{{array}}" wx:key="*this">
+        <view class="weui-cells box" data-links="{{item._links}}" data-stamp="{{item.stamp}}" bindtap="logEdit" wx:for="{{array}}" wx:key="*this">
             <view class="weui-cell weui-cell_access">
                 <view class="weui-cell__bd">Diver:</view>
                 <view class="weui-cell__ft">{{item.nick_name}}</view>

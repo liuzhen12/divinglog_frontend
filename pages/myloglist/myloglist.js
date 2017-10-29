@@ -27,12 +27,12 @@ Page({
   onLoad: function (option) {
     var that = this;
     var token = wx.getStorageSync('access_token')
-    var links = wx.getStorageSync('indexLinks')
+    var links = wx.getStorageSync('logmineLinks')
     that.setData({
       access_token: token,
     });
     wx.request({
-      url: links.logs.href + "?access-token=" + token,
+      url: links.href + "?access-token=" + token,
       data: {
 
       },
@@ -69,9 +69,22 @@ Page({
       key: "loglistLinks",
       data: event.currentTarget.dataset.links
     })
-    wx.navigateTo({
+    var stamp = event.currentTarget.dataset.stamp
+    if(stamp==0)
+    {
+      wx.setStorage({
+        key: "logEditStatus",
+        data: 'Edit'
+      })
+      wx.navigateTo({
+        url: '../logedit/logedit'
+      })
+    }
+    else{
+      wx.navigateTo({
       url: '../logdetail/logdetail'
-    })
+      })
+    }
   },
 
   yulan: function () {
