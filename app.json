@@ -11,6 +11,7 @@
     "pages/logedit/logedit",
     "pages/stamp/stamp",
     "pages/findbuddy/findbuddy",
+    "pages/findbuddycreate/findbuddycreate",
     "pages/findbuddylist/findbuddylist",
     "pages/findbuddydetail/findbuddydetail",
     "pages/findbuddysearch/findbuddysearch",

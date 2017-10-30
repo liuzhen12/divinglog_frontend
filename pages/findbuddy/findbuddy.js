@@ -15,7 +15,8 @@ Page({
         southwest: {
           latitude:null,
           longitude:null
-        }
+        },
+        extraLinks:[]
     },
     onShow: function(){
         console.log(this.data.northeast);
@@ -124,8 +125,10 @@ Page({
                       resArray.data.items[i].timeline_month = dateUtils.getMonthsInEn(d.getMonth());
                       resArray.data.items[i].timeline_day = d.getDate();
                   }
+                  console.log(resArray.data)
                   that.setData({
-                    array: resArray.data.items
+                    array: resArray.data.items,
+                    extra: resArray.data._extra
                   })
                 }
               })
@@ -134,6 +137,26 @@ Page({
           
         }
       });
+    },
+
+    create: function(){
+      wx.setStorage({
+        key: "findbuddyCreateLinks",
+        data: this.data.extra.create
+      }),
+      wx.navigateTo({
+        url: '../findbuddycreate/findbuddycreate'
+      })
+    },
+
+    mine: function(){
+      wx.setStorage({
+        key: "findbuddyMineLinks",
+        data: this.data.extra.mine
+      }),
+        wx.navigateTo({
+          url: '../findbuddylist/findbuddylist'
+        })
     }
   
 });

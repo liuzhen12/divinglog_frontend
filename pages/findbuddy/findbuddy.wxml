@@ -54,10 +54,10 @@
     </scroll-view>
 </view>
 <view class="flex-row">
-    <navigator url="../findbuddydetail/findbuddydetail" class="weui_btn weui_btn_default" hover-class="changestyle">
-        <button class="weui_btn weui_btn_default btn-normal">Create</button>
+    <navigator url="" class="weui_btn weui_btn_default" hover-class="changestyle">
+        <button class="weui_btn weui_btn_default btn-normal" bindtap="create">Create</button>
     </navigator>
     <navigator url="../findbuddylist/findbuddylist" class="weui_btn weui_btn_default" hover-class="changestyle">
-        <button class="weui_btn weui_btn_default btn-normal">Me</button>
+        <button class="weui_btn weui_btn_default btn-normal" bindtap="mine">Me</button>
     </navigator>
 </view>

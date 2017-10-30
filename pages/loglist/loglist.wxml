@@ -4,6 +4,7 @@
         <view class="page__desc"></view>
     </view>
     <view class="page__bd page__bd_spacing">
+      <scroll-view scroll-y="true" bindscroll="scroll" bindscrolltolower="searchScrollLower" style="height:{{view.Height}}px">
         <view class="weui-cells box"  wx:for="{{array}}" wx:key="*this">
           <view data-links="{{item._links}}" bindtap="logEdit">
             <view class="weui-cell weui-cell_access">
@@ -34,6 +35,14 @@
                 </view>
             </view>
         </view>
+        <view class="weui-loadmore" hidden="{{!searchLoading}}">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">Loading...</view>
+        </view>
+        <view class="weui-loadmore weui-loadmore_line" hidden="{{!searchLoadingComplete}}">
+          <view class="weui-loadmore__tips weui-loadmore__tips_in-line">All loaded</view>
+        </view>
+      </scroll-view>
     </view>
 </view>
 <view class="dock_bottom flex-row">
