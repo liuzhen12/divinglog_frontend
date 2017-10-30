@@ -54,6 +54,7 @@ Page({
               'content-type': 'application/json'
             },
             success: function (res) {
+              wx.setStorageSync('url', 'https://divinglog.cn/')
               if (res.data.hasOwnProperty('id'))
               {
                 wx.setStorageSync('id', res.data.id)

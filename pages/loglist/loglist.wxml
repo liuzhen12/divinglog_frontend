@@ -4,7 +4,8 @@
         <view class="page__desc"></view>
     </view>
     <view class="page__bd page__bd_spacing">
-        <view class="weui-cells box" data-links="{{item._links}}" bindtap="logEdit" wx:for="{{array}}" wx:key="*this">
+        <view class="weui-cells box"  wx:for="{{array}}" wx:key="*this">
+          <view data-links="{{item._links}}" bindtap="logEdit">
             <view class="weui-cell weui-cell_access">
                 <view class="weui-cell__bd">Diver:</view>
                 <view class="weui-cell__ft">{{item.nick_name}}</view>
@@ -17,34 +18,15 @@
                 <view class="weui-cell__bd">Location:</view>
                 <view class="weui-cell__ft">{{item.location_name}}</view>
             </view> 
+          </view>
             <view class="weui-cell">
                 <view class="weui-cell__bd">
                     <view class="weui-uploader">
                         <view class="weui-uploader__bd">
                             <view class="weui-uploader__files" id="uploaderFiles" >
-                                <view class="weui-uploader__file" bindtap="yulan">
+                                <view class="weui-uploader__file" data-urls="{{item.compressed}}" data-url="{{comUrl}}" wx:for="{{item.compressed}}" wx:for-item="comUrl" bindtap="yulan" wx:key="*this">
                                     <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
-                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
-                                </view>
-                                <view class="weui-uploader__file" bindtap="yulan">
-                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
-                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
-                                </view>
-                                <view class="weui-uploader__file" bindtap="yulan">
-                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
-                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
-                                </view>
-                                <view class="weui-uploader__file" bindtap="yulan">
-                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
-                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
-                                </view>
-                                <view class="weui-uploader__file" bindtap="yulan">
-                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
-                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
-                                </view>
-                                <view class="weui-uploader__file" bindtap="yulan">
-                                    <!--<image src="{{source}}" mode="aspectFill" class="weui-uploader__img"/>-->
-                                    <image src="/images/pic_160.png" class="weui-uploader__img"></image>
+                                    <image src="{{comUrl}}" class="weui-uploader__img"></image>
                                 </view>
                             </view>
                         </view>

@@ -42,6 +42,18 @@ Page({
         method: "GET",
         success: function (resArray) {
           console.log(resArray.data)
+          var url = wx.getStorageSync('url')
+          var original = resArray.data.assets.split(',')
+          original.forEach(function (item, index, array) {
+            array[index] = url + item;
+          })
+          resArray.data.original = original
+          var compressed = resArray.data.assets.split(',')
+          compressed.forEach(function (item, index, array) {
+            array[index] = url + item.replace(".", "_thumb.");
+          })
+          resArray.data.compressed = compressed
+          console.log(resArray.data)
           that.setData({
             array: resArray.data
           })
@@ -49,20 +61,23 @@ Page({
       })
     },
 
-    yulan:function(){
+    yulan: function (event){
+      console.log(event)
+      var currentUrl = event.currentTarget.dataset.url.replace("_thumb", "")
+      var oriUrls = event.currentTarget.dataset.urls
+      oriUrls.forEach(function (item, index, array) {
+        array[index] = item.replace("_thumb", "");
+      })
       wx.previewImage({
-        current: '../../images/index1.jpg', // 当前显示图片的链接，不填则默认为 urls 的第一张
-        urls: [ 
-          'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1493207030398&di=472fb4992e05c5d5f403713aac8a5f60&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F25%2F18%2F67y58PICP9a_1024.jpg',
-          'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1493207030398&di=322b0eec79959422c5e70372e6158828&imgtype=0&src=http%3A%2F%2Fimg01.taopic.com%2F160628%2F240410-16062PR24866.jpg'
-        ],
-        success: function(res){
+        current: currentUrl, // 当前显示图片的链接，不填则默认为 urls 的第一张
+        urls: oriUrls,
+        success: function (res) {
         },
-        fail: function() {
-        // fail
+        fail: function () {
+          // fail
         },
-        complete: function() {
-        // complete
+        complete: function () {
+          // complete
         }
       })
     },

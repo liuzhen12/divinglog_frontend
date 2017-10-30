@@ -176,43 +176,50 @@
             <textarea placeholder="Comments" focus="{{focus}}" value="{{commnets}}" bindblur="commentsInput"/>
             </view>
         </view>
-        <view class="weui-cells box">
-            <view class="weui-cell">
-                <view class="weui-cell__bd">
-                    <view class="weui-uploader">
-                        <view class="weui-uploader__hd">
-                            <view class="weui-uploader__title">Phote Upload</view>
-                            <view class="weui-uploader__info">{{files.length}}/6</view>
-                        </view>
-                        <view class="weui-uploader__bd">
-                            <view class="weui-uploader__files" id="uploaderFiles">
-                                <block wx:for="{{files}}" wx:key="*this">
-                                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                                        <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
-                                    </view>
-                                </block>                                
-                            </view>
-                            <block wx:if="{{files.length<6}}">
-                            <view class="weui-uploader__input-box">
-                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
-                            </view>
-                            </block>
-                        </view>
-                    </view>
-                </view>
-            </view>
+        <view wx:if="{{logEditStatus=='Add'}}">
+          <view class="weui-cells box">
+              <view class="weui-cell">
+                  <view class="weui-cell__bd">
+                      <view class="weui-uploader">
+                          <view class="weui-uploader__hd">
+                              <view class="weui-uploader__title">Phote Upload</view>
+                              <view class="weui-uploader__info">{{files.length}}/6</view>
+                          </view>
+                          <view class="weui-uploader__bd">
+                              <view class="weui-uploader__files" id="uploaderFiles">
+                                  <block wx:for="{{files}}" wx:key="*this">
+                                      <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                                          <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                      </view>
+                                  </block>                                
+                              </view>
+                              <block wx:if="{{files.length<6}}">
+                              <view class="weui-uploader__input-box">
+                                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                              </view>
+                              </block>
+                          </view>
+                      </view>
+                  </view>
+              </view>
+          </view>
         </view>
         <block wx:if="{{logEditStatus=='Add'}}">
           <view class="weui-cells box">
             <button class="weui_btn weui_btn_primary" bindtap="btnSave">Save</button>
           </view>
         </block>
-        <block else if="logEditStatus=='Edit'">
+        <block else wx:if="{{logEditStatus=='Edit'}}">
           <view class="weui-cells box">
             <button class="weui_btn weui_btn_primary" bindtap="btnSave">Save</button>
           </view>
           <view class="weui-cells box">
             <button class="weui_btn weui_btn_primary" bindtap="btnDelete">Delete</button>
+          </view>
+        </block>
+        <block else wx:if="{{logEditSatatus=='Stamp'}}">
+          <view class="weui-cells box">
+            <button class="weui_btn weui_btn_primary" bindtap="btnStamp">Stamp</button>
           </view>
         </block>
         <!--<view class="weui-cells box">

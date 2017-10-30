@@ -26,7 +26,8 @@ Page({
         endbar: '0',
         weight: '0',
         comments: '',
-        files: []
+        files: [],
+        filesPath:''
     },
     bindDateChange: function(e) {
     this.setData({
@@ -123,6 +124,32 @@ Page({
                 that.setData({
                   files: that.data.files.concat(res.tempFilePaths)
                 });
+
+                var filePaths = res.tempFilePaths
+                var uploadlink = wx.getStorageSync('loguploadLinks')
+                
+                console.log(filePaths.length)
+                for (var i = 0; i < filePaths.length; i++) {
+                  wx.uploadFile({
+                    url: uploadlink.href, //仅为示例，非真实的接口地址  
+                    filePath: filePaths[i],
+                    name: 'UploadModel[files]',
+                    formData:{  
+                      thumbWidth: 100,
+                      thumbHeight: 100
+                    },  
+                    success: function (res) {
+                      console.log(res.data)
+                      var path = JSON.parse(res.data)
+                      var uploadPath = ''
+                      uploadPath = path.filePath.toString() + ','
+                      that.setData({
+                        filesPath: that.data.filesPath + uploadPath
+                      })
+                      console.log(that.data.filesPath)
+                    }
+                  });
+                }               
             }
         })
     },
@@ -140,8 +167,13 @@ Page({
       })
       var that = this;
       var status = wx.getStorageSync('logEditStatus')
-      console.log(status)
       if (status=='Add'){
+        
+        var filepaths = ''
+        if (this.data.filesPath.length > 0) {
+          filepaths = this.data.filesPath.substr(0, this.data.filesPath.length - 1);
+        }
+        console.log(filepaths)
         var addlink = wx.getStorageSync('logaddLinks')
         wx.request({
           url: addlink.href + "?access-token=" + this.data.access_token,
@@ -170,7 +202,7 @@ Page({
             barometer_end: this.data.endbar,
             weight: this.data.weight,
             comments: this.data.comments,
-            assets: this.data.files,
+            assets: filepaths,
             stamp: 0,
             divestore_id: 0,
             divestore_score: 0
@@ -178,9 +210,6 @@ Page({
           complete: function (res) {
             if (res == null || res.statusCode != 201) {
               console.error(res.statusCode);
-              // that.setData({
-              //   hiddenLoading: true,
-              // }); 
               setTimeout(function () {
                 wx.hideLoading()
               }, 2000)
@@ -193,11 +222,7 @@ Page({
                 wx.hideToast()
               }, 2000)
               return;
-            }
-            console.log(res)
-            // that.setData({
-            //   hiddenLoading: true,
-            // }); 
+            } 
             setTimeout(function () {
               wx.hideLoading()
             }, 2000)
@@ -209,7 +234,6 @@ Page({
             setTimeout(function () {
               wx.hideToast()
             }, 2000)
-            // wx.setStorageSync('access_token', res.data.access_token)
             wx.navigateBack({
               delta: 1
             })
