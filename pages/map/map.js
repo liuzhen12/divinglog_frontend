@@ -13,10 +13,12 @@ Page({
         iconPath: "../../images/map_marker_pink.png",
         id: 0,
         width: 25,
-        height: 25
+        height: 25,
+        callout: {content:'choose',borderRadius:2,display:'BYCLICK'}
       }],
-    showMarkers: false  
-    
+    showMarkers: false,
+    northeast: null,
+    southwest: null 
   },
 
   /**
@@ -86,7 +88,13 @@ Page({
               longitude: options.longitude,
               latitude: options.latitude
         });
-      };    
+      };
+
+    if(null != options.showMarkers){
+      this.setData({
+        showMarkers: options.showMarkers
+      });
+    }  
   },
 
   /**
@@ -186,6 +194,7 @@ Page({
   },
 
   translateMarker: function(latitude,longitude) {
+    var that = this;
     this.mapCtx.translateMarker({
             markerId: 0,
             // autoRotate: true,
@@ -199,11 +208,32 @@ Page({
       success: function(res){
         console.log(res.northeast);
         console.log(res.southwest);
+        that.setData({
+          northeast: res.northeast,
+          southwest: res.southwest
+        });
       }
     });
     this.setData({
       latitude: latitude,
       longitude: longitude
+    });
+  },
+
+  markertap: function(e){
+  },
+
+  callouttap: function(e){
+    var arr = getCurrentPages(); 
+    var refererPage = arr[arr.length-2];
+    refererPage.data.northeast = this.data.northeast;
+    refererPage.data.southwest = this.data.southwest;
+    refererPage.onLoad();
+    var that = this;
+    wx.navigateBack({
+      delta:1,
+      success: function(res){
+      }
     });
   }
 })
