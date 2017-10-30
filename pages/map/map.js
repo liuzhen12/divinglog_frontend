@@ -4,8 +4,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    longitude:0,
-    latitude:0,
     scale:5,
     width:0,
     height:0,
@@ -17,8 +15,15 @@ Page({
         callout: {content:'choose',borderRadius:2,display:'BYCLICK'}
       }],
     showMarkers: false,
+    longitude:0,
+    latitude:0,
     northeast: null,
-    southwest: null 
+    southwest: null,
+    triggerOnLoad: false,
+    getNortheast: false,
+    getSouthwest: false,
+    getLongitude: false,
+    getLatitude: false
   },
 
   /**
@@ -94,7 +99,37 @@ Page({
       this.setData({
         showMarkers: options.showMarkers
       });
-    }  
+    } 
+
+    if(null != options.triggerOnLoad){
+      this.setData({
+        triggerOnLoad: options.triggerOnLoad
+        });
+    }
+
+    if(null != options.getNortheast){
+      this.setData({
+        getNortheast: options.getNortheast
+        });
+    }
+
+    if(null != options.getSouthwest){
+      this.setData({
+        getSouthwest: options.getSouthwest
+        });
+    }
+
+    if(null != options.getLongitude){
+      this.setData({
+        getLongitude: options.getLongitude
+        });
+    }
+
+    if(null != options.getLatitude){
+      this.setData({
+        getLatitude: options.getLatitude
+        });
+    }
   },
 
   /**
@@ -225,11 +260,12 @@ Page({
 
   callouttap: function(e){
     var arr = getCurrentPages(); 
-    var refererPage = arr[arr.length-2];
-    refererPage.data.northeast = this.data.northeast;
-    refererPage.data.southwest = this.data.southwest;
-    refererPage.onLoad();
-    var that = this;
+    var refererPage = arr[arr.length-2];console.log(this.data.triggerOnLoad);
+    if(this.data.getNortheast) refererPage.data.northeast = this.data.northeast;
+    if(this.data.getSouthwest) refererPage.data.southwest = this.data.southwest;
+    if(this.data.getLongitude) refererPage.data.longitude = this.data.longitude;
+    if(this.data.getLatitude) refererPage.data.latitude = this.data.latitude;
+    if(this.data.triggerOnLoad) refererPage.onLoad();
     wx.navigateBack({
       delta:1,
       success: function(res){

@@ -52,7 +52,7 @@ Page({
 
     selectLocation: function(e) {
         wx.navigateTo({
-          url: '../map/map?showMarkers=true',
+          url: '../map/map?showMarkers=true&getNortheast=true&getSouthwest=true&triggerOnLoad=true',
           success: function(res){
             console.log(res);
           },
@@ -111,7 +111,7 @@ Page({
               }
               if(null != that.data.southwest.latitude){
                 reqData.southwest_latitude = that.data.southwest.latitude;
-              }
+              }console.log(reqData);
               wx.request({
                 url: resLinks.data.activity.href + '?access-token=' + res.data,
                 data: reqData,
