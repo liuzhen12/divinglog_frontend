@@ -1,22 +1,29 @@
 // pages/findbuddysearch/findbuddysearch.js
 Page({
   data:{
-    date: '2017-05-12',
-    array:["酒店","船宿"],
-    index:0
+    array:[],
     },
-  bindPickerChange: function(e) {
-    this.setData({
-      index: e.detail.value
-    })
-  },
-  bindDateChange: function(e) {
-    this.setData({
-      date: e.detail.value
-    })
-    },
+
   onLoad:function(options){
-    // 页面初始化 options为页面跳转所带来的参数
+    var that = this
+    var link = wx.getStorageSync('findbuddysearchLinks')
+    var token = wx.getStorageSync('access_token')
+    wx.request({
+      url: link.self.href + '?access-token=' + token,
+      data: {
+
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (resArray) {
+        console.log(resArray)
+        that.setData({
+          array: resArray.data
+        })
+      }
+    })
   },
   onReady:function(){
     // 页面渲染完成

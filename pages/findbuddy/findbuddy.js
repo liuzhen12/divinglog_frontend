@@ -7,6 +7,12 @@ Page({
         start_date: "",
         end_date: "",
         array: [],
+        access_token: '',
+        initiallistLink: '',
+        activitysLink: '',
+        searchLoading: false,
+        searchLoadingComplte: false,
+        batchLoadingComplete: true,
         content_height:"",
         northeast: {
           latitude:null,
@@ -47,6 +53,17 @@ Page({
         end_date_short: this.data.end_date.substring(5)
       });
 
+      var token = wx.getStorageSync('access_token')
+      var links = wx.getStorageSync('indexLinks')
+      var params = { 'access-token': token };
+      that.setData({
+        access_token: token,
+      });
+      that.setData({
+        initiallistLink: links.activity.href,
+        activitysLink: links.activity.href
+      })
+
       this.getActivityList();
     },
 
@@ -82,67 +99,86 @@ Page({
     },
 
     findbuddyEdit: function(e){
-        console.log(e);
+      console.log(e);
+      wx.setStorage({
+        key: "findbuddysearchLinks",
+        data: e.currentTarget.dataset.links
+      })
+      wx.navigateTo({
+        url: '../findbuddysearch/findbuddysearch'
+      })
     },
 
-    getActivityList: function(){
-      let that = this;
-      wx.getStorage({
-        key: 'access_token',
-        success: function (res) {
-          that.setData({
-            access_token: res.data,
-          });
-          wx.getStorage({
-            key: 'indexLinks',
-            success: function (resLinks){
-              let reqData = {
-                start_date: that.data.start_date,
-                end_date: that.data.end_date
-              };
-              if(null != that.data.northeast.longitude){
-                reqData.northeast_longitude = that.data.northeast.longitude;
-              }
-              if(null != that.data.northeast.latitude){
-                reqData.northeast_latitude = that.data.northeast.latitude;
-              }
-              if(null != that.data.southwest.longitude){
-                reqData.southwest_longitude = that.data.southwest.longitude;
-              }
-              if(null != that.data.southwest.latitude){
-                reqData.southwest_latitude = that.data.southwest.latitude;
-              }console.log(reqData);
-              wx.request({
-                url: resLinks.data.activity.href + '?access-token=' + res.data,
-                data: reqData,
-                header: {
-                  'content-type': 'application/json'
-                },
-                method: "GET",
-                success: function (resArray) {
-                  for(let i = 0; i < resArray.data.items.length; i++){
-                      let d = new Date(resArray.data.items[i].start_date);
-                      resArray.data.items[i].timeline_month = dateUtils.getMonthsInEn(d.getMonth());
-                      resArray.data.items[i].timeline_day = d.getDate();
-                  }
-                  console.log(resArray.data)
-                  that.setData({
-                    array: resArray.data.items,
-                    extra: resArray.data._extra
-                  })
-                }
-              })
-            }
-          })
-          
+    getActivityList: function (refresh = true){
+      var that = this
+      var token = wx.getStorageSync('access_token');
+      let reqData = {
+        start_date: that.data.start_date,
+        end_date: that.data.end_date,
+        'access-token': token
+      };
+      if (null != that.data.northeast.longitude) {
+        reqData.northeast_longitude = that.data.northeast.longitude;
+      }
+      if (null != that.data.northeast.latitude) {
+        reqData.northeast_latitude = that.data.northeast.latitude;
+      }
+      if (null != that.data.southwest.longitude) {
+        reqData.southwest_longitude = that.data.southwest.longitude;
+      }
+      if (null != that.data.southwest.latitude) {
+        reqData.southwest_latitude = that.data.southwest.latitude;
+      }
+
+      getData(that.data.activitysLink, reqData, function (activity_data) {
+        var activityItems = activity_data.items;
+        
+        for (let i = 0; i < activityItems.length; i++) {
+          let d = new Date(activityItems[i].start_date);
+          activityItems[i].timeline_month = dateUtils.getMonthsInEn(d.getMonth());
+          activityItems[i].timeline_day = d.getDate();
         }
-      });
+
+        var activityArray = refresh ? activityItems : that.data.array.concat(activityItems);
+        var nextUrl = activity_data._links.next ? activity_data._links.next.href : that.data.initiallistLink;
+        var extralinks = activity_data._extra
+        that.setData({
+          array: activityArray,
+          activitysLink: nextUrl,
+          extraLinks: extralinks,
+          searchLoading: activity_data._links.next ? true : false,
+          searchLoadingComplete: activity_data._links.next ? false : true,
+          batchLoadingComplete: true
+        })
+      })
+    },
+
+    searchScrollLower: function () {
+      if (this.data.batchLoadingComplete && this.data.searchLoading && !this.data.searchLoadingComplete) {
+        this.setData({
+          batchLoadingComplete: false
+        });
+        this.fetchSearchList(false);
+      }
+    },
+
+    scroll: function (e, res) {
+      // 容器滚动时将此时的滚动距离赋值给 this.data.scrollTop
+      if (e.detail.scrollTop > 500) {
+        this.setData({
+          floorstatus: true
+        });
+      } else {
+        this.setData({
+          floorstatus: false
+        });
+      }
     },
 
     create: function(){
       wx.setStorage({
         key: "findbuddyCreateLinks",
-        data: this.data.extra.create
+        data: this.data.extraLinks.create
       }),
       wx.navigateTo({
         url: '../findbuddycreate/findbuddycreate'
@@ -152,11 +188,31 @@ Page({
     mine: function(){
       wx.setStorage({
         key: "findbuddyMineLinks",
-        data: this.data.extra.mine
+        data: this.data.extraLinks.mine
       }),
-        wx.navigateTo({
-          url: '../findbuddylist/findbuddylist'
-        })
+      wx.navigateTo({
+        url: '../findbuddylist/findbuddylist'
+      })
     }
   
 });
+
+function getData(url, params, callback) {
+  wx.request({
+    url: url,
+    header: {
+      'content-type': 'application/json'
+    },
+    data: params,
+    complete: function (res) {
+      if (res.statusCode == 200) {
+        callback(res.data);
+      }
+      else {
+        console.log(res.data.message);
+        callback();
+
+      }
+    }
+  })
+}

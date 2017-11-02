@@ -5,39 +5,37 @@ Page({
   },
   onLoad: function (options) {
     var that = this
-    wx.getStorage({
-      key: 'access_token',
-      success: function (res) {
+    var link = wx.getStorageSync('findbuddyMineLinks')
+    var token = wx.getStorageSync('access_token')
+    wx.request({
+      url: link.href + '?access-token=' + token,
+      data: {
+
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (resArray) {
+        console.log(resArray)
         that.setData({
-          access_token: res.data,
-        });
-        wx.getStorage({
-          key: 'indexLinks',
-          success: function (resLinks){
-            console.log(resLinks.data)
-            wx.request({
-              url: resLinks.data.activity.href + '?access-token=' + res.data,
-              data: {
-
-              },
-              header: {
-                'content-type': 'application/json'
-              },
-              method: "GET",
-              success: function (resArray) {
-                console.log(resArray)
-                that.setData({
-                  array: resArray.data.items
-                })
-              }
-            })
-          }
+          array: resArray.data.items
         })
-        
       }
-    });
-
+    })
   },
+
+  findbuddyEdit: function(e){
+    console.log(e);
+    wx.setStorage({
+      key: "findbuddydetailLinks",
+      data: e.currentTarget.dataset.links
+    })
+    wx.navigateTo({
+      url: '../findbuddydetail/findbuddydetail'
+    })
+  },
+
   onReady:function(){
     // 页面渲染完成
   },

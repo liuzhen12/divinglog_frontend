@@ -5,14 +5,14 @@
     </view>
      <view class="location-time-search-bar">
         <label bindtap="selectLocation">
-        潜点
+        Dive Pint
         </label>
         <label>
         |
         </label>
         <label>
         <picker mode="date" value="{{start_date}}" start="1999-01-01" end="2999-12-12" bindchange="startDatePickerBindchange">
-            开始{{start_date_short}}
+            Start {{start_date_short}}
         </picker>
         </label>
         <label>
@@ -20,11 +20,11 @@
         </label>
         <label>
         <picker mode="date" value="{{end_date}}" start="1999-01-01" end="2999-12-12" bindchange="endDatePickerBindchange">
-            结束{{end_date_short}}
+            End {{end_date_short}}
         </picker>
         </label>
     </view>
-    <scroll-view scroll-y class="page__bd" style="height:{{content_height}}">        
+    <scroll-view scroll-y class="page__bd" bindscroll="scroll" bindscrolltolower="searchScrollLower" style="height:{{content_height}}">        
         <view class="flex-row" data-links="{{item._links}}" bindtap="findbuddyEdit" wx:for="{{array}}" wx:key="*this">
             <view class="timeline">
                 <view class="timeline-month">{{item.timeline_month}}</view>
@@ -51,13 +51,20 @@
                 </view>
             </view> 
         </view>
+        <view class="weui-loadmore" hidden="{{!searchLoading}}">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">Loading...</view>
+        </view>
+        <view class="weui-loadmore weui-loadmore_line" hidden="{{!searchLoadingComplete}}">
+          <view class="weui-loadmore__tips weui-loadmore__tips_in-line">All loaded</view>
+        </view>
     </scroll-view>
 </view>
 <view class="flex-row">
     <navigator url="" class="weui_btn weui_btn_default" hover-class="changestyle">
         <button class="weui_btn weui_btn_default btn-normal" bindtap="create">Create</button>
     </navigator>
-    <navigator url="../findbuddylist/findbuddylist" class="weui_btn weui_btn_default" hover-class="changestyle">
+    <navigator url="" class="weui_btn weui_btn_default" hover-class="changestyle">
         <button class="weui_btn weui_btn_default btn-normal" bindtap="mine">Me</button>
     </navigator>
 </view>

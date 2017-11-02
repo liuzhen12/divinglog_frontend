@@ -5,58 +5,57 @@
     </view>
     <view class="page__bd page__bd_spacing">
         <view class="weui-cells box">
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'发起人'}}</view>
-                <view class="weui-cell__ft">某某</view>
+          <view class="weui-cell weui-cell_access">
+            <view class="weui-cell__bd">Title :</view>
+            <view class="weui-cell__ft">{{array.title}}</view>
+          </view> 
+          <view class="weui-cell weui-cell_access">
+            <view class="weui-cell__bd">Organizer :</view>
+            <view class="weui-cell__ft">{{array.nick_name}}</view>
+          </view>           
+          <view class="weui-cell weui-cell_access">
+              <view class="weui-cell__bd">Title :</view>
+              <view class="weui-cell__ft">{{array.title}}</view>
+          </view> 
+          <view class="weui-cell weui-cell_access">
+              <view class="weui-cell__bd">Dive Point :</view>
+              <view class="weui-cell__ft">{{array.dive_point}}</view>
+          </view> 
+          <view class="weui-cell weui-cell_access">
+              <view class="weui-cell__bd">Date :</view>
+              <view class="weui-cell__ft">{{array.start_date}} to {{array.end_date}}</view>
+          </view> 
+          <view class="weui-cell weui-cell_access">
+              <view class="weui-cell__bd">Loacation Name :</view>
+              <view class="weui-cell__ft">{{array.location_name}}</view>
+          </view> 
+          <view class="weui-cell weui-cell_access">
+              <view class="weui-cell__bd">Location Address :</view>
+              <view class="weui-cell__ft">{{array.location_address}}</view>
+          </view> 
+          <view class="weui-cell weui-cell_access">
+              <view class="weui-cell__bd">Max Member :</view>
+              <view class="weui-cell__ft">{{array.participants_count}}/{{array.max_member}}</view>
+          </view> 
+          <view class="weui-cell weui-cell_access">
+              <view class="weui-cell__bd">Accommodation :</view>
+              <block wx:if="{{array.accommodation=='1'}}">
+              <view class="weui-cell__ft">Hotel</view>
+              </block>
+              <block else wx:if="{{array.accommodation=='1'}}">
+              <view class="weui-cell__ft">Liveaboard</view>
+              </block>
+          </view> 
+          <view class="weui-cells box">
+            <view class="section">
+              <textarea placeholder="Description" focus="{{focus}}" value="array.description"/>
             </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'联系方式'}}</view>
-                <view class="weui-cell__ft">1234567890</view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="section">
-                    <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
-                        <view class="picker">
-                        开始日期: {{date}}
-                        </view>
-                    </picker>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="section">
-                    <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
-                        <view class="picker">
-                        结束日期: {{date}}
-                        </view>
-                    </picker>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'潜点'}}</view>
-                <view class="weui-cell__ft">Bali</view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="section">
-                    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-                        <view class="picker">
-                            住宿：{{array[index]}}
-                        </view>
-                    </picker>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'参与人'}}</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">5</view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'特殊项目'}}</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">洞潜</view>
-            </view>
+          </view>
         </view>
-        <view class="weui-cells box">
-            <navigator url="" class="weui_btn weui_btn_default" hover-class="changestyle">
-                <button class="weui_btn weui_btn_default">参加/创建</button>
-            </navigator>
-        </view>
+        <block wx:if="{{array.is_sponser=='flase'}}">
+          <view class="weui-cells box">
+            <button class="weui_btn weui_btn_primary" bindtap="btnDelete">Cancle</button>
+          </view>
+        </block>
     </view>
 </view>

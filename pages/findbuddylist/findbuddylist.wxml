@@ -4,47 +4,25 @@
         <view class="page__desc"></view>
     </view>
     <view class="page__bd page__bd_spacing">
-        <view class="weui-cells box">
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'日期:'}}</view>
-                <view class="weui-cell__ft">2017/05/12 - 2017/05/19</view>
-            </navigator>
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'潜点'}}</view>
-                <view class="weui-cell__ft">Bali</view>
-            </navigator>
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'参与人数'}}</view>
-                <view class="weui-cell__ft">4/5</view>
-            </navigator>
-        </view>
-        <view class="weui-cells box">
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'日期:'}}</view>
-                <view class="weui-cell__ft">2017/05/12 - 2017/05/19</view>
-            </navigator>
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'潜点'}}</view>
-                <view class="weui-cell__ft">Bali</view>
-            </navigator>
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'参与人数'}}</view>
-                <view class="weui-cell__ft">4/5</view>
-            </navigator>
-        </view>
-        <view class="weui-cells box">
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'日期:'}}</view>
-                <view class="weui-cell__ft">2017/05/12 - 2017/05/19</view>
-            </navigator>
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'潜点'}}</view>
-                <view class="weui-cell__ft">Bali</view>
-            </navigator>
-            <navigator url="../findbuddydetail/findbuddydetail" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'参与人数'}}</view>
-                <view class="weui-cell__ft">4/5</view>
-            </navigator>
-        </view>        
+        <view class="weui-cells box" wx:for="{{array}}" wx:key="*this">
+            <view data-links="{{item._links}}" bindtap="findbuddyEdit">
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">Title :</view>
+                <view class="weui-cell__ft">{{item.title}}</view>
+            </view> 
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">Dive Point :</view>
+                <view class="weui-cell__ft">{{item.dive_point}}</view>
+            </view> 
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">Date :</view>
+                <view class="weui-cell__ft">{{item.start_date}} to {{item.end_date}}</view>
+            </view> 
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell__bd">Max Member :</view>
+                <view class="weui-cell__ft">{{item.participants_count}}/{{item.max_member}}</view>
+            </view> 
+          </view>
+        </view>      
     </view>
 </view>
