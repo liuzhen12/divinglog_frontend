@@ -80,6 +80,16 @@
                     </view>
                 </view>
             </view>
-        </view>     
+        </view>    
+         <block wx:if="{{array.stamp>0}}">
+          <view class="weui-cells box">
+            <button class="weui_btn weui_btn_primary" bindtap="btnEvaluateCoach">Evaluate Coach</button>
+          </view>
+        </block>
+        <block wx:if="{{array.divestore_score==0}}">
+          <view class="weui-cells box">
+            <button class="weui_btn weui_btn_primary" bindtap="btnEvaluateStore">Evaluate Dive Store</button>
+          </view>
+        </block> 
     </view>
 </view>

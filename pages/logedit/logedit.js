@@ -25,6 +25,7 @@ Page({
         startbar: '0',
         endbar: '0',
         weight: '0',
+        divestoreNo: '0',
         comments: '',
         files: [],
         filesPath:''
@@ -107,6 +108,11 @@ Page({
     weightInput: function (e){
       this.setData({
         weight: e.detail.value
+      })
+    },
+    divestoreNoInput:function(e){
+      this.setData({
+        divestoreNo: e.detail.value
       })
     },
     commentsInput: function (e){

@@ -9,6 +9,8 @@
     "pages/loglist/loglist",
     "pages/logdetail/logdetail",
     "pages/logedit/logedit",
+    "pages/evaluatecoach/evaluatecoach",
+    "pages/evaluatestore/evaluatestore",
     "pages/stamp/stamp",
     "pages/findbuddy/findbuddy",
     "pages/findbuddycreate/findbuddycreate",

@@ -13,7 +13,7 @@
                 <view class="section">
                     <picker mode="date" value="{{date}}" bindchange="bindDateChange">
                         <view class="picker">
-                        Date: {{date}}
+                        Date : {{date}}
                         </view>
                     </picker>
                 </view>
@@ -22,7 +22,7 @@
                 <view class="section">
                     <picker mode="time" value="{{starttime}}" bindchange="bindStartTimeChange">
                         <view class="picker">
-                        Start Time: {{starttime}}
+                        Start Time : {{starttime}}
                         </view>
                     </picker>
                 </view>
@@ -31,7 +31,7 @@
                 <view class="section">
                     <picker mode="time" value="{{endtime}}" bindchange="bindEndTimeChange">
                         <view class="picker">
-                        End Time: {{endtime}}
+                        End Time : {{endtime}}
                         </view>
                     </picker>
                 </view>
@@ -39,7 +39,7 @@
             <view class="weui-cell weui-cell_access">
                 <view class="weui-cell weui-cell_input">
                     <view class="weui-cell__hd">
-                        <view class="weui-label">Location:</view>
+                        <view class="weui-label">Location :</view>
                     </view>
                     <view class="weui-cell__bd">
                         <input class="weui-input" type="text" value="{{location}}" placeholder="Input location" bindinput="locationInput"/>
@@ -49,7 +49,7 @@
             <view class="weui-cell weui-cell_access">
                 <view class="weui-cell weui-cell_input">
                     <view class="weui-cell__hd">
-                        <view class="weui-label">Dive point:</view>
+                        <view class="weui-label">Dive point :</view>
                     </view>
                     <view class="weui-cell__bd">
                         <input class="weui-input" type="text" value="{{divepoint}}" placeholder="Input dive point" bindinput="divePointInput"/>
@@ -59,7 +59,7 @@
             <view class="weui-cell weui-cell_access">
                 <view class="weui-cell weui-cell_input">
                     <view class="weui-cell__hd">
-                        <view class="weui-label">Depth1(m):</view>
+                        <view class="weui-label">Depth1(m) :</view>
                     </view>
                     <view class="weui-cell__bd">
                         <input class="weui-input" type="number" maxlength="3" value="{{depth1}}" placeholder="Input depth" bindinput="depthInput1"/>
@@ -69,7 +69,7 @@
             <view class="weui-cell weui-cell_access">
                 <view class="weui-cell weui-cell_input">
                     <view class="weui-cell__hd">
-                        <view class="weui-label">Tiem1(min)</view>
+                        <view class="weui-label">Tiem1(min) :</view>
                     </view>
                     <view class="weui-cell__bd">
                         <input class="weui-input" type="number" maxlength="3" value="{{tiem1}}" placeholder="Input tiem" bindinput="tiemInput1"/>
@@ -79,7 +79,7 @@
             <view class="weui-cell weui-cell_access">
                 <view class="weui-cell weui-cell_input">
                     <view class="weui-cell__hd">
-                        <view class="weui-label">Depth2(m)</view>
+                        <view class="weui-label">Depth2(m) :</view>
                     </view>
                     <view class="weui-cell__bd">
                         <input class="weui-input" type="number" maxlength="3" value="{{depth2}}" placeholder="Input depth" bindinput="depthInput2"/>
@@ -89,7 +89,7 @@
             <view class="weui-cell weui-cell_access">
                 <view class="weui-cell weui-cell_input">
                     <view class="weui-cell__hd">
-                        <view class="weui-label">Tiem2(min)</view>
+                        <view class="weui-label">Tiem2(min) :</view>
                     </view>
                     <view class="weui-cell__bd">
                         <input class="weui-input" type="number" maxlength="3" value="{{tiem2}}" placeholder="Input tiem" bindinput="tiemInput2"/>
@@ -99,7 +99,7 @@
             <view class="weui-cell weui-cell_access">
                 <view class="weui-cell weui-cell_input">
                     <view class="weui-cell__hd">
-                        <view class="weui-label">Depth3(m)</view>
+                        <view class="weui-label">Depth3(m) :</view>
                     </view>
                     <view class="weui-cell__bd">
                         <input class="weui-input" type="number" maxlength="3" value="{{depth3}}" placeholder="Input depth" bindinput="depthInput3"/>
@@ -109,7 +109,7 @@
             <view class="weui-cell weui-cell_access">
                 <view class="weui-cell weui-cell_input">
                     <view class="weui-cell__hd">
-                        <view class="weui-label">Tiem3(min)</view>
+                        <view class="weui-label">Tiem3(min) :</view>
                     </view>
                     <view class="weui-cell__bd">
                         <input class="weui-input" type="number" maxlength="3" value="{{tiem3}}" placeholder="Input tiem" bindinput="tiemInput3"/>
@@ -128,7 +128,7 @@
               <view class="weui-cells weui-cell_access">
                   <view class="weui-cell weui-cell_input">
                       <view class="weui-cell__hd">
-                          <view class="weui-label">Nitrox(%)</view>
+                          <view class="weui-label">Nitrox(%) :</view>
                       </view>
                       <view class="weui-cell__bd">
                           <input class="weui-input" type="number" maxlength="2" value="{{nitrox}}" placeholder="Input nitrox concentration" bindinput="nitroxInput"/>
@@ -139,7 +139,7 @@
             <view class="weui-cell weui-cell_access">
                 <view class="weui-cell weui-cell_input">
                     <view class="weui-cell__hd">
-                        <view class="weui-label">Start(bar)</view>
+                        <view class="weui-label">Start(bar) :</view>
                     </view>
                     <view class="weui-cell__bd">
                         <input class="weui-input" type="number" maxlength="4" value="{{startbar}}" placeholder="Input start bar" bindinput="startBarInput"/>
@@ -149,7 +149,7 @@
             <view class="weui-cell weui-cell_access">
                 <view class="weui-cell weui-cell_input">
                     <view class="weui-cell__hd">
-                        <view class="weui-label">End(bar)</view>
+                        <view class="weui-label">End(bar) :</view>
                     </view>
                     <view class="weui-cell__bd">
                         <input class="weui-input" type="number" maxlength="4" value="{{endbar}}"placeholder="Input end bar" bindinput="endBarInput"/>
@@ -159,17 +159,23 @@
             <view class="weui-cell weui-cell_access">
                 <view class="weui-cell weui-cell_input">
                     <view class="weui-cell__hd">
-                        <view class="weui-label">Weight(kg/lbs)</view>
+                        <view class="weui-label">Weight(kg/lbs) :</view>
                     </view>
                     <view class="weui-cell__bd">
                         <input class="weui-input" type="number" maxlength="2" value="{{weight}}" placeholder="Input weight" bindinput="weightInput"/>
                     </view>
                 </view>
             </view>
-            <!--<navigator url="../stamp/stamp" class="weui-cell weui-cell_access" hover-class="changestyle">
-                <view class="weui-cell__bd">{{'Buddy'}}</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">5人</view>
-            </navigator>-->
+            <view class="weui-cell weui-cell_access">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">Dive Store ID :</view>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input class="weui-input" type="number" maxlength="10" value="{{divestoreNo}}" placeholder="Input dive store No." bindinput="divestoreNoInput"/>
+                    </view>
+                </view>
+            </view>
         </view>
         <view class="weui-cells box">
             <view class="section">
@@ -222,20 +228,5 @@
             <button class="weui_btn weui_btn_primary" bindtap="btnStamp">Stamp</button>
           </view>
         </block>
-        <!--<view class="weui-cells box">
-            <navigator url="../commentedit/commentedit" class="weui_btn weui_btn_default" hover-class="changestyle">
-                <button class="weui_btn weui_btn_default">潜水长/教练 评价</button>
-            </navigator>
-        </view>
-        <view class="weui-cells box">
-            <navigator url="../commentedit/commentedit" class="weui_btn weui_btn_default" hover-class="changestyle">
-                <button class="weui_btn weui_btn_default">Dive Store 评价</button>
-            </navigator>
-        </view>
-        <view class="weui-cells box">
-            <navigator url="../stamp/stamp" class="weui_btn weui_btn_default" hover-class="changestyle">
-                <button class="weui_btn weui_btn_default">删除</button>
-            </navigator>
-        </view>        -->
     </view>
 </view>

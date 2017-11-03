@@ -2,6 +2,7 @@ Page({
     data: {
       access_token: '',
       array: '',
+      links: '',
       source: function () {
         var that = this;
         wx.chooseImage({
@@ -27,6 +28,7 @@ Page({
       var links = wx.getStorageSync('loglistLinks')
       that.setData({
         access_token: token,
+        links: links
       });
       console.log(token)
       wx.request({
@@ -56,6 +58,26 @@ Page({
             array: resArray.data
           })
         }
+      })
+    },
+
+    btnEvaluateCoach:function(e){
+      wx.setStorage({
+        key: "evaluatecoachLinks",
+        data: this.data.links.certification
+      })
+      wx.navigateTo({
+        url: '../evaluatecoach/evaluatecoach'
+      })
+    },
+
+    btnEvaluateStore: function(e){
+      wx.setStorage({
+        key: "evaluatestoreLinks",
+        data: this.data.links.self
+      })
+      wx.navigateTo({
+        url: '../evaluatestore/evaluatestore'
       })
     },
 
