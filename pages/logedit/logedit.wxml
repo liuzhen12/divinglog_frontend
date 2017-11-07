@@ -223,7 +223,7 @@
             <button class="weui_btn weui_btn_primary" bindtap="btnDelete">Delete</button>
           </view>
         </block>
-        <block else wx:if="{{logEditSatatus=='Stamp'}}">
+        <block else wx:if="{{logEditStatus=='Stamp'}}">
           <view class="weui-cells box">
             <button class="weui_btn weui_btn_primary" bindtap="btnStamp">Stamp</button>
           </view>

@@ -1,2 +1,22 @@
-<!--pages/evaluatecoach/evaluatecoach.wxml-->
-<text>pages/evaluatecoach/evaluatecoach.wxml</text>
+<view class="l-evalbox row">
+  <view wx:for="{{array}}" wx:for-index="idx" wx:key="*this">
+    <text class="l-evaltxt">{{'item.nick_name'}}：</text>
+    <view class="l-evalist flex-1" bindtap="chooseicon">
+      <icon class="{{item.score >'0'? 'cur icon' : 'icon'}}" data-id="1" data-idx="{{idx}}"></icon>
+      <icon class="{{item.score >'1'? 'cur icon' : 'icon'}}" data-id="2" data-idx="{{idx}}"></icon>
+      <icon class="{{item.score >'2'? 'cur icon' : 'icon'}}" data-id="3" data-idx="{{idx}}"></icon>
+      <icon class="{{item.score >'3'? 'cur icon' : 'icon'}}" data-id="4" data-idx="{{idx}}"></icon>
+      <icon class="{{item.score >'4'? 'cur icon' : 'icon'}}" data-id="5" data-idx="{{idx}}"></icon>
+    </view>
+    <view class="weui-cells">
+        <view class="section">
+        <textarea placeholder="Input Comments" focus="{{focus}}" data-idx="{{idx}}" bindblur="commentsInput"/>
+        </view>
+    </view>
+  </view>
+  <view class="weui-cells box">
+    <navigator url="" class="weui_btn weui_btn_default" hover-class="changestyle">
+        <button class="weui_btn weui_btn_default" bindtap='btnSave'>Submit</button>
+    </navigator>
+  </view>
+</view>

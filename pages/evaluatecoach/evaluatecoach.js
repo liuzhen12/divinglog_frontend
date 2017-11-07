@@ -32,11 +32,83 @@ Page({
       },
       method: "GET",
       success: function (resArray) {
-        console.log(resArray.data)
+        console.log(resArray.data.items)
         that.setData({
-          array: resArray.data
+          array: resArray.data.items
         })
       }
+    })
+  },
+
+  chooseicon: function (e) {
+    var that = this
+    var strnumber = e.target.dataset.id;
+    var idx = e.target.dataset.idx;
+    that.data.array[idx].score = strnumber
+    that.setData({
+      array : that.data.array
+    });
+  },
+
+  commentsInput: function(e){
+    console.log(e)
+    var that = this
+    var value = e.detail.value;
+    var idx = e.target.dataset.idx;
+    that.data.array[idx].remarks = value
+    that.setData({
+      array: that.data.array
+    });
+  },
+
+  btnSave:function(e){
+    wx.showLoading({
+      title: 'Saving',
+    })
+    var that = this;
+    for(var i=0; i<this.data.array.length;i++){
+      wx.request({
+        url: array[i]._links.edit.href + "?access-token=" + this.data.access_token,
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        method: "PUT",
+        data: Util.json2Form({
+          score: array[i].score,
+          remarks: array[i].remarks
+        }),
+        complete: function (res){
+          if (res == null || res.statusCode != 200){
+            console.error(res.statusCode);
+            setTimeout(function () {
+              wx.hideLoading()
+            }, 2000)
+            wx.showToast({
+              title: '提交失败',
+              icon: 'fail',
+              duration: 2000
+            })
+            setTimeout(function () {
+              wx.hideToast()
+            }, 2000)
+            return;
+          }
+        }
+      })
+    }
+    setTimeout(function () {
+      wx.hideLoading()
+    }, 2000)
+    wx.showToast({
+      title: '提交成功',
+      icon: 'success',
+      duration: 2000
+    })
+    setTimeout(function () {
+      wx.hideToast()
+    }, 2000)
+    wx.navigateBack({
+      delta: 1
     })
   },
 

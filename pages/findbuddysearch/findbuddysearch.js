@@ -28,13 +28,15 @@ Page({
 
   btnSave: function(e){
     wx.showLoading({
-      title: 'Saveing',
+      title: 'Saving',
     })
     var links = this.data.array._links
+    var userId = wx.getStorageSync('id')
     wx.request({
       url: links.participate.href + "?access-token=" + this.data.access_token,
       data: Util.json2Form({
-
+        activity_id: this.data.id,
+        user_id: userId
       })
       ,
       header: {

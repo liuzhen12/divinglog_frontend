@@ -381,8 +381,9 @@ Page({
         title: '提交中',
       })
       var that = this;
+      var token = wx.getStorageSync('access_token')
       wx.request({
-        url: this.data.stampLinks.edit.href + "?access-token=" + this.data.access_token,
+        url: this.data.stampLinks.edit.href + "?access-token=" + token,
         header: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
@@ -406,8 +407,7 @@ Page({
           barometer_start: this.data.startbar,
           barometer_end: this.data.endbar,
           weight: this.data.weight,
-          comments: this.data.comments,
-          assets: this.data.files,
+          comments: this.data.comments
         }),
         complete: function (res) {
           if (res == null || res.statusCode != 200) {
@@ -427,15 +427,16 @@ Page({
           }
         }
       })
-
+      var certificationlink = wx.getStorageSync('url')
+      console.log(this.data.id)
       wx.request({
-        url: this.data.stampLinks.certification.href + "?access-token=" + this.data.access_token,
+        url: certificationlink + "certifications?access-token=" + token,
         header: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
         method: "POST",
         data: Util.json2Form({
-          id: this.data.id,
+          log_id: this.data.id,
           user_id: this.data.userId,
           coach_id: this.data.coachId
         }),
@@ -533,11 +534,11 @@ Page({
                 location: resArray.data.location_name,
                 divepoint: resArray.data.dive_point,
                 depth1: resArray.data.depth1,
-                time1: resArray.data.tiem1,
+                tiem1: resArray.data.time1,
                 depth2: resArray.data.depth2,
-                time2: resArray.data.tiem2,
+                tiem2: resArray.data.time2,
                 depth3: resArray.data.depth3,
-                time3: resArray.data.tiem3,
+                tiem3: resArray.data.time3,
                 startbar: resArray.data.barometer_start,
                 endbar: resArray.data.barometer_end,
                 weight: resArray.data.weight,

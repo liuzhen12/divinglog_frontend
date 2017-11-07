@@ -7,7 +7,9 @@ Page({
   data: {
     access_token: '',
     links: '',
-    array: ''
+    array: '',
+    score: 0,
+    comments:''
   },
 
   /**
@@ -35,6 +37,71 @@ Page({
         console.log(resArray.data)
         that.setData({
           array: resArray.data
+        })
+      }
+    })
+  },
+
+  chooseicon: function (e) {
+    var strnumber = e.target.dataset.id;
+    var _obj = {};
+    _obj.curHdIndex = strnumber;
+    that.setData({
+      tabArr: _obj,
+      score: strnumber
+    });
+    console.log(_obj)
+  },
+
+  InputComments:function(e){
+    var that = this
+    var value = e.detail.value;
+    that.setData({
+      comments: value
+    });
+  },
+
+  btnSave:function(e){
+    wx.showLoading({
+      title: 'Saving',
+    })
+    wx.request({
+      url: this.data.array._links.edit.href + "?access-token=" + this.data.access_token,
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: "PUT",
+      data: Util.json2Form({
+        divestore_score: this.data.score,
+      }),
+      complete: function (res) {
+        if (res == null || res.statusCode != 200) {
+          console.error(res.statusCode);
+          setTimeout(function () {
+            wx.hideLoading()
+          }, 2000)
+          wx.showToast({
+            title: '提交失败',
+            icon: 'fail',
+            duration: 2000
+          })
+          setTimeout(function () {
+            wx.hideToast()
+          }, 2000)
+        }
+        setTimeout(function () {
+          wx.hideLoading()
+        }, 2000)
+        wx.showToast({
+          title: '提交成功',
+          icon: 'success',
+          duration: 2000
+        })
+        setTimeout(function () {
+          wx.hideToast()
+        }, 2000)
+        wx.navigateBack({
+          delta: 1
         })
       }
     })
