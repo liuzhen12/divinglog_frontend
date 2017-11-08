@@ -1,1 +1,4 @@
 /* pages/registerdiver/registerdiver.wxss */
+.label-language{
+  padding: 0 0
+}

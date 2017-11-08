@@ -5,7 +5,7 @@
         <view class="page__desc"></view>
     </view>
     <view class="page__bd page__bd_spacing">
-        <view class="weui_cells_title">Please choose your role:</view>
+        <view class="weui-cells__title">Please choose your role:</view>
         <view class="weui-cells box">
           <navigator url="../registerdiver/registerdiver" class="weui-cell weui-cell_access" hover-class="changestyle">
                 <view class="weui-cell__bd">{{'Diver'}}</view>

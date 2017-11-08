@@ -1,1 +1,4 @@
 /* pages/registercoach/registercoach.wxss */
+.label-language{
+  padding: 0 0
+}
