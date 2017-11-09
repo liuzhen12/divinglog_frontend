@@ -37,11 +37,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      startDate: formatDate(new Date),
-      endDate: formatDate(new Date)
+    wx.getSystemInfo({
+      success: function (res) {
+        //设置宽度，根据当前设备宽高满屏显示
+        this.setData({
+          view: {
+            Width: res.windowWidth - 25
+          },
+          startDate: formatDate(new Date),
+          endDate: formatDate(new Date)
+        })
+      }
     })
-      
   },
 
   titleInput: function (e) {
