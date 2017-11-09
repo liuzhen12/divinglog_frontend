@@ -1,1 +1,4 @@
 /* pages/logedit/logedit.wxss */
+.textarea-comment{
+  padding: 8px 8px 8px 8px;
+}

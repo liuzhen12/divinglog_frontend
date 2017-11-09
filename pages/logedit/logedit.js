@@ -490,6 +490,16 @@ Page({
 
     onLoad: function (options){
       var that = this
+      wx.getSystemInfo({
+        success: function (res) {
+          //设置宽度，根据当前设备宽高满屏显示
+          that.setData({
+            view: {
+              Width: res.windowWidth - 25
+            }
+          })
+        }
+      })
       if (options.status == 'Stamp'){
         console.log(options)
         var token = wx.getStorageSync('access_token')

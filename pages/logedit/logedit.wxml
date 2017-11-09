@@ -1,232 +1,194 @@
 <view class="page">
-    <view class="page__hd">
-        <view class="page__title"></view>
-        <view class="page__desc"></view>
+  <view class="page__hd">
+    <view class="page__title"></view>
+    <view class="page__desc"></view>
+  </view>
+  <view class="page__bd page__bd_spacing">
+    <view class="weui-cells box">
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd picker">Date</view>
+        <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+          <view class="weui-cell__ft weui-cell__ft_in-access">
+            {{date?date:'Select'}}</view>
+        </picker>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd picker">Start Time </view>
+        <picker mode="time" value="{{starttime}}" bindchange="bindStartTimeChange">
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{starttime?starttime:'Select'}}</view>
+        </picker>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd picker">End Time</view>
+        <picker mode="time" value="{{endtime}}" bindchange="bindEndTimeChange">
+          <view class="weui-cell__ft weui-cell__ft_in-access"> {{endtime?endtime:'Select'}}</view>
+        </picker>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd">
+          <view class="weui-label">Location</view>
+        </view>
+        <view class="weui-cell__ft">
+          <input class="weui-input" type="text" value="{{location}}" placeholder="Input location" bindinput="locationInput" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd">
+          <view class="weui-label">Dive Point</view>
+        </view>
+        <view class="weui-cell__ft">
+          <input class="weui-input" type="text" value="{{divepoint}}" placeholder="Input dive point" bindinput="divePointInput" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd">
+          <view class="weui-label">Depth1(m)</view>
+        </view>
+        <view class="weui-cell__ft">
+          <input class="weui-input" type="number" maxlength="3" value="{{depth1}}" placeholder="Input depth" bindinput="depthInput1" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd">
+          <view class="weui-label">Time1(min)</view>
+        </view>
+        <view class="weui-cell__ft">
+          <input class="weui-input" type="number" maxlength="3" value="{{tiem1}}" placeholder="Input tiem" bindinput="tiemInput1" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd">
+          <view class="weui-label">Depth2(m)</view>
+        </view>
+        <view class="weui-cell__ft">
+          <input class="weui-input" type="number" maxlength="3" value="{{depth2}}" placeholder="Input depth" bindinput="depthInput2" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd">
+          <view class="weui-label">Time2(min)</view>
+        </view>
+        <view class="weui-cell__ft">
+          <input class="weui-input" type="number" maxlength="3" value="{{tiem2}}" placeholder="Input tiem" bindinput="tiemInput2" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd">
+          <view class="weui-label">Depth3(m)</view>
+        </view>
+        <view class="weui-cell__ft">
+          <input class="weui-input" type="number" maxlength="3" value="{{depth3}}" placeholder="Input depth" bindinput="depthInput3" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd">
+          <view class="weui-label">Time3(min)</view>
+        </view>
+        <view class="weui-cell__ft">
+          <input class="weui-input" type="number" maxlength="3" value="{{tiem3}}" placeholder="Input tiem" bindinput="tiemInput3" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd">
+          <view class="weui-label">Air or Nitrox</view>
+        </view>
+        <view class="weui-cell__ft">
+          <switch checked="{{switch1Checked}}" bindchange="switch1Change" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_access" wx:if="{{switch1Checked}}">
+        <view class="weui-cell__bd">
+          <view class="weui-label">Nitrox(%)</view>
+        </view>
+        <view class="weui-cell__ft">
+          <input class="weui-input" type="number" maxlength="2" value="{{nitrox}}" placeholder="Input nitrox concentration" bindinput="nitroxInput" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd">
+          <view class="weui-label">Start(bar)</view>
+        </view>
+        <view class="weui-cell__ft">
+          <input class="weui-input" type="number" maxlength="4" value="{{startbar}}" placeholder="Input start bar" bindinput="startBarInput" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd">
+          <view class="weui-label">End(bar)</view>
+        </view>
+        <view class="weui-cell__ft">
+          <input class="weui-input" type="number" maxlength="4" value="{{endbar}}" placeholder="Input end bar" bindinput="endBarInput" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd">
+          <view class="weui-label">Weight(kg/lbs)</view>
+        </view>
+        <view class="weui-cell__ft">
+          <input class="weui-input" type="number" maxlength="2" value="{{weight}}" placeholder="Input weight" bindinput="weightInput" />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd">
+          <view class="weui-label">Dive Store ID</view>
+        </view>
+        <view class="weui-cell__ft">
+          <input class="weui-input" type="number" maxlength="10" value="{{divestoreNo}}" placeholder="Input dive store No." bindinput="divestoreNoInput" />
+        </view>
+      </view>
     </view>
-    <view class="page__bd page__bd_spacing">
-        <view class="weui-cells box">
-            <!--<view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'Dive No'}}</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">21</view>
-            </view>-->
-            <view class="weui-cell weui-cell_access">
-                <view class="section">
-                    <picker mode="date" value="{{date}}" bindchange="bindDateChange">
-                        <view class="picker">
-                        Date : {{date}}
-                        </view>
-                    </picker>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="section">
-                    <picker mode="time" value="{{starttime}}" bindchange="bindStartTimeChange">
-                        <view class="picker">
-                        Start Time : {{starttime}}
-                        </view>
-                    </picker>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="section">
-                    <picker mode="time" value="{{endtime}}" bindchange="bindEndTimeChange">
-                        <view class="picker">
-                        End Time : {{endtime}}
-                        </view>
-                    </picker>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell weui-cell_input">
-                    <view class="weui-cell__hd">
-                        <view class="weui-label">Location :</view>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" type="text" value="{{location}}" placeholder="Input location" bindinput="locationInput"/>
-                    </view>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell weui-cell_input">
-                    <view class="weui-cell__hd">
-                        <view class="weui-label">Dive point :</view>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" type="text" value="{{divepoint}}" placeholder="Input dive point" bindinput="divePointInput"/>
-                    </view>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell weui-cell_input">
-                    <view class="weui-cell__hd">
-                        <view class="weui-label">Depth1(m) :</view>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" type="number" maxlength="3" value="{{depth1}}" placeholder="Input depth" bindinput="depthInput1"/>
-                    </view>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell weui-cell_input">
-                    <view class="weui-cell__hd">
-                        <view class="weui-label">Tiem1(min) :</view>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" type="number" maxlength="3" value="{{tiem1}}" placeholder="Input tiem" bindinput="tiemInput1"/>
-                    </view>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell weui-cell_input">
-                    <view class="weui-cell__hd">
-                        <view class="weui-label">Depth2(m) :</view>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" type="number" maxlength="3" value="{{depth2}}" placeholder="Input depth" bindinput="depthInput2"/>
-                    </view>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell weui-cell_input">
-                    <view class="weui-cell__hd">
-                        <view class="weui-label">Tiem2(min) :</view>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" type="number" maxlength="3" value="{{tiem2}}" placeholder="Input tiem" bindinput="tiemInput2"/>
-                    </view>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell weui-cell_input">
-                    <view class="weui-cell__hd">
-                        <view class="weui-label">Depth3(m) :</view>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" type="number" maxlength="3" value="{{depth3}}" placeholder="Input depth" bindinput="depthInput3"/>
-                    </view>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell weui-cell_input">
-                    <view class="weui-cell__hd">
-                        <view class="weui-label">Tiem3(min) :</view>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" type="number" maxlength="3" value="{{tiem3}}" placeholder="Input tiem" bindinput="tiemInput3"/>
-                    </view>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__bd">{{'Air or Nitrox'}}</view>
-                <view class="section section_gap weui-cell__ft ">
-                <view class="body-view">
-                    <switch checked="{{switch1Checked}}" bindchange="switch1Change"/>
-                </view>
-                </view>
-            </view>
-            <block wx:if="{{switch1Checked}}">
-              <view class="weui-cells weui-cell_access">
-                  <view class="weui-cell weui-cell_input">
-                      <view class="weui-cell__hd">
-                          <view class="weui-label">Nitrox(%) :</view>
-                      </view>
-                      <view class="weui-cell__bd">
-                          <input class="weui-input" type="number" maxlength="2" value="{{nitrox}}" placeholder="Input nitrox concentration" bindinput="nitroxInput"/>
-                      </view>
-                  </view>
-              </view>
-            </block>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell weui-cell_input">
-                    <view class="weui-cell__hd">
-                        <view class="weui-label">Start(bar) :</view>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" type="number" maxlength="4" value="{{startbar}}" placeholder="Input start bar" bindinput="startBarInput"/>
-                    </view>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell weui-cell_input">
-                    <view class="weui-cell__hd">
-                        <view class="weui-label">End(bar) :</view>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" type="number" maxlength="4" value="{{endbar}}"placeholder="Input end bar" bindinput="endBarInput"/>
-                    </view>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell weui-cell_input">
-                    <view class="weui-cell__hd">
-                        <view class="weui-label">Weight(kg/lbs) :</view>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" type="number" maxlength="2" value="{{weight}}" placeholder="Input weight" bindinput="weightInput"/>
-                    </view>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell weui-cell_input">
-                    <view class="weui-cell__hd">
-                        <view class="weui-label">Dive Store ID :</view>
-                    </view>
-                    <view class="weui-cell__bd">
-                        <input class="weui-input" type="number" maxlength="10" value="{{divestoreNo}}" placeholder="Input dive store No." bindinput="divestoreNoInput"/>
-                    </view>
-                </view>
-            </view>
-        </view>
-        <view class="weui-cells box">
-            <view class="section">
-            <textarea placeholder="Comments" focus="{{focus}}" value="{{commnets}}" bindblur="commentsInput"/>
-            </view>
-        </view>
-        <view wx:if="{{logEditStatus=='Add'}}">
-          <view class="weui-cells box">
-              <view class="weui-cell">
-                  <view class="weui-cell__bd">
-                      <view class="weui-uploader">
-                          <view class="weui-uploader__hd">
-                              <view class="weui-uploader__title">Phote Upload</view>
-                              <view class="weui-uploader__info">{{files.length}}/6</view>
-                          </view>
-                          <view class="weui-uploader__bd">
-                              <view class="weui-uploader__files" id="uploaderFiles">
-                                  <block wx:for="{{files}}" wx:key="*this">
-                                      <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                                          <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
-                                      </view>
-                                  </block>                                
-                              </view>
-                              <block wx:if="{{files.length<6}}">
-                              <view class="weui-uploader__input-box">
-                                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
-                              </view>
-                              </block>
-                          </view>
-                      </view>
-                  </view>
-              </view>
-          </view>
-        </view>
-        <block wx:if="{{logEditStatus=='Add'}}">
-          <view class="weui-cells box">
-            <button class="weui_btn weui_btn_primary" bindtap="btnSave">Save</button>
-          </view>
-        </block>
-        <block else wx:if="{{logEditStatus=='Edit'}}">
-          <view class="weui-cells box">
-            <button class="weui_btn weui_btn_primary" bindtap="btnSave">Save</button>
-          </view>
-          <view class="weui-cells box">
-            <button class="weui_btn weui_btn_primary" bindtap="btnDelete">Delete</button>
-          </view>
-        </block>
-        <block else wx:if="{{logEditStatus=='Stamp'}}">
-          <view class="weui-cells box">
-            <button class="weui_btn weui_btn_primary" bindtap="btnStamp">Stamp</button>
-          </view>
-        </block>
+
+
+    <view class="weui-cells box">
+      <view class="section">
+        <textarea placeholder="Comments" focus="{{focus}}" value="{{commnets}}" bindblur="commentsInput" class="textarea-comment" style="width:{{view.Width}}px" />
+      </view>
     </view>
+    <view wx:if="{{logEditStatus=='Add'}}">
+      <view class="weui-cells box">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">Phote Upload</view>
+                <view class="weui-uploader__info">{{files.length}}/6</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderFiles">
+                  <block wx:for="{{files}}" wx:key="*this">
+                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                      <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                    </view>
+                  </block>
+                </view>
+                <block wx:if="{{files.length<6}}">
+                  <view class="weui-uploader__input-box">
+                    <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                  </view>
+                </block>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <block wx:if="{{logEditStatus=='Add'}}">
+      <view class="weui-cells box">
+        <button class="weui_btn weui_btn_primary" bindtap="btnSave">Save</button>
+      </view>
+    </block>
+    <block else wx:if="{{logEditStatus=='Edit'}}">
+      <view class="weui-cells box">
+        <button class="weui_btn weui_btn_primary" bindtap="btnSave">Save</button>
+      </view>
+      <view class="weui-cells box">
+        <button class="weui_btn weui_btn_primary" bindtap="btnDelete">Delete</button>
+      </view>
+    </block>
+    <block else wx:if="{{logEditStatus=='Stamp'}}">
+      <view class="weui-cells box">
+        <button class="weui_btn weui_btn_primary" bindtap="btnStamp">Stamp</button>
+      </view>
+    </block>
+  </view>
 </view>
