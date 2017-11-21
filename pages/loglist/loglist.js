@@ -3,6 +3,7 @@ var app = getApp()
 Page({
     data: {
       access_token: '',
+      role: '',
       array: [],
       loglinks: [],
       initialLogsLink: '',
@@ -43,9 +44,11 @@ Page({
       })
       var token = wx.getStorageSync('access_token')
       var links = wx.getStorageSync('indexLinks')
+      var role = wx.getStorageSync('role')
       var params = { 'access-token': token };
       that.setData({
         access_token: token,
+        role: role
       });
       that.setData({
         initialLogsLink: links.logs.href,

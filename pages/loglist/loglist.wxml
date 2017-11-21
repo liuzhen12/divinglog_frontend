@@ -45,6 +45,7 @@
       </scroll-view>
     </view>
 </view>
+<block wx:if="{{role==1}}">
 <view class="dock_bottom flex-row">
 <navigator url="" class="weui_btn weui_btn_default" hover-class="changestyle">
 <button class="weui_btn weui_btn_default btn-normal" bindtap="logAdd">新建</button>
@@ -53,3 +54,4 @@
 <button class="weui_btn weui_btn_default btn-normal" bindtap="logMine">我的</button>
 </navigator>
 </view>
+</block>

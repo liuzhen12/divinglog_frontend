@@ -14,10 +14,6 @@
             <view class="weui-cell__ft">{{array.nick_name}}</view>
           </view>           
           <view class="weui-cell weui-cell_access">
-              <view class="weui-cell__bd">Title :</view>
-              <view class="weui-cell__ft">{{array.title}}</view>
-          </view> 
-          <view class="weui-cell weui-cell_access">
               <view class="weui-cell__bd">Dive Point :</view>
               <view class="weui-cell__ft">{{array.dive_point}}</view>
           </view> 
@@ -48,7 +44,7 @@
           </view> 
           <view class="weui-cells box">
             <view class="section">
-              <textarea placeholder="Description" focus="{{focus}}" value="array.description"/>
+              <textarea placeholder="Description" focus="{{focus}}" value="{{array.description}}"/>
             </view>
           </view>
         </view>

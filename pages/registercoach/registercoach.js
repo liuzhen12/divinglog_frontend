@@ -134,28 +134,37 @@ Page({
       title: 'Submiting',
     })
     if (this.data.langlist.length == 0) {
-      wx.showToast({
-        title: 'Please choose language!',
-        icon: 'fail',
-        duration: 3000
-      })
-      return;
+      wx.showModal({
+        content: 'Please choose language!',
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+            return;
+          }
+        }
+      }); 
     }
     if (this.data.locationName.length == 0) {
-      wx.showToast({
-        title: 'Please choose country!',
-        icon: 'fail',
-        duration: 3000
-      })
-      return;
+      wx.showModal({
+        content: 'Please choose country!',
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+            return;
+          }
+        }
+      }); 
     }
     if (this.data.title.length == 0) {
-      wx.showToast({
-        title: 'Please input your level!',
-        icon: 'fail',
-        duration: 3000
-      })
-      return;
+      wx.showModal({
+        content: 'Please input your level!',
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+            return;
+          }
+        }
+      });
     }
     
     that = this;
