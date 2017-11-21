@@ -51,13 +51,13 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页",
+        "text": "Homepage",
         "iconPath": "images/1.png",
         "selectedIconPath": "images/1s.png"
       },
       {
         "pagePath": "pages/meinfo/meinfo",
-        "text": "我的",
+        "text": "Mine",
         "iconPath": "images/2.png",
         "selectedIconPath": "images/2s.png"
       }

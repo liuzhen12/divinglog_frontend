@@ -45,4 +45,4 @@
       </scroll-view>
     </view>
 </view>
-<button class="weui_btn weui_btn_default dock_bottom" bindtap="addLog">新建</button>
+<button class="weui_btn weui_btn_default dock_bottom" bindtap="addLog">Create</button>
