@@ -32,6 +32,7 @@
     "pages/instructorlist/instructorlist",
     "pages/studentlist/studentlist",
     "pages/storesearch/storesearch",
+    "pages/storesearchbyno/storesearchbyno",
     "pages/storelist/storelist",
     "pages/storeinfo/storeinfo",
     "pages/storeinstructor/storeinstructor",

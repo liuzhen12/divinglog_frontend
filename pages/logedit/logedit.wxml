@@ -132,8 +132,8 @@
         <view class="weui-cell__bd">
           <view class="weui-label">Dive Store ID</view>
         </view>
-        <view class="weui-cell__ft">
-          <input class="weui-input" type="number" maxlength="10" value="{{divestoreNo}}" placeholder="Input dive store No." bindinput="divestoreNoInput" />
+        {{divestoreId}}
+        <view class="weui-cell__ft weui-cell__ft_in-access" bindtap="openFindStore" data-url="{{loglinks.divestore.href}}">
         </view>
       </view>
     </view>

@@ -25,7 +25,7 @@ Page({
         startbar: '0',
         endbar: '0',
         weight: '0',
-        divestoreNo: '0',
+        divestoreId: '0',
         comments: '',
         files: [],
         filesPath:''
@@ -110,11 +110,7 @@ Page({
         weight: e.detail.value
       })
     },
-    divestoreNoInput:function(e){
-      this.setData({
-        divestoreNo: e.detail.value
-      })
-    },
+    
     commentsInput: function (e){
       this.setData({
         comments: e.detail.value
@@ -210,7 +206,7 @@ Page({
             comments: this.data.comments,
             assets: filepaths,
             stamp: 0,
-            divestore_id: 0,
+            divestore_id: this.data.divestoreId,
             divestore_score: 0
           }),
           complete: function (res) {
@@ -275,6 +271,7 @@ Page({
             weight: this.data.weight,
             comments: this.data.comments,
             assets: this.data.files,
+            divestoreId: this.data.divestoreId
           }),
           complete: function (res) {
             if (res == null || res.statusCode != 200) {
@@ -407,7 +404,8 @@ Page({
           barometer_start: this.data.startbar,
           barometer_end: this.data.endbar,
           weight: this.data.weight,
-          comments: this.data.comments
+          comments: this.data.comments,
+          divestoreId: this.data.divestoreId
         }),
         complete: function (res) {
           if (res == null || res.statusCode != 200) {
@@ -488,6 +486,13 @@ Page({
       }
     },
 
+    openFindStore: function (event) {
+      var url = event.currentTarget.dataset.url;
+      wx.navigateTo({
+        url: "../storesearchbyno/storesearchbyno?url=" + url
+      })
+    },
+
     onLoad: function (options){
       var that = this
       wx.getSystemInfo({
@@ -552,7 +557,8 @@ Page({
                 startbar: resArray.data.barometer_start,
                 endbar: resArray.data.barometer_end,
                 weight: resArray.data.weight,
-                comments: resArray.data.comments
+                comments: resArray.data.comments,
+                divestoreId: resArray.data.divestore_id
               })
               return
             }
@@ -617,7 +623,8 @@ Page({
                 startbar: resArray.data.barometer_start,
                 endbar: resArray.data.barometer_end,
                 weight: resArray.data.weight,
-                comments: resArray.data.comments
+                comments: resArray.data.comments,
+                divestoreId: resArray.data.divestore_id
               })
             }
           })

@@ -1,0 +1,45 @@
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title"></view>
+    <view class="page__desc"></view>
+  </view>
+  <view class="page__bd page__bd_spacing">
+    <view style="margin-top:49px;margin-bottom:58px;">
+      <view class="dock_top flex-column">
+        <view class='weui-search-bar '>
+          <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+              <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+              <input type="text" class="weui-search-bar__input" placeholder="Search" value="{{searchKeyword}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+              <view class="weui-icon-clear" wx:if="{{searchKeyword.length > 0}}" bindtap="clearInput">
+                <icon type="clear" size="14"></icon>
+              </view>
+            </view>
+          </view>
+          <view class="weui-search-bar__cancel-btn" bindtap="fetchSearchList">Search</view>
+        </view>
+      </view>
+        <view class="weui-cells list-box" wx:for="{{storesArray}}">
+          <view class="weui-cell" hover-class="weui-cell_active" bindtap="openConfirm" data-storeid="{{item.id}}">
+            <view class="weui-cell__hd">
+              <image src="{{item.avatar_url?item.avatar_url:imagePlaceholder}}" class="image-avatar"></image>
+            </view>
+            <view class="weui-cell__bd">
+              <view class="weui-cell__bd">
+                <text>{{item.name}}</text>
+                <text class="text-title" hidden="{{!item.title}}">{{item.title}}</text>
+              </view>
+              <view class="weui-cell__bd">
+                <text class="text-rate">{{item.evaluation_score}}</text>
+                <text class="text-rate-count">{{item.evaluation_count}}{{' Reviews'}}</text>
+                <text class="text-language" hidden="{{!item.language_detail}}">{{item.language_detail}}</text>
+              </view>
+              <view class="weui-cell__bd">
+                <text class="text-location">{{item.location_name ? item.location_name + ', ':''}}{{item.city ? item.city + ', ' : ''}}{{item.province ? item.province + ', ' : ''}}{{item.country}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+    </view>
+  </view>
+</view>

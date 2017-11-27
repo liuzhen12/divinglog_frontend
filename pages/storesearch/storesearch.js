@@ -134,7 +134,6 @@ Page({
   },
   listClick: function (event) {
     var url = event.currentTarget.dataset.url;
-    console.log(url);
     wx.navigateTo({
       url: "../storeinfo/storeinfo?url=" + url
     })
