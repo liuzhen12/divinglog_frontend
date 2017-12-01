@@ -238,6 +238,13 @@ Page({
             setTimeout(function () {
               wx.hideToast()
             }, 2000)
+            var pages = getCurrentPages();
+            if (pages.length > 1) {
+              //上一个页面实例对象
+              var prePage = pages[pages.length - 2];
+              //关键在这里
+              prePage.onLoad()
+            }
             wx.navigateBack({
               delta: 1
             })
@@ -310,6 +317,13 @@ Page({
               wx.hideToast()
             }, 2000)
             // wx.setStorageSync('access_token', res.data.access_token)
+            var pages = getCurrentPages();
+            if (pages.length > 1) {
+              //上一个页面实例对象
+              var prePage = pages[pages.length - 2];
+              //关键在这里
+              prePage.onLoad()
+            }
             wx.navigateBack({
               delta: 1
             })
