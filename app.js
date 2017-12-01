@@ -16,10 +16,12 @@ App({
               success: function (res) {
                 if (res.data.hasOwnProperty('id')) {
                   wx.setStorageSync('id', res.data.id)
+                  wx.setStorageSync('role', res.data.role)
                   wx.setStorageSync('access_token', res.data.access_token)
                   wx.setStorageSync('indexLinks', res.data._links)
                 }
                 else {
+                  wx.setStorageSync('registerStatus', false)
                   wx.setStorage({
                     key: 'registerLinks',
                     data: res.data._links,

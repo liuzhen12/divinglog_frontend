@@ -13,4 +13,4 @@
     </view>
 </view>
 
-<button class="weui_btn weui_btn_default dock_bottom" bindtap="addEquipment">添加装备</button>
+<button class="weui_btn weui_btn_default dock_bottom" bindtap="addEquipment">Add</button>

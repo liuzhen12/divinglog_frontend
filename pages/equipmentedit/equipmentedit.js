@@ -26,69 +26,45 @@ Page({
     },
     onLoad: function(options){
       var that = this;
-        wx.getStorage({
-          key: 'access_token',
-          success: function (resToken) {
-            that.setData({
-              access_token: resToken.data,
-            });
-            console.log(resToken.data)
-            
-            wx.getStorage({
-              key: 'id',
-              success: function (resId) {
-                that.setData({
-                  id: resId.data
-                });
-              }
-            })
-            wx.getStorage({
-              key: 'equipStatus',
-              success: function (resEquipStatus) {
-                that.setData({
-                  editStatus: resEquipStatus.data
-                });
-                if (resEquipStatus.data =='Edit'){
-                  wx.getStorage({
-                    key: 'equipLinks',
-                    success: function (resLinks) {
-                      that.setData({
-                        links: resLinks.data
-                      });
-                      if (resLinks.data != null || typeof (resLinks.data) != 'undefined') {
-                        console.log(resLinks.data)
-                        wx.request({
-                          url: resLinks.data.self.href + "?access-token=" + resToken.data,
-                          data: {
+      var token = wx.getStorageSync('access_token')
+      var id = wx.getStorageSync('id')
+      var status = wx.getStorageSync('equipStatus')
+      that.setData({
+        access_token: token,
+        id: id,
+        editStatus: status
+      });
+      if (status == 'Edit'){
+        var links = wx.getStorageSync('equipLinks')
+        that.setData({
+          links: links
+        });
+        if (links != null || typeof (links) != 'undefined') {
+          wx.request({
+            url: links.self.href + "?access-token=" + token,
+            data: {
 
-                          },
-                          header: {
-                            'content-type': 'application/json'
-                          },
-                          method: "GET",
-                          success: function (resList) {
-                            console.log(resList.data)
-                            if (resList.data != null) {
-                              that.setData({
-                                equiptype: resList.data.type,
-                                brand: resList.data.brand,
-                                model: resList.data.model
-                              });
-                            }
-                            else {
-                              console.log('errer')
-                            }
-                          }
-                        })
-                      }
-                    }
-                  })
-                }
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            method: "GET",
+            success: function (resList) {
+              console.log(resList.data)
+              if (resList.data != null) {
+                that.setData({
+                  equiptype: resList.data.type,
+                  brand: resList.data.brand,
+                  model: resList.data.model
+                });
               }
-            })
-            
-          }
-        });        
+              else {
+                console.log('errer')
+              }
+            }
+          })
+        }
+      }   
     },
     btnSave: function(){
       wx.showLoading({
@@ -150,71 +126,62 @@ Page({
         })
       }
       else{
-        console.log('Add')
-        console.log(this.data.access_token)
         var that = this;
-        wx.getStorage({
-          key: 'meLinks',
-          success: function (meLinks) {
-            console.log(meLinks.data)
-            console.log(meLinks.data.equip.href)
-            wx.request({
-              url: meLinks.data.equip.href + "?access-token=" + that.data.access_token,
-              data: Util.json2Form({
-                brand: that.data.brand,
-                type: that.data.equiptype,
-                model: that.data.model,
-                user_id: that.data.id
+        var melinks = wx.getStorageSync('meLinks')
+        wx.request({
+          url: melinks.equip.href + "?access-token=" + that.data.access_token,
+          data: Util.json2Form({
+            brand: that.data.brand,
+            type: that.data.equiptype,
+            model: that.data.model,
+            user_id: that.data.id
+          })
+          ,
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          method: "POST",
+          complete: function (res2) {
+            console.log(res2)
+            if (res2 == null || res2.statusCode != 201) {
+              console.error(res2.statusCode);
+              setTimeout(function () {
+                wx.hideLoading()
+              }, 2000)
+              wx.showToast({
+                title: 'save fail',
+                icon: 'fail',
+                duration: 2000
               })
-              ,
-              header: {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              method: "POST",
-              complete: function (res2) {
-                console.log(res2)
-                if (res2 == null || res2.statusCode != 201) {
-                  console.error(res2.statusCode);
-                  setTimeout(function () {
-                    wx.hideLoading()
-                  }, 2000)
-                  wx.showToast({
-                    title: 'save fail',
-                    icon: 'fail',
-                    duration: 2000
-                  })
-                  setTimeout(function () {
-                    wx.hideToast()
-                  }, 2000)
-                  return;
-                }
-                console.log(res2)
-                setTimeout(function () {
-                  wx.hideLoading()
-                }, 2000)
-                wx.showToast({
-                  title: 'save success',
-                  icon: 'success',
-                  duration: 2000
-                })
-                setTimeout(function () {
-                  wx.hideToast()
-                }, 2000)
-                var pages = getCurrentPages();
-                if (pages.length > 1) {
-                  //上一个页面实例对象
-                  var prePage = pages[pages.length - 2];
-                  //关键在这里
-                  prePage.onLoad()
-                }
-                wx.navigateBack({
-                  delta: 1
-                })
-              }
+              setTimeout(function () {
+                wx.hideToast()
+              }, 2000)
+              return;
+            }
+            console.log(res2)
+            setTimeout(function () {
+              wx.hideLoading()
+            }, 2000)
+            wx.showToast({
+              title: 'save success',
+              icon: 'success',
+              duration: 2000
+            })
+            setTimeout(function () {
+              wx.hideToast()
+            }, 2000)
+            var pages = getCurrentPages();
+            if (pages.length > 1) {
+              //上一个页面实例对象
+              var prePage = pages[pages.length - 2];
+              //关键在这里
+              prePage.onLoad()
+            }
+            wx.navigateBack({
+              delta: 1
             })
           }
         })
-
       }
     },
     btnDelete: function(){

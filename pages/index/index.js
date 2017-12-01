@@ -54,19 +54,24 @@ Page({
               'content-type': 'application/json'
             },
             success: function (res) {
+              console.log(res)
               wx.setStorageSync('url', 'https://divinglog.cn/')
               if (res.data.hasOwnProperty('id'))
               {
                 wx.setStorageSync('id', res.data.id)
+                wx.setStorageSync('role', res.data.role)
                 wx.setStorageSync('access_token', res.data.access_token)
                 wx.setStorageSync('indexLinks', res.data._links)
               }                
               else {
-                wx.setStorage({
-                  key: 'registerLinks',
-                  data: res.data._links,
-                })
-                wx.navigateTo({ url: '/pages/registerrole/registerrole'})
+                var register = wx.getStorageSync('registerStatus')
+                if (register == true){
+                  wx.setStorageSync('registerLinks', res.data._links)
+                  wx.navigateTo({ url: '/pages/registerrole/registerrole' })
+                }
+                else{
+                  wx.setStorageSync('registerStatus', true)
+                }
               }
             }
           })

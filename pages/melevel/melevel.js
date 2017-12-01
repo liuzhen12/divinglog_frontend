@@ -4,23 +4,14 @@ Page({
       array: []
     },
     levelEdit: function (event) {
-      wx.setStorage({
-        key: "melevelLinks",
-        data: event.currentTarget.dataset.links
-      })
-      wx.setStorage({
-        key: "melevelStatus",
-        data: "Edit"
-      })
+      wx.setStorageSync('melevelLinks', event.currentTarget.dataset.links)
+      wx.setStorageSync('melevelStatus', 'Edit')
       wx.navigateTo({
         url: '../meleveledit/meleveledit'
       })
     },
     addLevel: function () {
-      wx.setStorage({
-        key: "melevelStatus",
-        data: "Add"
-      })
+      wx.setStorageSync('melevelStatus', 'Add')
       wx.navigateTo({
         url: '../meleveledit/meleveledit'
       })

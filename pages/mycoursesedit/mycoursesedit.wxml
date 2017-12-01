@@ -77,12 +77,12 @@
         </view>
         <view wx:if="{{editStatus=='Add'}}">
           <view class="weui-cells box">
-              <button class="weui_btn weui_btn_default" bindtap="btnSave">保存</button>
+              <button class="weui_btn weui_btn_default" bindtap="btnSave">Save</button>
           </view>
         </view>
         <view wx:else>
           <view class="weui-cells box">
-              <button class="weui_btn weui_btn_default" bindtap="btnDelete">删除</button>
+              <button class="weui_btn weui_btn_default" bindtap="btnDelete">Delete</button>
           </view>
         </view>
     </view>

@@ -129,10 +129,7 @@ Page({
     })
   },
 
-  listenerButton: function () {  
-    wx.showLoading({
-      title: 'Submiting',
-    })
+  listenerButton: function () {      
     if (this.data.langlist.length == 0) {
       wx.showModal({
         content: 'Please choose language!',
@@ -166,7 +163,9 @@ Page({
         }
       });
     }
-    
+    wx.showLoading({
+      title: 'Submiting',
+    })
     that = this;
     wx.request({
       url: "https://divinglog.cn/register",
@@ -339,11 +338,4 @@ Page({
   onReachBottom: function () {
   
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

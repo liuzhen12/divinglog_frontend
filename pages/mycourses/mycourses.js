@@ -11,28 +11,15 @@ Page({
   },
 
   coursesEdit: function (event) {
-    console.log(event)
-    wx.setStorage({
-      key: "mycourseLinks",
-      data: event.currentTarget.dataset.links
-    })
-    wx.setStorage({
-      key: "mycourseStatus",
-      data: "Edit"
-    })
+    wx.setStorageSync('mycourseLinks', event.currentTarget.dataset.links)
+    wx.setStorageSync('mycourseStatus','Edit')
     wx.navigateTo({
       url: '../mycoursesedit/mycoursesedit'
     })
   },
   addCourse: function () {
-    wx.setStorage({
-      key: "mycourseAddLinks",
-      data: this.data.extra
-    })
-    wx.setStorage({
-      key: "mycourseStatus",
-      data: "Add"
-    })
+    wx.setStorageSync('mycourseAddLinks', this.data.extra)
+    wx.setStorageSync('mycourseStatus', 'Add')
     wx.navigateTo({
       url: '../mycoursesedit/mycoursesedit'
     })
@@ -109,11 +96,4 @@ Page({
   onReachBottom: function () {
   
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })
