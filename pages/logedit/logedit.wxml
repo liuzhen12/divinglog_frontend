@@ -45,7 +45,7 @@
           <view class="weui-label">Depth1(m)</view>
         </view>
         <view class="weui-cell__ft">
-          <input class="weui-input" type="number" maxlength="3" value="{{depth1}}" placeholder="Input depth" bindinput="depthInput1" />
+          <input class="weui-input" type="number" maxlength="3" value="{{depth1}}" placeholder="Input depth1" bindinput="depthInput1" />
         </view>
       </view>
       <view class="weui-cell weui-cell_access">
@@ -53,7 +53,7 @@
           <view class="weui-label">Time1(min)</view>
         </view>
         <view class="weui-cell__ft">
-          <input class="weui-input" type="number" maxlength="3" value="{{tiem1}}" placeholder="Input tiem" bindinput="tiemInput1" />
+          <input class="weui-input" type="number" maxlength="3" value="{{tiem1}}" placeholder="Input time1" bindinput="tiemInput1" />
         </view>
       </view>
       <view class="weui-cell weui-cell_access">
@@ -61,7 +61,7 @@
           <view class="weui-label">Depth2(m)</view>
         </view>
         <view class="weui-cell__ft">
-          <input class="weui-input" type="number" maxlength="3" value="{{depth2}}" placeholder="Input depth" bindinput="depthInput2" />
+          <input class="weui-input" type="number" maxlength="3" value="{{depth2}}" placeholder="Input depth2" bindinput="depthInput2" />
         </view>
       </view>
       <view class="weui-cell weui-cell_access">
@@ -69,7 +69,7 @@
           <view class="weui-label">Time2(min)</view>
         </view>
         <view class="weui-cell__ft">
-          <input class="weui-input" type="number" maxlength="3" value="{{tiem2}}" placeholder="Input tiem" bindinput="tiemInput2" />
+          <input class="weui-input" type="number" maxlength="3" value="{{tiem2}}" placeholder="Input time2" bindinput="tiemInput2" />
         </view>
       </view>
       <view class="weui-cell weui-cell_access">
@@ -77,7 +77,7 @@
           <view class="weui-label">Depth3(m)</view>
         </view>
         <view class="weui-cell__ft">
-          <input class="weui-input" type="number" maxlength="3" value="{{depth3}}" placeholder="Input depth" bindinput="depthInput3" />
+          <input class="weui-input" type="number" maxlength="3" value="{{depth3}}" placeholder="Input depth3" bindinput="depthInput3" />
         </view>
       </view>
       <view class="weui-cell weui-cell_access">
@@ -85,7 +85,7 @@
           <view class="weui-label">Time3(min)</view>
         </view>
         <view class="weui-cell__ft">
-          <input class="weui-input" type="number" maxlength="3" value="{{tiem3}}" placeholder="Input tiem" bindinput="tiemInput3" />
+          <input class="weui-input" type="number" maxlength="3" value="{{tiem3}}" placeholder="Input time3" bindinput="tiemInput3" />
         </view>
       </view>
       <view class="weui-cell weui-cell_access">
@@ -121,12 +121,11 @@
         </view>
       </view>
       <view class="weui-cell weui-cell_access">
-        <view class="weui-cell__bd">
-          <view class="weui-label">Weight(kg/lbs)</view>
-        </view>
-        <view class="weui-cell__ft">
-          <input class="weui-input" type="number" maxlength="2" value="{{weight}}" placeholder="Input weight" bindinput="weightInput" />
-        </view>
+        <view class="weui-cell__bd picker">Weight(kg)</view>
+        <picker bindchange="bindPickerWeightChange" range="{{weightList}}">
+          <view class="weui-cell__ft weui-cell__ft_in-access">
+            {{weight}}</view>
+        </picker>
       </view>
       <view class="weui-cell weui-cell_access">
         <view class="weui-cell__bd">

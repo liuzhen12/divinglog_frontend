@@ -14,18 +14,21 @@ Page({
         switch1Checked: false,
         location: '',
         divepoint: '',
-        depth1: '0',
-        tiem1: '0',
-        depth2: '0',
-        tiem2: '0',
-        depth3: '0',
-        tiem3: '0',
-        gas: '0',
-        nitrox: '0',
-        startbar: '0',
-        endbar: '0',
-        weight: '0',
-        divestoreId: '0',
+        depth1: '',
+        tiem1: '',
+        depth2: '',
+        tiem2: '',
+        depth3: '',
+        tiem3: '',
+        gas: '',
+        nitrox: '',
+        startbar: '',
+        endbar: '',
+        weight: '',
+        weightList: [
+          "0","1","2","3","4","5","6","7","8","9","10"
+        ],
+        divestoreId: '',
         comments: '',
         files: [],
         filesPath:''
@@ -105,12 +108,11 @@ Page({
         endbar: e.detail.value
       })
     },
-    weightInput: function (e){
+    bindPickerWeightChange: function (e) {
       this.setData({
-        weight: e.detail.value
+        weight: e.detail.value,
       })
-    },
-    
+    },    
     commentsInput: function (e){
       this.setData({
         comments: e.detail.value
@@ -165,7 +167,7 @@ Page({
 
     btnSave: function(){
       wx.showLoading({
-        title: '提交中',
+        title: 'Saving',
       })
       var that = this;
       var status = wx.getStorageSync('logEditStatus')
@@ -375,7 +377,7 @@ Page({
 
     btnStamp:function(){
       wx.showLoading({
-        title: '提交中',
+        title: 'Submiting',
       })
       var that = this;
       var token = wx.getStorageSync('access_token')
@@ -476,7 +478,7 @@ Page({
     onShareAppMessage: function () {
       return {
         title: 'Stamp',
-        path: '/pages/logedit?status=Stamp&selflink=' + this.data.loglinks.self.href,
+        path: '/pages/logedit/logedit?status=Stamp&selflink=' + this.data.loglinks.self.href,
         success: function (res) {
           // 转发成功
         },
@@ -615,11 +617,11 @@ Page({
                 location: resArray.data.location_name,
                 divepoint: resArray.data.dive_point,
                 depth1: resArray.data.depth1,
-                time1: resArray.data.tiem1,
+                tiem1: resArray.data.time1,
                 depth2: resArray.data.depth2,
-                time2: resArray.data.tiem2,
+                tiem2: resArray.data.time2,
                 depth3: resArray.data.depth3,
-                time3: resArray.data.tiem3,
+                tiem3: resArray.data.time3,
                 startbar: resArray.data.barometer_start,
                 endbar: resArray.data.barometer_end,
                 weight: resArray.data.weight,

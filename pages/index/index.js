@@ -17,7 +17,7 @@ Page({
         id:"airline",
         color:"#31A4FF",
         image:"../../images/buddy1.png",
-        title:"Activity",
+        title:"Activities",
         subTitle:"Find Buddy/Join Activity",
         ur:'../../pages/findbuddy/findbuddy'
       },
@@ -25,7 +25,7 @@ Page({
         id:"train",
         color:"#2FC4FD",
         image:"../../images/instructor1.png",
-        title:"Instrutor",
+        title:"Instrutors",
         subTitle:"Find Instrutor/Consulting Course",
         ur:'../../pages/instructorsearch/instructorsearch'
       },
@@ -33,8 +33,8 @@ Page({
         id:"bus",
         color:"#20D4E8",
         image:"../../images/store1.png",
-        title:"Dive Store",
-        subTitle:"Find Dive Stroe",
+        title:"Dive Stores",
+        subTitle:"Find Dive Store",
         ur:'../../pages/storesearch/storesearch'
       }
     ]

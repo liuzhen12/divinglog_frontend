@@ -368,7 +368,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: 'Stamp',
-      path: '/pages/meleveledit?status=Stamp&stamplink=' + this.data.stamplink,
+      path: '/pages/meleveledit/meleveledit?status=Stamp&stamplink=' + this.data.stamplink,
       success: function (res) {
         // 转发成功
       },
